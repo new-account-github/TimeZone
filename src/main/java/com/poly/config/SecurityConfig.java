@@ -1,4 +1,4 @@
-package com.poly;
+package com.poly.config;
 
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -51,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers("/order/**").authenticated()
-		.antMatchers("/admin/**").hasAnyRole("STAF","DIRE")
-		.antMatchers("/rest/authorities").hasRole("DIRE")
+		.antMatchers("/admin/**").hasAnyRole("STA","DIR","AD")
+		.antMatchers("/rest/authorities").hasRole("DIR")
 		.anyRequest().permitAll();
 		
 		http.formLogin()

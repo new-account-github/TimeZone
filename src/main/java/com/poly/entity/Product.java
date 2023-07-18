@@ -3,7 +3,6 @@ package com.poly.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale.Category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
