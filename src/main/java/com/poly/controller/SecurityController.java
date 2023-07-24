@@ -9,7 +9,7 @@ public class SecurityController {
 	@RequestMapping("/security/login/form")
 	public String form(Model model) {
 		model.addAttribute("message", "Vui lòng đăng nhập");
-		return "/home/login";
+		return "/security/login";
 	}
 	
 	@RequestMapping("/security/login/success")
@@ -20,13 +20,13 @@ public class SecurityController {
 	@RequestMapping("/security/login/error")
 	public String error(Model model) {
 		model.addAttribute("message", "Vui lòng thử lại tên đăng nhập hoặc mật khẩu không đúng");
-		return "/home/login";
+		return "/security/login";
 	}
 	
 	@RequestMapping("/security/login/unauthoried")
 	public String unauthoried(Model model) {
 		model.addAttribute("messsage", "Không có quyền truy xuất");
-		return "/home/login";
+		return "/security/login";
 	}
 	
 	@RequestMapping("/security/logoff/success")

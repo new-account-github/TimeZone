@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-		.antMatchers("/order/**").authenticated()
+		.antMatchers("/home/checkout/**").authenticated()
 		.antMatchers("/admin/**").hasAnyRole("STA","DIR","AD")
 		.antMatchers("/rest/authorities").hasRole("DIR")
 		.anyRequest().permitAll();

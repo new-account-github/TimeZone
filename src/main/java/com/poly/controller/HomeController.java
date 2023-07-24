@@ -7,28 +7,21 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 
 @Controller
 public class HomeController {
-	@RequestMapping("/home/index")
+	
+	@RequestMapping({"/","/home/index"})
 	public String index() {
-		return "/home/index";
+		return "redirect:/home/main";
+	}
+	@RequestMapping("/home/main")
+	public String main() {
+		return "/home/main";
 	}
 	@RequestMapping("/home/login")
 	public String login() {
-		return "/home/login";
-	}
-	@RequestMapping("/home/cart")
-	public String cart() {
-		return "/home/cart";
-	}
-	@RequestMapping("/home/shop")
-	public String shop() {
-		return "/home/shop";
-	}
-	@RequestMapping("/home/checkout")
-	public String checkout() {
-		return "/home/checkout";
+		return "/security/login";
 	}
 	@RequestMapping("/home/detail")
 	public String detail() {
-		return "/home/detail";
+		return "/product/detail";
 	}
 }
