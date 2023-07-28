@@ -32,4 +32,9 @@ public class AccountServiceImpl implements AccountService{
 	public Optional<Account> findByUsername(String username) {
 		return accountsDAO.findByUsername(username);
 	}
+
+	@Override
+	 public boolean checkUsernameExists(String username) {
+        return accountsDAO.findByUsername(username).isPresent();
+    }
 }

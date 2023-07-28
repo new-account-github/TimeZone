@@ -10,5 +10,5 @@ public interface AccountService {
 	Optional<Account> findByUsernameAndEmail(String username, String email);
 	Optional<Account> findByUsername(String username);
 	void create(Account account);
-	
+    public boolean checkUsernameExists(String username);
 }

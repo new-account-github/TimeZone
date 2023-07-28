@@ -70,8 +70,11 @@ public class ForgotPasswordController {
 
 	    Optional<Account> accountOptional = accountService.findByUsername(username);
 	    Account account = accountOptional.get();
-	    String token = verificationTokenService.createVerificationTokenForUser(account);
-	    if (!tokenveri.equals(token)) {
+	    // Lấy giá trị của token từ HttpSession
+	    String token = (String) session.getAttribute("token");
+//	    System.out.println(token);
+//	    System.out.println(tokenveri);
+	    if (tokenveri.equals(token)) {
 	        return "redirect:/security/confirmPass";
 	    } else {
 	        model.addAttribute("message", "Sai mã xác thực");
@@ -79,7 +82,6 @@ public class ForgotPasswordController {
 	    }
 	}
 
-	
 	@RequestMapping(value = "/security/confirmPass", method = RequestMethod.GET)
 	public String confirmPassForm() {
 		return "/security/confirmPass";
@@ -96,13 +98,13 @@ public class ForgotPasswordController {
 				account.setPassword(PassWord1);
 				// Lưu lại thông tin tài khoản
 				accountService.create(account);
-				return "/security/Login";
+				
 			} else {
 				model.addAttribute("message", "Sai Password");
-				
+				return "/security/confirmPass";
 			}
 
 		}
-		return "/security/confirmPass";
+		return "/security/Login";
 	}
 }

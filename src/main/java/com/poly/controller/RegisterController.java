@@ -29,6 +29,11 @@ public class RegisterController {
     }
     @RequestMapping(value = "/security/register", method = RequestMethod.POST)
     public String register(Account account, Model model) {
+    	if (accountService.checkUsernameExists(account.getUsername())) {
+            model.addAttribute("message", "Username already exists");
+            return "/security/register";
+        }
+    	
     	account.setPhone("(+84) " + account.getPhone());
         accountService.create(account);
         emailService.sendWelcomeEmail(account.getEmail(), account.getFullname());
