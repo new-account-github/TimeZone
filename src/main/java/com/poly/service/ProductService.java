@@ -12,4 +12,10 @@ public interface ProductService {
 
 	List<Product> findByName(String string);
 
+	Product create(Product product);
+
+	Product update(Product product);
+
+	void delete(Integer id);
+
 }
