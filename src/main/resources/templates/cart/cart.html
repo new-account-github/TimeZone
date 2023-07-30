@@ -58,7 +58,7 @@
                   </td>
                   <td>{{item.name}}</td>
                   <td>
-                    <h5 class="text-center">{{item.price | number:2}} VND</h5>
+                    <h5 class="text-center">{{item.price }} VND</h5>
                   </td>
                   <td>
                     <div class="product_count">
@@ -68,7 +68,7 @@
                     </div>
                   </td>
                   <td>
-                    <h5 class="text-center">{{item.price * item.qty | number:2}} VND</h5>
+                    <h5 class="text-center">{{item.price * item.qty}} VND</h5>
                   </td>
                   <td>
                     <button ng-click="cart.remove(item.id)" class="btn btn-outline-danger">Delete</button>

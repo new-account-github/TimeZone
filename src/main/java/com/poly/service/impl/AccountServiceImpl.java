@@ -1,5 +1,7 @@
 package com.poly.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class AccountServiceImpl implements AccountService{
 		return accountsDAO.findById(username).get();
 	}
 
+<<<<<<< HEAD
 
 	@Override
 	public Account update(Account account) {
@@ -30,4 +33,24 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 
+=======
+	@Override
+	public void create(Account account) {
+		accountsDAO.save(account);
+	}
+	@Override
+    public Optional<Account> findByUsernameAndEmail(String username, String email) {
+        return accountsDAO.findByUsernameAndEmail(username, email);
+    }
+
+	@Override
+	public Optional<Account> findByUsername(String username) {
+		return accountsDAO.findByUsername(username);
+	}
+
+	@Override
+	 public boolean checkUsernameExists(String username) {
+        return accountsDAO.findByUsername(username).isPresent();
+    }
+>>>>>>> eafe7e65e3de44fceeedcc8501c3e71259729d92
 }
