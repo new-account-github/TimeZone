@@ -19,7 +19,6 @@ public class AccountServiceImpl implements AccountService{
 		return accountsDAO.findById(username).get();
 	}
 
-<<<<<<< HEAD
 
 	@Override
 	public Account update(Account account) {
@@ -32,8 +31,6 @@ public class AccountServiceImpl implements AccountService{
 		accountsDAO.deleteById(username);
 	}
 
-
-=======
 	@Override
 	public void create(Account account) {
 		accountsDAO.save(account);
@@ -52,5 +49,4 @@ public class AccountServiceImpl implements AccountService{
 	 public boolean checkUsernameExists(String username) {
         return accountsDAO.findByUsername(username).isPresent();
     }
->>>>>>> eafe7e65e3de44fceeedcc8501c3e71259729d92
 }
