@@ -12,7 +12,7 @@
 </head>
 
 <body >
-    <main>
+    <main th:object="${order}">
         <!-- Hero Area Start-->
         <div class="slider-area ">
             <div class="single-slider slider-height2 d-flex align-items-center">
@@ -37,22 +37,21 @@
                             <table class="table table-hover">
                                 <thead>
                                   <tr>
-                                    <th>No</th>
-                                    <th>Order no</th>
-                                    <th>Order Date</th>
-                                    <th>Shipping Address</th>
-                                    <th></th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th class="d-flex justify-content-center"></th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr th:each="order,state:${orders}" >
-                                    <td>[[${state.index}]]</td>
-                                    <td>[[${order.id}]]</td>
-                                    <td>[[${order.createDate}]]</td>
-                                    <td>[[${order.address}]]</td>
-                                    <td class="d-flex justify-content-center">
-                                        <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-outline-primary">DETAIL</a>
-                                    </td>
+                                  <tr th:each="detail:*{orderDetails}" th:object="${detail}">
+                                    <td>[[*{product.id}]]</td>
+                                    <td>[[*{product.name}]]</td>
+                                    <td>[[*{#numbers.formatDecimal(price,0,'COMMA',2,'POINT')}]]</td>
+                                    <td>[[*{quantity}]]</td>
+                                    <td>[[*{#numbers.formatDecimal(price*quantity,0,'COMMA',2,'POINT')}]]</td>
                                   </tr>
                                 </tbody>
                               </table>

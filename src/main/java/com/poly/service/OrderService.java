@@ -11,4 +11,6 @@ public interface OrderService {
 
 	List<Order> findByUserName(String username);
 
+	Order findById(Long id);
+
 }

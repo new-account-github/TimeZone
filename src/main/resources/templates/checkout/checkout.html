@@ -39,12 +39,14 @@
               <h3>Billing Details</h3>
               <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                 <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="first" name="name" disabled/>
-                  <span class="placeholder" data-placeholder="Name"> [[${#request.remoteUser}]]</span>
+                  <div class="form-control" id="username">[[${#request.remoteUser}]]</div>
+                  <span class="placeholder" data-placeholder=""></span>
                 </div>
                 <div class="col-md-6 form-group p_star">
-                  <input type="text" class="form-control" id="date" name="date" disabled/>
-                  <span class="placeholder" data-placeholder="Create Date"> {{order.createDate | date:'dd-MMM-yyyy'}}</span>
+                  <div type="text" class="form-control" id="date" name="date">
+                    <span class="placeholder" data-placeholder=""></span>
+                    {{order.createDate | date:'dd-MMM-yyyy'}}
+                  </div>
                 </div>
             
                 <div class="col-md-12 form-group">
