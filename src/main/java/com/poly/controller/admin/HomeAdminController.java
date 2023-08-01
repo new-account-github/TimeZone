@@ -20,13 +20,13 @@ public class HomeAdminController {
 	
 	@RequestMapping("/admin/index")
 	public String show() {
-		return "admin/index";
+		return "admin/DashBoard";
 	}
 
 
-	@RequestMapping("/admin/Product_Manager")
+	@RequestMapping("/admin/Authority")
 	public String EditProduct() {
-		return "admin/Product_Manager";
+		return "admin/Authority";
 	}
 
 	

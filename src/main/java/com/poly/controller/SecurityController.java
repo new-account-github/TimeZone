@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SecurityController {
 	@RequestMapping("/security/login/form")
 	public String form(Model model) {
-		model.addAttribute("message", "Vui lòng đăng nhập");
+		model.addAttribute("message", "Vui lòng đăng nhập hoặc đăng kí");
 		return "/security/login";
 	}
 	

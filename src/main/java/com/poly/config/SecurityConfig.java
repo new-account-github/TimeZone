@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/home/checkout/**").authenticated()
 		.antMatchers("/admin/**").hasAnyRole("STA","DIR","AD")
 		.antMatchers("/rest/authorities").hasRole("DIR")
+		.antMatchers("/rest/authorities").hasRole("AD")
 		.anyRequest().permitAll();
 		
 		http.formLogin()
