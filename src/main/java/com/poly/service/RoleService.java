@@ -1,5 +1,9 @@
 package com.poly.service;
 
-public interface RoleService {
+import java.util.List;
 
+import com.poly.entity.Role;
+
+public interface RoleService {
+	List<Role> findALL();
 }
