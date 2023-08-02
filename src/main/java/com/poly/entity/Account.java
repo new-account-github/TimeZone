@@ -8,6 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,11 +25,20 @@ import lombok.Setter;
 @Table(name = "Accounts")
 public class Account  implements Serializable{
 	@Id
-	String username;
-	String password;
-	String fullname;
-	String email;
-	String phone;
+    @NotBlank(message = "Username is required")
+    String username;
+    
+    @NotBlank(message = "Password is required")
+    String password;
+    
+    @NotBlank(message = "Fullname is required")
+    String fullname;
+    
+    @Email(message = "Email must be in the correct format")
+    String email;
+    
+    @NotBlank(message = "Phone is required")
+    String phone;
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
 	List<Order> orders;
