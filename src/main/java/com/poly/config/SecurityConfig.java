@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers("/home/checkout/**").authenticated()
+		.antMatchers("/home/account/**").authenticated()
+		.antMatchers("/rest/account/**").authenticated()
 		.antMatchers("/admin/**").hasAnyRole("STA","DIR","AD")
 		.antMatchers("/rest/authorities").hasRole("DIR")
 		.anyRequest().permitAll();
@@ -66,6 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.exceptionHandling().accessDeniedPage("/security/unauthoried");
 		
 		http.logout().logoutUrl("/security/logoff").logoutSuccessUrl("/security/logoff/success");
+		
 	}
 	
 	@Bean

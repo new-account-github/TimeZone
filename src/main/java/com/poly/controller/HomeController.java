@@ -24,4 +24,10 @@ public class HomeController {
 	public String detail() {
 		return "/product/detail";
 	}
+	
+	@RequestMapping("/home/account")
+	public String profile() {
+		return "home/profile";
+	}
+	
 }

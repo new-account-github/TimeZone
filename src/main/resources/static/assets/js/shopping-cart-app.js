@@ -12,7 +12,7 @@ app.controller('shopping-cart-ctrl',function($scope,$http){
                 $http.get(`/rest/products/${id}`).then(resp =>{
                     resp.data.qty = 1;
                     this.items.push(resp.data);
-                     this.saveToLocalStorage();
+                    this.saveToLocalStorage();
                 })
             }
         },
@@ -60,7 +60,7 @@ app.controller('shopping-cart-ctrl',function($scope,$http){
 
         purchase(){
             var order = angular.copy(this);
-            $http.post("/rest/orders",order).then(resp=>{
+            $http.post(`/rest/orders`,order).then(resp=>{
                 alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
                 $scope.cart.clear();
                 location.href = "/order/detail" + resp.get.data.id;
@@ -70,5 +70,35 @@ app.controller('shopping-cart-ctrl',function($scope,$http){
             })
         }
     }
+    // account ctrl
+    $scope.account = {};
 
+    $scope.initialize = function() {
+        $http.get(`/rest/account`).then(resp=>{
+             $scope.account = resp.data;
+       });
+    }
+    
+    $scope.initialize();
+
+    $scope.updateAccount= function(){
+        var newAccount = angular.copy($scope.account);
+        $http.put(`/rest/account/${newAccount.username}`,newAccount).then(resp=>{
+            $scope.account = angular.copy(newAccount);
+            alert("Update thanh cong");
+        }).catch(err=>{
+            alert("Update that bai");
+            console.log(err);
+        })
+    }
+
+    $scope.delete = function(accountD){
+        $http.delete(`/rest/account/${accountD.username}`).then(resp=>{
+            alert("Delete access");
+            location.href = "/security/logoff";
+        }).catch(err => {
+            alert('Delete error');
+            console.log(err);
+        })
+    }
 });
