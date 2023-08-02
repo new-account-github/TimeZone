@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SecurityController {
 	@RequestMapping("/security/login/form")
 	public String form(Model model) {
-		model.addAttribute("message", "Vui lòng đăng nhập");
+		model.addAttribute("message", "Login");
 		return "/security/login";
 	}
 	
@@ -19,13 +19,13 @@ public class SecurityController {
 	
 	@RequestMapping("/security/login/error")
 	public String error(Model model) {
-		model.addAttribute("message", "Vui lòng thử lại tên đăng nhập hoặc mật khẩu không đúng");
+		model.addAttribute("message", "Username or password incorrect");
 		return "/security/login";
 	}
 	
 	@RequestMapping("/security/login/unauthoried")
 	public String unauthoried(Model model) {
-		model.addAttribute("messsage", "Không có quyền truy xuất");
+		model.addAttribute("messsage", "Your don't have role to get url");
 		return "/security/login";
 	}
 	
