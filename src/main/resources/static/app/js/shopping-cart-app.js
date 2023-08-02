@@ -1,57 +1,98 @@
 const app = angular.module('shopping-cart-app',[]);
 
 app.controller('shopping-cart-ctrl',function($scope,$http){
+    function getCart(username){
+        const cartKey = `cart_${username}`
+        const json = localStorage.getItem(cartKey);
+        return json? JSON.parse(json) : {
+            username : username,
+            items :[]
+        };
+    }
+    
+    function saveCart(username,cart){
+        let cartKey = `cart_${username}`
+        let json = JSON.stringify(cart);
+        localStorage.setItem(cartKey, json);      
+    }
+
+    function totalPrice(){
+        let totalPrice = 0;
+        angular.forEach($scope.cart.items, function(item) {
+            totalPrice += item.price * item.qty;
+        });
+        return totalPrice;
+    }
+
+
     $scope.cart= {
-        items:[],
+     
+        username:"",
+
+        items : [],
         
         add(id){
-            var item = this.items.find(item => item.id == id);
+
+            if (!this.items) {
+                this.items = []; 
+            }
+            
+
+            let item = this.items.find(item => item.id == id);
+
             if(item){
                 item.qty++;
+                saveCart(this.username, this)
             } else {
                 $http.get(`/rest/products/${id}`).then(resp =>{
-                    resp.data.qty = 1;
-                    this.items.push(resp.data);
-                    this.saveToLocalStorage();
+                    let newItem = resp.data;
+                    newItem.qty = 1;
+                    this.items.push(newItem);
+                    saveCart(this.username,this);
                 })
             }
         },
         remove(id){
-            var index = this.items.findIndex( item => item.id === id );
+            let index = this.items.findIndex( item => item.id === id );
             this.items.splice( index, 1 );
-            this.saveToLocalStorage();
+            saveCart(this.username,this);
         },
         clear(){
             this.items = [];
-            this.saveToLocalStorage();
+            saveCart(this.username,this);
         },
-        amt_of(item){},
         get count(){
-            return this.items.map(item => item.qty).reduce((total,qty) => total += qty, 0);
+            return this.items.map(item => item.qty).reduce((total, qty) => total += qty, 0);
         },
         get amount(){
-            return this.items.map(item => item.qty * item.price).reduce((total,qty) => total += qty, 0);
+            return totalPrice();
         },
         saveToLocalStorage(){
-            var json = JSON.stringify(angular.copy(this.items));
-            localStorage.setItem("cart",json);
+            saveCart(this.username,angular.copy(this.items));
         },
         loadFromLocalStorage(){
-            var json = localStorage.getItem("cart");
-            this.items = json ? JSON.parse(json) : [];
+            let cart = getCart(this.username);
+            this.items = cart.items
         },
-    }
 
+        totalPrice : totalPrice
+    };
+
+    let username = $("#username").text().trim();
+    $scope.cart.username = username;
     $scope.cart.loadFromLocalStorage();
+
+
 
     $scope.order = {
         createDate: new Date(),
-        address: "",
+        address: "TP HCM",
         account:{username: $("#username").text()},
+
         get orderDetails(){
             return $scope.cart.items.map(item=>{
                 return {
-                    product:{id:item.id},
+                    product: {id: item.id},
                     price:item.price,
                     quantity:item.qty
                 }
@@ -71,6 +112,10 @@ app.controller('shopping-cart-ctrl',function($scope,$http){
             })
         }
     }
+
+
+
+
     // account ctrl
     $scope.account = {};
 

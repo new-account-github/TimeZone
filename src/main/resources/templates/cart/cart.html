@@ -58,17 +58,15 @@
                   </td>
                   <td>{{item.name}}</td>
                   <td>
-                    <h5 class="text-center">{{item.price }} VND</h5>
+                    <h5 class="text-center">{{item.price | number:0}} VND</h5>
                   </td>
                   <td>
                     <div class="product_count">
-                      <!-- <span class="input-number-decrement"> <i class="ti-minus"></i></span> -->
-                      <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" class="input-number" type="number"  min="1" max="5">
-                      <!-- <span class="input-number-increment"> <i class="ti-plus"></i></span> -->
+                      <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" class="input-number" type="number" min="1" max="5">
                     </div>
                   </td>
                   <td>
-                    <h5 class="text-center">{{item.price * item.qty}} VND</h5>
+                    <h5 class="text-center">{{item.price * item.qty | number :0}} VND</h5>
                   </td>
                   <td>
                     <button ng-click="cart.remove(item.id)" class="btn btn-outline-danger">Delete</button>
@@ -92,7 +90,7 @@
                     <h3>Subtotal</h3>
                   </td>
                   <td>
-                    <h3 class="text-center"> {{cart.amount | number : 2}} VND</h3>
+                    <h3 class="text-center"> {{cart.amount | number : 0}} VND</h3>
                   </td>
                 </tr>
                 
