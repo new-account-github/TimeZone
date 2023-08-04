@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +19,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "Authorities", uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"Username", "Roleid"})
+		@UniqueConstraint(columnNames = { "Username", "Roleid" })
 })
-public class Authority  implements Serializable{
-	@Id 
+public class Authority implements Serializable {
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@ManyToOne @JoinColumn(name = "Username")
+	@ManyToOne
+	@JoinColumn(name = "Username")
 	private Account account;
-	@ManyToOne  @JoinColumn(name = "Roleid")
+	@ManyToOne
+	@JoinColumn(name = "Roleid")
 	private Role role;
 }

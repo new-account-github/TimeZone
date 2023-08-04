@@ -1,12 +1,6 @@
 package com.poly.service;
 
 import java.util.Optional;
-
-import java.util.Optional;
-
-import java.util.List;
-
-import java.util.Optional;
 import java.util.List;
 import com.poly.entity.Account;
 
@@ -26,7 +20,6 @@ public interface AccountService {
 	public boolean checkUsernameExists(String username);
 
 	List<Account> getAdmin();
-
 
 	List<Account> findALL();
 

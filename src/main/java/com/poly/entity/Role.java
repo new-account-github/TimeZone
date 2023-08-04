@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "roles")
-public class Role  implements Serializable{
+public class Role implements Serializable {
 	@Id
 	private String id;
 	private String name;

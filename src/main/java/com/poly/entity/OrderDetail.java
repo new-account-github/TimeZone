@@ -10,16 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @SuppressWarnings("serial")
 @Getter
 @Setter
-@Entity 
+@Entity
 @Table(name = "Orderdetails")
-public class OrderDetail  implements Serializable{
+public class OrderDetail implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;

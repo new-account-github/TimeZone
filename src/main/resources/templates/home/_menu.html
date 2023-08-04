@@ -12,13 +12,13 @@
                         <ul id="navigation">
                             <li><a th:href="@{|/home/index|}">Home</a></li>
                                 <th:block th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA')}">
-                                <li><a th:href="@{|/home/admin/index|}">Administration</a></li>
+                                <li><a th:href="@{|/admin/index|}">Administration</a></li>
                               </th:block>
                             <th:block th:if=${#request.remoteUser}>
                                 <li><a th:href="@{|/home/shop|}">Shop</a></li>
                                 <li><a th:href="@{|/home/order|}"> Order list</a></li>
                                 <li><a th:href="@{|/security/logoff|}">Logout</a></li>
-                                <li><a th:href="@{|/security/logoff|}" id="username">[[${#request.remoteUser}]]</a></li>
+                                <li><a id="username">[[${#request.remoteUser}]]</a></li>
 
                             </th:block>
                             <th:block th:unless="${#request.remoteUser}">

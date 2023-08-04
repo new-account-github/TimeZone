@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.entity.Category;
-import com.poly.entity.Product;
 import com.poly.service.CategoryService;
-import com.poly.service.ProductService;
 
 @CrossOrigin("*")
 @RestController
@@ -19,10 +17,9 @@ import com.poly.service.ProductService;
 public class CategoryRestController {
 	@Autowired
 	CategoryService categoryService;
-	
+
 	@GetMapping()
-	public List<Category>getAll() {	
+	public List<Category> getAll() {
 		return categoryService.findAll();
 	}
 }
-	
