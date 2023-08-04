@@ -1,5 +1,8 @@
 package com.poly.rest.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,23 +32,25 @@ public class AccountRestController {
 
 	@Autowired
 	HttpServletRequest request;
-	
-	
+
 	@GetMapping()
 	public Account account(HttpServletRequest request) {
-		String username = request.getRemoteUser();
-		Account account = accountService.findById(username);
-		if (username != null && account != null) {
-			return account;
+		return accountService.findById(request.getRemoteUser());
+	}
+
+	@GetMapping("/admin")
+	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin) {
+		if (admin.orElse(false)) {
+			return accountService.getAdmin();
 		} else {
-			return null;
+			return accountService.findALL();
 		}
 	}
 
 	@PutMapping("/{username}")
 	public Account update(@RequestBody Account account, @PathVariable("username") String username) {
-			account.setPhone("(+84) " + account.getPhone());
-			return accountService.update(account);
+		account.setPhone("(+84) " + account.getPhone());
+		return accountService.update(account);
 	}
 
 	@DeleteMapping("/{username}")

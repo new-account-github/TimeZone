@@ -11,7 +11,6 @@ import java.util.List;
 import com.poly.entity.Account;
 
 public interface AccountService {
-
 	Account findById(String username);
 
 	Account update(Account account);
@@ -25,5 +24,10 @@ public interface AccountService {
 	void create(Account account);
 
 	public boolean checkUsernameExists(String username);
+
+	List<Account> getAdmin();
+
+
+	List<Account> findALL();
 
 }
