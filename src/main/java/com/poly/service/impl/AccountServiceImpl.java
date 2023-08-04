@@ -20,7 +20,6 @@ public class AccountServiceImpl implements AccountService {
 		return accountsDAO.findById(username).get();
 	}
 
-<<<<<<<<< Temporary merge branch 1
 
 	@Override
 	public Account update(Account account) {
@@ -33,8 +32,6 @@ public class AccountServiceImpl implements AccountService {
 		accountsDAO.deleteById(username);
 	}
 
-=========
->>>>>>>>> Temporary merge branch 2
 	@Override
 	public void create(Account account) {
 		accountsDAO.save(account);
@@ -55,17 +52,6 @@ public class AccountServiceImpl implements AccountService {
         return accountsDAO.findByUsername(username).isPresent();
     }
 	
-	@Override
-	public Account update(Account account) {
-		return accountsDAO.save(account);
-	}
-
-
-	@Override
-	public void delete(String username) {
-		accountsDAO.deleteById(username);
-	}
-
 	@Override
 	public List<Account> getAdmin() {
 		return accountsDAO.getAdmin();
