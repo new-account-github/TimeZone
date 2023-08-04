@@ -22,7 +22,7 @@
                             </th:block>
                             <th:block
                                 th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA') or #request.isUserInRole('AD')}">
-                                <li><a th:href="@{|/home/admin/index|}">Administration</a></li>
+                                <li><a th:href="@{|/admin/index|}">Administration</a></li>
                             </th:block>
                         </ul>
                     </nav>

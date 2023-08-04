@@ -1,7 +1,5 @@
 package com.poly.controller.admin;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,6 @@ import com.poly.entity.Product;
 import com.poly.service.ProductService;
 
 @Controller
-
 public class HomeAdminController {
 	@Autowired
 	ProductService productService;
@@ -23,8 +20,7 @@ public class HomeAdminController {
 		return "admin/DashBoard";
 	}
 
-
-	@RequestMapping("/admin/Authority")
+	@RequestMapping("/admin/authority")
 	public String EditProduct() {
 		return "admin/Authority";
 	}

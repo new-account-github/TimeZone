@@ -9,11 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import com.poly.entity.Account;
 
 public interface AccountsDAO extends JpaRepository<Account, String> {
-	@Query("SELECT DISTINCT ar.account FROM Authority ar WHERE ar.id.role IN ('DIR','STA','AD')")
+	@Query("SELECT DISTINCT ar.account FROM Authority ar WHERE ar.id.role IN ('DIR','STA')")
 	List<Account> getAdmin();
 
 	Optional<Account> findByUsernameAndEmail(String username, String email);
-	
 	Optional<Account> findByUsername(String username);
 	
 }
