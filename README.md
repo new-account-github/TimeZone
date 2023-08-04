@@ -8,3 +8,5 @@
 note:
 + đừng dại mà vô database xong mò mật khẩu nó đã được mã hóa encode nên éo được đâu
 + thống kê còn đang tiếp tục phát triển
++ t đã pull mấy nhánh kia về xong xử lý conflig rồi nên đỡ khổ mấy cha pull lại xong giải quyết conflig
++ không tạo pull request cũng vì lý do đó pull về xong dính đống bug mệt
