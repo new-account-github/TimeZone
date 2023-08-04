@@ -11,10 +11,9 @@
                     <nav>
                         <ul id="navigation">
                             <li><a th:href="@{|/home/index|}">Home</a></li>
-                            <th:block
-                                th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA') or #request.isUserInRole('AD')}">
+                                <th:block th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA')}">
                                 <li><a th:href="@{|/home/admin/index|}">Administration</a></li>
-                            </th:block>
+                              </th:block>
                             <th:block th:if=${#request.remoteUser}>
                                 <li><a th:href="@{|/home/shop|}">Shop</a></li>
                                 <li><a th:href="@{|/home/order|}"> Order list</a></li>

@@ -1,6 +1,7 @@
 package com.poly.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.poly.entity.Product;
 
@@ -17,5 +18,7 @@ public interface ProductService {
 	Product update(Product product);
 
 	void delete(Integer id);
+
+	List<Product> findByCategory(String cid);
 
 }

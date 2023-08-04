@@ -1,6 +1,7 @@
 package com.poly.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class ProductServiceImpl implements ProductService{
 	public void delete(Integer id) {
 		productDAO.deleteById(id);
 		
+	}
+
+	@Override
+	public List<Product> findByCategory(String cid) {
+		return productDAO.findByCategoryID(cid);
 	}
 }

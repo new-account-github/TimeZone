@@ -1,4 +1,4 @@
-package com.poly.controller.user;
+package com.poly.controller;
 
 
 import javax.servlet.http.HttpServletRequest;

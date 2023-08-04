@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.poly.entity.Account;
 import com.poly.service.AccountService;
@@ -30,12 +31,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	BCryptPasswordEncoder pe;
 
+	
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	      return new BCryptPasswordEncoder();
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(username ->{
 			try {
 				Account user = accountService.findById(username);
-				String password = pe.encode(user.getPassword());
+				String password = user.getPassword();
 				String[] roles = user.getAuthorities().stream()
 						.map(er -> er.getRole().getId())
 						.collect(Collectors.toList()).toArray(new String[0]);
@@ -43,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			} catch (NoSuchElementException e) {
 				throw new UsernameNotFoundException(username + "NOT FOUND");
 			}
-		});
+		}).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -70,11 +82,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.logout().logoutUrl("/security/logoff").logoutSuccessUrl("/security/logoff/success");
 		
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
 	@Override

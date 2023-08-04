@@ -6,10 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.Account;
 import com.poly.service.AccountService;
 import com.poly.service.EmailService;
+import com.poly.service.EncodePasswordService;
 
 @Controller
 public class RegisterController {
@@ -21,6 +23,9 @@ public class RegisterController {
     
     @Autowired
     EmailService emailService;
+    
+    @Autowired
+    EncodePasswordService encoder;
     
     @RequestMapping(value = "/security/register", method = RequestMethod.GET)
     public String registerForm(Model model) {
@@ -34,7 +39,8 @@ public class RegisterController {
             return "/security/register";
         }
     	
-    	account.setPhone("(+84) " + account.getPhone());
+    	account.setPhone(account.getPhone());
+    	account.setPassword(encoder.encodeBcrypt(account.getPassword()));
         accountService.create(account);
         emailService.sendWelcomeEmail(account.getEmail(), account.getFullname());
         model.addAttribute("message", "Đăng ký thành công");

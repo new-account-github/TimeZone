@@ -63,13 +63,12 @@
                     </div>
                     <!-- Select items -->
                     <div class="select-this">
-                        <form action="#">
+                        <form>
                             <div class="select-itms">
-                                <select name="select" id="select1">
-                                    <option value="">40 per page</option>
-                                    <option value="">50 per page</option>
-                                    <option value="">60 per page</option>
-                                    <option value="">70 per page</option>
+                                <select name="select" id="select1" >
+                                    <option value="" th:each="cate:${cates}">
+                                        <a th:href="@{|/category/list?cid=${cate.id}|}">[[${cate.name}]]</a>
+                                    </option>
                                 </select>
                             </div>
                         </form>

@@ -1,4 +1,4 @@
-package com.poly.controller.user;
+package com.poly.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.entity.Category;
 import com.poly.entity.Product;
+import com.poly.service.CategoryService;
 import com.poly.service.ProductService;
 
 @Controller
@@ -17,11 +19,18 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	CategoryService categoryService;
+	
 	@RequestMapping("/home/shop")
 	public String shop(Model model) {
-		List<Product> list = productService.findAll();
-		model.addAttribute("items", list);
-		return "/product/shop";
+			List<Product> listProduct = productService.findAll();
+			model.addAttribute("items", listProduct);
+			
+			List<Category> listCates = categoryService.findAll(); 
+			model.addAttribute("cates", listCates);
+			
+			return "/product/shop";
 	}
 	
 	@RequestMapping("/home/shop/findByName")

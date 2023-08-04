@@ -62,7 +62,8 @@
                   </td>
                   <td>
                     <div class="product_count">
-                      <input ng-change="cart.saveToLocalStorage()" ng-model="item.qty" class="input-number" type="number" min="1" max="5">
+                      <div ng-show="item.qty < 0" style="color: red;">Số lượng phải lớn hơn hoặc bằng 0</div>
+                      <input ng-change="cart.saveToLocalStorage()" ng-pattern="/^[0-9]+$/" ng-model="item.qty" class="input-number" type="number" min="1" max="5">
                     </div>
                   </td>
                   <td>

@@ -11,7 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
 
 
-<body>
+<body ng-app="account" ng-controller="account-ctrl">
     <main>
         <!-- Hero Area Start-->
         <div class="slider-area ">
@@ -46,16 +46,15 @@
                         <div class="login_part_form">
                             <div class="login_part_form_iner">
                                 <h3>Welcome to your profile [[${#request.remoteUser}]] ! <br></h3>
-                                <form class="row contact_form" method="" novalidate="novalidate">
+                                <form class="row contact_form" method="" novalidate="novalidate" >
                                     <h6 class="text-centert text-danger" th:text="${message}"></h6>
                                    
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="username" name="username" value=""
-                                            ng-model="account.username" placeholder="Username" disabled>
+                                            ng-model="account.username" placeholder="Username" readonly>
                                     </div>
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="password" class="form-control" id="pwd" name="password" value=""
-                                            ng-model="account.password" placeholder="Old Pass">
+                                        <input type="password" class="form-control" id="password" name="password" ng-model="account.password" placeholder="Password" readonly>
                                     </div>
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="fullname" name="fullname" value=""
@@ -66,9 +65,14 @@
                                             ng-model="account.email" placeholder="Email">
                                     </div>
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="tel" class="form-control" id="phone" name="phone" value=""
-                                            ng-model="account.phone" placeholder="0123456789">
-                                    </div>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text">(+84)</span>
+											</div>
+											<input type="tel" class="form-control" id="phone" name="phone" value="" ng-model="account.phone"
+												placeholder="Phone">
+										</div>
+									</div>
                                     <div class="col-md-12 form-group">
                                         <button ng-click="updateAccount()" type="submit" value="submit" class="btn_3">
                                             Update
