@@ -11,20 +11,20 @@ import org.springframework.web.multipart.MultipartFile;
 import com.poly.service.UploadService;
 
 @Service
-public class UploadServiceImpl implements UploadService {
+public class UploadServiceImpl implements UploadService{
 	@Autowired
-	ServletContext app;
-
+	ServletContext context;
+	
 	@Override
-	public File save(MultipartFile file, String folder) {
-		File dir=new File(app.getRealPath("/assets/"+folder));
+	public File save(MultipartFile file, String folder) { 
+		File dir = new File(context.getRealPath("/assets/img/" + folder));
 		if(!dir.exists()) {
 			dir.mkdirs();
 		}
-		String s=System.currentTimeMillis()+file.getOriginalFilename();
-		String name=Integer.toHexString(s.hashCode())+s.substring(s.lastIndexOf("."));
+		String s = System.currentTimeMillis() + file.getOriginalFilename();
+		String name = Integer.toHexString(s.hashCode()) + s.substring(s.lastIndexOf("."));
 		try {
-			File saveFile=new File(dir,name);
+			File saveFile = new File(dir,name);
 			file.transferTo(saveFile);
 			System.out.println(saveFile.getAbsolutePath());
 			return saveFile;
@@ -32,4 +32,5 @@ public class UploadServiceImpl implements UploadService {
 			throw new RuntimeException();
 		}
 	}
+
 }

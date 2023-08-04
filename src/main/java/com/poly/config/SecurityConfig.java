@@ -53,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/home/checkout/**").authenticated()
 		.antMatchers("/home/account/**").authenticated()
 		.antMatchers("/rest/account/**").authenticated()
-		.antMatchers("/admin/**").hasAnyRole("STA","DIR","AD")
+		.antMatchers("/admin/index").hasAnyRole("STA","DIR")
+		.antMatchers("/admin/authority").hasAnyRole("DIR")
 		.antMatchers("/rest/authorities").hasRole("DIR")
-		.antMatchers("/rest/authorities").hasRole("AD")
 		.anyRequest().permitAll();
 		
 		http.formLogin()
@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.rememberMe().tokenValiditySeconds(86400);
 		
-		http.exceptionHandling().accessDeniedPage("/security/unauthoried");
+		http.exceptionHandling().accessDeniedPage("/security/login/unauthoried");
 		
 		http.logout().logoutUrl("/security/logoff").logoutSuccessUrl("/security/logoff/success");
 		
