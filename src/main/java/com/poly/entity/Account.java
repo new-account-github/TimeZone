@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -34,11 +35,14 @@ public class Account  implements Serializable{
     @NotBlank(message = "Fullname is required")
     String fullname;
     
+    @NotBlank(message = "Email is required")
     @Email(message = "Email must be in the correct format")
     String email;
     
-    @NotBlank(message = "Phone is required")
     String phone;
+    @Transient
+    @Size(min = 9, max = 10, message = "Phone number must be between 9 and 10 digits")
+    String inputphone;
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
 	List<Order> orders;
