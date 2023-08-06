@@ -44,7 +44,7 @@ app.controller('product_ctrl', function($scope, $http) {
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.items.push(resp.data);
 			$scope.reset();
-			alert("Them thanh cong");
+			alert("Create Success");
 		}).catch(err => {
 			alert('message');
 
@@ -56,9 +56,10 @@ app.controller('product_ctrl', function($scope, $http) {
 		$http.put(`/rest/products/${item.id}`, item).then(resp => {
 			var index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items[index] = item;
-			alert("Update thanh cong");
+			$scope.reset();
+			alert("Update Success");
 		}).catch(err => {
-			alert('Update that bai');
+			alert('Update Fail');
 			console.log(err);
 		})
 	}
@@ -68,9 +69,9 @@ app.controller('product_ctrl', function($scope, $http) {
 			var index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items.splice(index, 1);
 			$scope.reset();
-			alert("Xoa thanh cong")
+			alert("Delete Success")
 		}).catch(err => {
-			alert("Xoa that bai");
+			alert("Delete Fail");
 			console.log(err);
 		})
 	}
@@ -117,44 +118,7 @@ app.controller('product_ctrl', function($scope, $http) {
 			this.page = this.count - 1;
 		}
 	}
-	function isNonNegative(price) {
-		return number >= 0;
-	}
 
-
-	/*	$scope.submitForm = function() {
-			// Validate the form data
-			if (!$scope.form.name) {
-				alert('Xin hãy nhập tên.');
-				return;
-			}
-			if (!$scope.form.price) {
-				alert('Xin hãy nhập giá.');
-				return;
-			}
-	
-			if (!$scope.form.category) {
-				alert('Xin hãy nhập loại sản phẩm.');
-				return;
-			}
-	
-			if (!$scope.form.createDate) {
-				alert('Xin hãy nhập ngày tạo.');
-				return;
-			}
-				if (!$scope.form.available) {
-				alert('Xin hãy nhập Trạng Thái.');
-				return;
-			}
-	
-	
-			// The form is valid, submit it
-			console.log($scope.form.name);
-			console.log($scope.form.price);
-			console.log($scope.form.category.id);
-			console.log($scope.form.createDate);
-			console.log($scope.form.available);
-		};*/
 
 
 })

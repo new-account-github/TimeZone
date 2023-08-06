@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/home/account/**").authenticated()
 		.antMatchers("/rest/account/**").authenticated()
 		.antMatchers("/admin/index").hasAnyRole("STA","DIR")
+		.antMatchers("/admin/statistical").hasAnyRole("STA","DIR")
 		.antMatchers("/admin/authority").hasAnyRole("DIR")
 		.antMatchers("/rest/authorities").hasRole("DIR")
 		.anyRequest().permitAll();

@@ -39,7 +39,7 @@
               <h3>Billing Details</h3>
               <form class="row contact_form" action="#" method="post" novalidate="novalidate" name="formCheckOut">
                 <div class="col-md-6 form-group p_star">
-                  <div class="form-control" id="username">[[${#request.remoteUser}]]</div>
+                  <div class="form-control">[[${#request.remoteUser}]]</div>
                   <span class="placeholder" data-placeholder=""></span>
                 </div>
                 <div class="col-md-6 form-group p_star">
@@ -67,18 +67,14 @@
                 <ul class="list">
                   <li>
                     <a href="#">Name
-                      <span>Quantity</span>
                       <span>Price</span>
-                      <span>Total</span>
                     </a>
                   </li>
                  
               
                   <li ng-repeat="item in cart.items">
                     <a href="#">{{item.name}}
-                      <span class="start">{{item.qty}}</span>
-                      <span class="middle text-center">{{item.price | number: 2}}</span>
-                      <span class="last">{{item.qty * item.price | number: 2}}</span>
+                      <span class="last">{{item.qty * item.price | number: 1}} VND</span>
                     </a>
                   </li>
                 </ul>
@@ -86,18 +82,11 @@
                 
                   <li>
                     <a href="#">Total
-                      <span>{{cart.amount | number : 2}}</span>
+                      <span>{{cart.amount | number : 1}} VND</span>
                     </a>
                   </li>
                 </ul>
-              
-            
-                <!-- <div class="creat_account">
-                  <input type="checkbox" id="f-option4" name="selector" />
-                  <label for="f-option4">I’ve read and accept the </label>
-                  <a href="#">terms & conditions*</a>
-                </div> -->
-                <button class="btn_3" ng-click="order.purchase()" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">Proceed to Paypal</button>
+                <button class="btn_3" ng-click="order.purchase()" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">PURCHASE YOUR ORDER</button>
               </div>
             </div>
           </div>

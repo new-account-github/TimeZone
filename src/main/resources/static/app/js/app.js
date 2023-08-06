@@ -13,7 +13,7 @@ app.controller('ctrl',function($scope,$http){
     function saveCart(username,cart){
         let cartKey = `cart_${username}`
         let json = JSON.stringify(cart);
-        localStorage.setItem(cartKey, json);      
+        localStorage.setItem(cartKey, json);  
     }
 
     function totalPrice(){
@@ -68,13 +68,17 @@ app.controller('ctrl',function($scope,$http){
             return totalPrice();
         },
         saveToLocalStorage(){
-            saveCart(this.username,angular.copy(this.items));
+            let itemsToSave = this.items.map(item => {
+                const { $$hashKey, ...cleanItem } = item;
+                return cleanItem;
+            });
+            saveCart(this.username, itemsToSave);
         },
         loadFromLocalStorage(){
             let cart = getCart(this.username);
             this.items = cart.items
         },
-
+     
         totalPrice : totalPrice
     };
 
@@ -105,7 +109,7 @@ app.controller('ctrl',function($scope,$http){
             $http.post(`/rest/orders`,order).then(resp=>{
                 alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
                 $scope.cart.clear();
-                // location.href = "/order/detail" + resp.get.data.id;
+                location.href = "/order/detail/" + resp.data.id;
             }).catch(error=>{
                 alert("Error")
                 console.log(error);

@@ -118,9 +118,11 @@
 								<li class="active"><a href="index"><i
 										class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
 									<th:block th:if="${#request.isUserInRole('DIR')}">
-								<li class="active"><a th:href="@{|/admin/authority|}"><i
+										<li class="active"><a th:href="@{|/admin/authority|}"><i
 										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
-										</th:block>
+									</th:block>
+									<li class="active"><a th:href="@{|/admin/statistical|}"><i
+										class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -129,58 +131,7 @@
 		</div>
 		<div class="be-content">
 			<div class="main-content container-fluid">
-				<div class="row">
-					<div class="col-12 col-lg-9 col-xl-3">
-						<div class="widget widget-tile">
-							<div class="chart sparkline" id="spark1"></div>
-							<div class="data-info">
-								<div class="desc">New Users</div>
-								<div class="value">
-									<span class="indicator indicator-equal mdi mdi-chevron-right"></span><span
-										class="number" data-toggle="counter" data-end="113">0</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-9 col-xl-3">
-						<div class="widget widget-tile">
-							<div class="chart sparkline" id="spark2"></div>
-							<div class="data-info">
-								<div class="desc">Monthly Sales</div>
-								<div class="value">
-									<span class="indicator indicator-positive mdi mdi-chevron-up"></span><span
-										class="number" data-toggle="counter" data-end="80"
-										data-suffix="%">0</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-9 col-xl-3">
-						<div class="widget widget-tile">
-							<div class="chart sparkline" id="spark3"></div>
-							<div class="data-info">
-								<div class="desc">Impressions</div>
-								<div class="value">
-									<span class="indicator indicator-positive mdi mdi-chevron-up"></span><span
-										class="number" data-toggle="counter" data-end="532">0</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-lg-9 col-xl-3">
-						<div class="widget widget-tile">
-							<div class="chart sparkline" id="spark4"></div>
-							<div class="data-info">
-								<div class="desc">Downloads</div>
-								<div class="value">
-									<span class="indicator indicator-negative mdi mdi-chevron-down"></span><span
-										class="number" data-toggle="counter" data-end="113">0</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	
+				
 					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 					  <li class="nav-item">
 					    <a class="nav-link active" id="pills-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
@@ -325,9 +276,9 @@
 																	 ng-min="0" ng-max="10000000"  required>
 																<div class="errortext text-sm-left"
 																	ng-show="myForm.price.$dirty && myForm.price.$invalid" style="float: left; margin-right: 40px; color:red">
-																	  <span  ng-show="myForm.price.$error.required" >Nhập giá sản phẩm</span>
-																	 <span ng-show="myForm.price.$error.min" >Giá tiền không được nhập bé hơn 0</span>
-																	<span ng-show="myForm.price.$error.max	" >Giá tiền phải dưới 10000000</span>
+																	  <span  ng-show="myForm.price.$error.required" >Price is required</span>
+																	 <span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
+																	<span ng-show="myForm.price.$error.max	" >Price must be less than 10,000,000</span>
 															            
 																</div>
 															</div>
@@ -342,7 +293,7 @@
 																	required>
 																<div class="errortext"
 																	ng-show="myForm.image.$dirty && myForm.image.$invalid" style="float: left; margin-right: 40px; color:red">
-																		 <span ng-show="myForm.image.$error.required">Nhập ảnh sản phẩm</span>             
+																		 <span ng-show="myForm.image.$error.required">Image is required</span>             
 																</div>
 															</div>
 														</div>
@@ -356,7 +307,7 @@
 																</select>
 																<div class="errortext"
 																	ng-show="myForm.category.$dirty && myForm.category.$invalid" style="float: left; margin-right: 40px; color:red">
-																	    <span ng-show="myForm.category.$error.required">Nhập Loại sản phẩm</span>             
+																	    <span ng-show="myForm.category.$error.required"></span>             
 																</div>
 															</div>
 														</div>
@@ -368,7 +319,7 @@
 																	type="date" id="image" name="day" required>
 																<div class="errortext"
 																	ng-show="myForm.day.$dirty && myForm.day.$invalid" style="float: left; margin-right: 40px; color:red">
-																	    <span ng-show="myForm.day.$error.required">Nhập ngày tạo sản phẩm</span>             
+																	    <span ng-show="myForm.day.$error.required"></span>             
 																</div>
 															</div>
 														</div>
@@ -377,7 +328,7 @@
 																class="col-12 col-sm-3 col-form-label text-sm-left">Available</label>
 															<div class="col-12 col-sm-8 col-lg-4">
 																<div class="form-group" name="available">
-																	<label> <input ng-model="form.available"
+																	<label> <input  ng-model="form.available"
 																		type="radio" ng-value="true" ng-required> Yes
 																	</label> <br><label> <input ng-model="form.available"
 																		type="radio" ng-value="false" ng-required>No
@@ -394,13 +345,13 @@
 									</div>
 									<div class="d-grid gap-2 d-md-block text-sm-center">
 										<button ng-click=create() class="btn btn-primary"
-											type="button" ng-disabled=" myForm.$invalid ">Thêm</button>
+											type="button" ng-disabled=" myForm.$invalid ">Create</button>
 										<button ng-click=delete(form) class="btn btn-primary"
-											type="button">Xoá</button>
+											type="button">Delete</button>
 										<button ng-click=update() class="btn btn-primary"
-											type="button">Sửa</button>
-										<button ng-click=reset() class="btn btn-primary" type="button">Làm
-											Mới</button>
+											type="button">Update</button>
+										<button ng-click=reset() class="btn btn-primary" type="button">
+											New</button>
 									</div>
 								</div>
 							</div>
@@ -449,6 +400,6 @@
 		}
 	</script>
 
-	<script src="/assets/app/product_ctrl.js"></script>
+	<script src="/app/js/product_ctrl.js"></script>
 </body>
 </html>

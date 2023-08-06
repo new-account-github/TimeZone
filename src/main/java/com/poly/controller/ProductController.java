@@ -1,5 +1,8 @@
 package com.poly.controller;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +28,38 @@ public class ProductController {
 	
 	@RequestMapping("/home/shop")
 	public String shop(Model model) {
-			List<Product> listProduct = productService.findAll();
-			model.addAttribute("items", listProduct);
+		List<Product> listProduct = productService.findAll();
+		model.addAttribute("items", listProduct);	
+
+		List<Category> listCates = categoryService.findAll();
+		model.addAttribute("cates", listCates);
+
+		return "/product/shop";
+	}
+	
+	@RequestMapping("/home/shop/sortByPrice")
+	public String sortByPrice(Model model) {
+		List<Product> listProductSortByPrice = productService.findAll();
+		Collections.sort(listProductSortByPrice,Comparator.comparing(Product::getPrice).reversed());
+		model.addAttribute("items", listProductSortByPrice);	
+		return "/product/shop";
+	}
+	
+	@RequestMapping("/home/shop/sortByName")
+	public String sortByName(Model model) {
+		List<Product> listProductSortByName = productService.findAll();
+		
+		Collections.sort(listProductSortByName,Comparator.comparing(Product::getName));
+		model.addAttribute("items", listProductSortByName);	
 			
-			List<Category> listCates = categoryService.findAll(); 
-			model.addAttribute("cates", listCates);
-			
-			return "/product/shop";
+		return "/product/shop";
+	}
+	
+	@RequestMapping("/home/shop/detail/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id) {
+		Product item = productService.findById(id);
+		model.addAttribute("item", item);
+		return "product/detail";
 	}
 	
 	@RequestMapping("/home/shop/findByName")
@@ -40,10 +68,5 @@ public class ProductController {
 		model.addAttribute("items", list);
 		return "/product/shop";
 	}
-	@RequestMapping("/home/shop/detail/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id) {
-		Product item = productService.findById(id);
-		model.addAttribute("item", item);
-		return "product/detail";
-	}
+	
 }
