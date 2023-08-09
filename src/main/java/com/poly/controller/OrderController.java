@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.poly.entity.OrderDetail;
+import com.poly.service.OrderDetailService;
 import com.poly.service.OrderService;
 
 @Controller
@@ -16,6 +18,8 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
+	@Autowired
+	OrderDetailService orderDetailService;
 	@RequestMapping("/home/checkout")
 	public String checkout() {
 		return "/checkout/checkout";

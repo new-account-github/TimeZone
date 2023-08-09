@@ -41,11 +41,8 @@ public class ProductRestController {
 
 	@PostMapping()
 	public Product create(@RequestBody Product product) {
-
 		return productService.create(product);
 	}
-
-
 
 	@PutMapping("{id}")
 	public Product update(@RequestBody Product product, @PathVariable("id") Integer id) {

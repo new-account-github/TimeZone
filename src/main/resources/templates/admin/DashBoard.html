@@ -61,7 +61,7 @@
 	background: #fb3;
 	border-radius: 999px;
 	cursor: pointer;
-	font-size: 2rgb(0, 0, 0);
+	font-size: 2 rgb(0, 0, 0);
 }
 
 .button_scroll2top:hover {
@@ -212,7 +212,7 @@
 								<div class="card-footer text-center">
 									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
 									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
-									<button class="btn btn-outline-success">{{pager.page+1}}
+									<button class="btn btn-outline-success">{{pager.page + 1}}
 										of {{pager.count}}</button>
 									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
 									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
@@ -260,9 +260,9 @@
 																	ng-minlength="3" ng-maxlength="20"
 																	ng-pattern="/^[a-zA-Z0-9_]*$/">
 																<div class="errortext" ng-show="myForm.name.$dirty && myForm.name.$invalid" style="float: left; margin-right: 40px; color:red">
-																	<span ng-show="myForm.name.$error.required">Nhập tên sản phẩm</span> 
-																	<span ng-show="myForm.name.$error.minlength">Tên phải trên 3 ký tự</span>  
-																	 <span ng-show="myForm.name.$error.maxlength">Tên không được quá 20 ký tự</span>
+																	<span ng-show="myForm.name.$error.required">Name is required</span> 
+																	<span ng-show="myForm.name.$error.minlength">Name must be greater than 3</span> 
+																	<span ng-show="myForm.name.$error.maxlength">Name must be less than 20</span>
 																	 <span ng-show="myForm.name.$error.pattern && !myForm.name.$error.minlength && !myForm.name.$error.maxlength">Tên không được nhập ký tự đặc biệt</span>            
 																</div>
 															</div>
@@ -276,10 +276,9 @@
 																	 ng-min="0" ng-max="10000000"  required>
 																<div class="errortext text-sm-left"
 																	ng-show="myForm.price.$dirty && myForm.price.$invalid" style="float: left; margin-right: 40px; color:red">
-																	  <span  ng-show="myForm.price.$error.required" >Price is required</span>
-																	 <span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
+																	<span  ng-show="myForm.price.$error.required" >Price is required</span>
+																	<span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
 																	<span ng-show="myForm.price.$error.max	" >Price must be less than 10,000,000</span>
-															            
 																</div>
 															</div>
 														</div>
@@ -293,7 +292,7 @@
 																	required>
 																<div class="errortext"
 																	ng-show="myForm.image.$dirty && myForm.image.$invalid" style="float: left; margin-right: 40px; color:red">
-																		 <span ng-show="myForm.image.$error.required">Image is required</span>             
+																		<span ng-show="myForm.image.$error.required">Image is required</span> 
 																</div>
 															</div>
 														</div>
@@ -307,7 +306,7 @@
 																</select>
 																<div class="errortext"
 																	ng-show="myForm.category.$dirty && myForm.category.$invalid" style="float: left; margin-right: 40px; color:red">
-																	    <span ng-show="myForm.category.$error.required"></span>             
+																	<span ng-show="myForm.category.$error.required"></span> 
 																</div>
 															</div>
 														</div>
@@ -319,7 +318,7 @@
 																	type="date" id="image" name="day" required>
 																<div class="errortext"
 																	ng-show="myForm.day.$dirty && myForm.day.$invalid" style="float: left; margin-right: 40px; color:red">
-																	    <span ng-show="myForm.day.$error.required"></span>             
+																	<span ng-show="myForm.day.$error.required"></span> 
 																</div>
 															</div>
 														</div>

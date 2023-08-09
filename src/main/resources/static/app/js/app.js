@@ -131,12 +131,11 @@ app.controller('ctrl',function($scope,$http){
 
   $scope.updateAccount= function(){
       var account = angular.copy($scope.account);
-      console.log(account);
       $http.put(`/rest/account/${account.username}`, account).then(resp=>{
           $scope.account = angular.copy(account);
-          alert("Update thanh cong");
+          alert("Update success");
       }).catch(err=>{
-          alert("Update that bai");
+          alert("Update fail");
           console.log(err);
       })
   }

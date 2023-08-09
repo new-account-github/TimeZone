@@ -46,7 +46,7 @@ public class RegisterController {
 		account.setPassword(pe.encode(account.getPassword()));
 		accountService.create(account);
 		emailService.sendWelcomeEmail(account.getEmail(), account.getFullname());
-		model.addAttribute("message", "Đăng ký thành công");
+		model.addAttribute("message", "Register Success");
 		return "/security/login";
 	}
 

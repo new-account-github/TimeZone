@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,9 @@ public class ForgotPasswordController {
 	@Autowired
 	EmailService emailService;
 
+	@Autowired
+	BCryptPasswordEncoder pe;
+	
 	@RequestMapping(value = "/security/forgot", method = RequestMethod.GET)
 	public String forgotForm() {
 		return "/security/forgot";
@@ -95,7 +99,7 @@ public class ForgotPasswordController {
 			Account account = accountService.findById(username);
 			if (account != null) {
 				// Đổi mật khẩu
-				account.setPassword(PassWord1);
+				account.setPassword(pe.encode(PassWord1));
 				// Lưu lại thông tin tài khoản
 				accountService.create(account);
 

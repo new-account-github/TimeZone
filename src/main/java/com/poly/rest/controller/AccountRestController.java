@@ -49,7 +49,6 @@ public class AccountRestController {
 
 	@PutMapping("/{username}")
 	public Account update(@RequestBody Account account, @PathVariable("username") String username) {
-		account.setPhone("(+84) " + account.getPhone());
 		return accountService.update(account);
 	}
 
