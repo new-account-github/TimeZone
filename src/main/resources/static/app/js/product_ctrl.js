@@ -106,7 +106,7 @@ app.controller('product_ctrl', function($scope, $http) {
 		},
 		prev() {
 			this.page--;
-			if (prev < 0) {
+			if (this.page < 0) {
 				this.last();
 			}
 		},

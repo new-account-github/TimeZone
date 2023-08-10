@@ -176,11 +176,6 @@
 
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-							type="button" role="tab" aria-controls="home" aria-selected="true">Quantity
-							statistics</button>
-					</li>
-					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
 							type="button" role="tab" aria-controls="profile" aria-selected="false"> Products
 							sold</button>
@@ -200,56 +195,6 @@
 					</li>
 				</ul>
 				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						<div class="col-12 col-lg-12">
-							<div class="card card-table">
-								<div class="card-header">
-									<div class="title" style="color:#005500">
-										<h1>General Statistics</h1>
-									</div>
-								</div>
-								<div class="card-body table-responsive">
-									<table class=" table table-striped table-borderless">
-										<thead>
-											<tr>
-												<th style="width: 30%;">Total User</th>
-												<th style="width: 30%;">Total Products</th>
-												<th style="width: 30%">Total Orders</th>
-												<th style="width: 30%">Total revenue</th>
-												<th class="actions" style="width: 4%;"></th>
-											</tr>
-										</thead>
-										<tbody class="no-border-x" >
-											<!-- somthing -->
-											<td class="w-20">
-												<div class="d-flex px-0 py-0 ">
-													<div class="ms-1">
-														<h6 class="text-sm mb-0">{{item.id}}</h6>
-													</div>
-												</div>
-											</td>
-											<td class="align-middle text-sm-left">
-												<div>
-													<h6 class="text-sm mb-1">{{item.name}}</h6>
-												</div>
-											</td>
-											<td class="align-middle text-sm-left">
-												<div class="">
-													<h6 class="text-sm mb-0">{{item.price}}</h6>
-												</div>
-											</td>
-											<td class="align-middle text-sm-left">
-												<div class="">
-													<h6 class="text-sm mb-0">{{item.price}}</h6>
-												</div>
-											</td>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						`
-					</div>
 					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="col-12 col-lg-12">
 							<div class="card card-table">

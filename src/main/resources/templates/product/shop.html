@@ -11,7 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
 </head>
 
-<body >
+<body>
     <!--? Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -50,8 +50,10 @@
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
                                     role="tab" aria-controls="nav-home" aria-selected="true">All Product</a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" th:href="@{|/home/shop/sortByPrice|}"> Price high to low</a>
-                                <a class="nav-item nav-link" id="nav-contact-tab" th:href="@{|/home/shop/sortByName|}"> A->Z </a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" th:href="@{|/home/shop/sortByPrice|}">
+                                    Price high to low</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" th:href="@{|/home/shop/sortByName|}">
+                                    A->Z </a>
                             </div>
                         </nav>
                         <!--End Nav Button  -->
@@ -64,7 +66,7 @@
                         <form>
                             <div class="select-itms">
                                 <select name="select" id="select1" >
-                                    <option value="" th:each="cate:${cates}">
+                                    <option th:each="cate:${cates}">
                                         <a th:href="@{|/category/list?cid=${cate.id}|}">[[${cate.name}]]</a>
                                     </option>
                                 </select>
@@ -77,7 +79,7 @@
                     <!-- card one -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                         <div class="row">
-                        
+
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" th:each="a:${items}">
                                 <div class="single-popular-items mb-50 text-center">
                                     <div class="popular-img">
@@ -99,7 +101,7 @@
 
                         </div>
                     </div>
-               
+
                 </div>
                 <!-- End Nav Card -->
             </div>
@@ -210,9 +212,18 @@
                 <input type="text" id="search-input" name="keyword" placeholder="Searching key.....">
             </form>
         </div>
+        <button class="btn-3">SUBMIT</button>
     </div>
     <!-- Search model end -->
-
+    <script th:inline="javascript">
+        document.getElementById("select1").addEventListener("change", function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var link = selectedOption.value;
+            if (link) {
+                window.location.href = link;
+            }
+        });
+    </script>
 </body>
 
 </html>

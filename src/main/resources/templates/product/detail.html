@@ -45,7 +45,7 @@
 					<div class="col-8">
 						<div class="single_product_text text-center">
 							<h3 th:utext="*{name}"></h3>
-							<p th:utext="*{price}">
+							<p th:utext="*{#numbers.formatDecimal(price,2,'COMMA',1,'POINT')}">
 							</p>
 							<p th:utext="*{category.name}"></p>
 							<div class="card_area">
