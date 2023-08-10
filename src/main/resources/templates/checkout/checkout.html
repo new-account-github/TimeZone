@@ -74,7 +74,7 @@
               
                   <li ng-repeat="item in cart.items">
                     <a href="#">{{item.name}}
-                      <span class="last">{{item.qty * item.price | number: 1}} VND</span>
+                      <span class="last">{{item.qty * item.price | number: 0}} VND</span>
                     </a>
                   </li>
                 </ul>
@@ -82,7 +82,7 @@
                 
                   <li>
                     <a href="#">Total
-                      <span>{{cart.amount | number : 1}} VND</span>
+                      <span>{{cart.amount | number : 0}} VND</span>
                     </a>
                   </li>
                 </ul>

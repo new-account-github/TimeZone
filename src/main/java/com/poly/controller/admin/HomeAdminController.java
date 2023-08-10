@@ -38,6 +38,10 @@ public class HomeAdminController {
 	public String authority() {
 		return "admin/authority";
 	}
+	@RequestMapping("/admin/Profile")
+	public String Profile() {
+		return "admin/ProfileAdmin";
+	}
 	
 	@RequestMapping("/admin/statistical")
 	public String statistical(Model model) {

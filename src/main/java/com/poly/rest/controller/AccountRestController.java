@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.entity.Account;
 import com.poly.service.AccountService;
-import com.poly.service.EncodePasswordService;
 
 @CrossOrigin("*")
 @RestController
@@ -27,8 +26,7 @@ public class AccountRestController {
 	@Autowired
 	AccountService accountService;
 
-	@Autowired
-	EncodePasswordService encodePasswordService;
+	
 
 	@Autowired
 	HttpServletRequest request;
