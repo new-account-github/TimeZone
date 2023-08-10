@@ -41,7 +41,7 @@ public class ForgotPasswordController {
 			HttpSession session) {
 		Optional<Account> accountOptional = accountService.findByUsernameAndEmail(username, email);
 		if (!accountOptional.isPresent()) {
-			model.addAttribute("message", "Tên đăng nhập hoặc email không tồn tại");
+			model.addAttribute("message", "Username or email does not exist");
 			return "/security/forgot";
 		}
 
@@ -50,13 +50,13 @@ public class ForgotPasswordController {
 		// Lưu giá trị của username vào HttpSession
 		session.setAttribute("username", username);
 
-		model.addAttribute("message", "Vui lòng kiểm tra email để đặt lại mật khẩu");
+		model.addAttribute("message", "Please check your email to reset your password");
 
 		// Tạo mã xác thực và lưu vào cơ sở dữ liệu
 		String token = verificationTokenService.createVerificationTokenForUser(account);
 		session.setAttribute("token", token);
 		// Gửi email
-		emailService.sendEmail(account.getEmail(), token, account.getFullname());
+		emailService.sendEmail(account.getEmail(), token, account.getFirstname(),account.getLastname());
 
 		return "redirect:/security/verifi";
 	}
@@ -104,7 +104,7 @@ public class ForgotPasswordController {
 				accountService.create(account);
 
 			} else {
-				model.addAttribute("message", "Sai Password");
+				model.addAttribute("message", "Wrong Password");
 				return "/security/confirmPass";
 			}
 

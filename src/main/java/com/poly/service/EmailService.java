@@ -13,23 +13,23 @@ public class EmailService {
     @Autowired
     VerificationTokenService verificationTokenService;
 
-    public void sendWelcomeEmail(String to, String fullName) {
+    public void sendWelcomeEmail(String to, String firstname, String lastname) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(to);
-        msg.setSubject("Chào mừng đến với TimeZone");
-        msg.setText("Chào mừng bạn " + fullName + " đã đến với TimeZone");
+        msg.setSubject("Welcome to TimeZone");
+        msg.setText("Welcome " + firstname +" "+lastname+ " to TimeZone");
         javaMailSender.send(msg);
     }
-    public void sendEmail(String to, String token,String fullName) {
+    public void sendEmail(String to, String token,String firstname, String lastname) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(to);
-         msg.setSubject("Đặt lại mật khẩu");
-        msg.setText("Chào " + fullName + ",\n\n"
-                + "Chúng tôi nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn. "
-                + "Mã xác thực của bạn là: " + token + "\n\n"
-                + "Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.\n\n"
-                + "Trân trọng,\n"
-                + "Đội ngũ hỗ trợ");
+         msg.setSubject("Reset Password");
+        msg.setText("Hi "  + firstname +" "+lastname+  ",\n\n"
+                + "We have received a request to reset the password for your account. \n\n"
+                + "Your authentication code is: " + token + "\n\n"
+                + "If you did not request a password reset, please ignore this email.\n\n"
+                + "Regards,\n"
+                + "TimeZone");
         javaMailSender.send(msg);
 
 	}
