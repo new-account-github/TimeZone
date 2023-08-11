@@ -1,7 +1,6 @@
 # TimeZone
 những thứ cần sửa hoặc bổ sung,
 đặt mật khẩu theo một quy tắc,
-form đăng ký: fullname = lastname + firstname,
 profile: đổi mật khẩu , xác nhận mật khẩu ,
 shop :tìm kiếm sản phẩm ,
 shop detail : thêm thông tin,
