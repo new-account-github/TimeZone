@@ -13,5 +13,15 @@ public interface OrderService {
 
 	Order findById(Long id);
 
+	List<Order> getOrdered();
+
+	List<Order> getOrderedConfirmed();
+
+	List<Order> getOrderedCancelled();
+
+	List<Order> getOrderedSuccessful();
+
+	Order update(Order updateOrder);
+
 
 }

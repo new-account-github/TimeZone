@@ -1,12 +1,14 @@
 package com.poly.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,14 +20,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table( name= "OrdersStatus")
+@Table( name= "orders_status")
 public class OrderStatus implements Serializable{
 	@Id
 	Integer id;
 	String name;
-	@ManyToOne
-	@JoinColumn(name = "OrderId")
-	Order order;
 	
+	@JsonIgnore
+	@OneToMany
+	List<Order> order;
 	
 }

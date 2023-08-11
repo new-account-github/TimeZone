@@ -41,6 +41,7 @@
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
+                                    <!-- <th>Status</th> -->
                                     <th>Amount</th>
                                     <th class="d-flex justify-content-center"></th>
                                   </tr>
@@ -51,7 +52,8 @@
                                     <td>[[*{product.name}]]</td>
                                     <td>[[*{#numbers.formatDecimal(price,0,'COMMA',2,'POINT')}]]</td>
                                     <td>[[*{quantity}]]</td>
-                                    <td ng-model="total">[[*{#numbers.formatDecimal(price*quantity,0,'COMMA',2,'POINT')}]]</td>
+                                    <!-- <td>[[*{order.orderStatus.name}]]</td> -->
+                                    <td>[[*{#numbers.formatDecimal(price*quantity,0,'COMMA',2,'POINT')}]]</td>
                                   </tr>
                                 </tbody>
                               </table>

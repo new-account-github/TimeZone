@@ -31,12 +31,21 @@ public class HomeAdminController {
 	
 	@RequestMapping("/admin/index")
 	public String show() {
-		return "admin/DashBoard";
+		return "admin/D"
+				+ "ashBoard";
+	}
+	@RequestMapping("/admin/order")
+	public String orderManager() {
+		return "admin/order";
 	}
 
 	@RequestMapping("/admin/authority")
 	public String authority() {
 		return "admin/authority";
+	}
+	@RequestMapping("/admin/order")
+	public String order() {
+		return "admin/orders";
 	}
 	
 	@RequestMapping("/admin/statistical")

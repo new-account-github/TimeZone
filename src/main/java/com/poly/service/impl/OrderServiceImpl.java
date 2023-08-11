@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poly.dao.AccountsDAO;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
+import com.poly.dao.OrderStatusDAO;
 import com.poly.entity.Order;
 import com.poly.entity.OrderDetail;
 import com.poly.service.OrderService;
@@ -26,13 +27,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderDetailDAO orderDetailDAO;
-
+	
 	@Override
 	public Order create(JsonNode orderData) {
 		ObjectMapper mapper = new ObjectMapper();
 
 		Order order = mapper.convertValue(orderData, Order.class);
-
 		orderDAO.save(order);
 
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
@@ -53,6 +53,31 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order findById(Long id) {
 		return orderDAO.findById(id).get();
+	}
+
+	@Override
+	public List<Order> getOrdered() {
+		return orderDAO.findByOrderStatusId(1);
+	}
+
+	@Override
+	public List<Order> getOrderedConfirmed() {
+		return orderDAO.findByOrderStatusId(2);
+	}
+
+	@Override
+	public List<Order> getOrderedCancelled() {
+		return orderDAO.findByOrderStatusId(3);
+	}
+
+	@Override
+	public List<Order> getOrderedSuccessful() {
+		return orderDAO.findByOrderStatusId(4);
+	}
+
+	@Override
+	public Order update(Order updateOrder) {
+		return orderDAO.save(updateOrder);
 	}
 
 }

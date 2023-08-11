@@ -14,7 +14,7 @@
                                 <th:block th:if="${#request.isUserInRole('DIR') or #request.isUserInRole('STA')}">
                                 <li><a th:href="@{|/admin/index|}">Administration</a></li>
                               </th:block>
-                            <th:block th:if=${#request.remoteUser}>
+                            <th:block th:if="${#request.remoteUser}">
                                 <li><a th:href="@{|/home/shop|}">Shop</a></li>
                                 <li><a th:href="@{|/home/order|}"> Order list</a></li>
                                 <li><a th:href="@{|/security/logoff|}">Logout</a></li>
