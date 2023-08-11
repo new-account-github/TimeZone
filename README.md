@@ -2,7 +2,7 @@
 những thứ cần sửa hoặc bổ sung,
 đặt mật khẩu theo một quy tắc,
 form đăng ký: fullname = lastname + firstname,
-profile: bỏ +84, đổi mật khẩu , xác nhận mật khẩu ,
+profile: đổi mật khẩu , xác nhận mật khẩu ,
 shop :tìm kiếm sản phẩm ,
 shop detail : thêm thông tin,
 checkout : chia địa điểm (quận, huyện,tỉnh),
