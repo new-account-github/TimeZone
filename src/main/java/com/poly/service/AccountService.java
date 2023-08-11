@@ -23,4 +23,6 @@ public interface AccountService {
 
 	List<Account> findALL();
 
+	 Account createStaff(Account account); 
+
 }

@@ -2,7 +2,6 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org"
 	th:fragment="dynamic(main)">
 <head>
-
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>Watch shop</title>
@@ -42,10 +41,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	
 <link rel="stylesheet" href="/assets/css/admin.css" type="text/css">
 <link rel="stylesheet" href="/assets/css/adminform.css" type="text/css">
 
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+
+
 
 <style type="text/css">
 .button_scroll2top {
@@ -61,16 +62,15 @@
 	background: #fb3;
 	border-radius: 999px;
 	cursor: pointer;
-	font-size: 2rgb(0, 0, 0);
+	font-size: 2 rgb(0, 0, 0);
 }
 
 .button_scroll2top:hover {
 	opacity: 1.0;
 }
 </style>
-</style>
 </head>
-<body ng-app="product-app" ng-controller="product_ctrl">
+<body ng-app="staff-app" ng-controller="staff-ctrl">
 	<div class="be-wrapper be-fixed-sidebar">
 
 		<nav class="navbar navbar-expand fixed-top be-top-header">
@@ -95,7 +95,7 @@
 								class="user-name">[[${#request.remoteUser}]]</span></a>
 							<div class="dropdown-menu" role="menu">
 								<div class="user-info">
-									<div class="user-name">Bùi Hải Hưng</div>
+									<div class="user-name">[[${#request.remoteUser}]]</div>
 									<div class="user-position online">Available</div>
 								</div>
 								<a class="dropdown-item" href="/home/account"><span
@@ -143,60 +143,159 @@
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					 	<div class="col-12 col-lg-12">
-							<form class="row g-3">
-  <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail4">
-  </div>
-  <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Password</label>
-    <input type="password" class="form-control" id="inputPassword4">
-  </div>
-  <div class="col-12">
-    <label for="inputAddress" class="form-label">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-  </div>
-  <div class="col-12">
-    <label for="inputAddress2" class="form-label">Address 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-  </div>
-  <div class="col-md-6">
-    <label for="inputCity" class="form-label">City</label>
-    <input type="text" class="form-control" id="inputCity">
-  </div>
-  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
-      <option>...</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <label for="inputZip" class="form-label">Zip</label>
-    <input type="text" class="form-control" id="inputZip">
-  </div>
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        Check me out
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </div>
-</form>
+							<div class="card card-table">
+								<div class="card-header">
+									<div class="title">ListStaff</div>
+								</div>
+								<div class="card-body table-responsive">
+									<table class="table table-striped table-borderless">
+										<thead>
+											<tr>
+												<th style="width: 12%;">Username</th>
+												<th style="width: 15%;">Fullname</th>
+												<th style="width: 12%">Email</th>
+												<th style="width: 15%;">Phone</th>
+												<th style="width: 15%;">Role</th>
+												<th class="actions" style="width: 4%;"></th>
+											</tr>
+										</thead>
+										<tbody class="no-border-x" ng-repeat="staff in staffs">
+											<td class="w-20">
+												<div class="d-flex px-0 py-0 ">
+													<div class="ms-1">
+														<h6 class="text-sm mb-0">{{staff[0]}}</h6>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div>
+													<h6 class="text-sm mb-1">{{staff[1]}}</h6>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div class="">
+													<h6 class="text-sm mb-0">{{staff[2]}}</h6>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div class=" ">
+													<h6 class="text-sm mb-0">{{staff[3]}}
+													</h6>
+												</div>
+											</td>
+												<td class="align-middle text-sm">
+												<div class=" ">
+													<h6 class="text-sm mb-0">{{staff[4]}}
+													</h6>
+												</div>
+											</td>
+							
+											<td>
+												<button class="btn btn-outline-primary"
+													ng-click="edit(staff)">
+													<i class="bi bi-pencil-square"></i>
+												</button>
+												<button class="btn btn-outline-danger"
+													ng-click="delete(staff)">
+													<i class="bi bi-trash"></i>
+												</button>
+											</td>
+											</tr>
+									</table>
+								</div>
+
+								<div class="card-footer text-center">
+									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
+									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
+									<button class="btn btn-outline-success">{{pager.page + 1}}
+										of {{pager.count}}</button>
+									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
+									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
+								</div>
+
+							</div>
 						</div>
 					  </div>
-				
+					  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+						<div class="col-12 col-lg-12 text-sm-left">
+						<div class="card ">
+							<div class="card-header">
+								<div class="title">Edit Product</div>
+
+							</div>
+							<div class="card-body table-responsive  text-sm-left ">
+								<div class="row text-center">
+									<div class="col-12">
+										<form name="myForm" novalidate>
+											<div class="row">
+												<div class="col-md-12">
+													<div
+														class="card card-border-color card-border-color-primary">
+													</div>
+													<div class="card-body">
+														<div class="form-group row">
+															<label
+																class="col-12 col-sm-3 col-form-label text-sm-left">Username</label>
+															<div class="col-12 col-sm-8 col-lg-9">
+																<input class="form-control" name="username" ng-model="form[0]"
+																	type="text" placeholder="Username">
+															</div>
+														</div>
+												
+														<div class="form-group row">
+															<label
+																class="col-12 col-sm-3 col-form-label text-sm-left">FullName</label>
+															<div class="col-12 col-sm-8 col-lg-9 text-center">
+																<input class="form-control" name="fullname" ng-model="form[1]"
+																	type="text" placeholder="FullName" required >
+															</div>
+														</div>
+														
+														<div class="form-group row">
+															<label
+																class="col-12 col-sm-3 col-form-label text-sm-left">Email</label>
+															<div class="col-12 col-sm-8 col-lg-9 text-sm-left">
+																<input class="form-control" ng-model="form[2]"
+																	name="Email" type="email" placeholder="Email" required>
+															</div>
+														</div>
+														
+														<div class="form-group row">
+															<label
+																class="col-12 col-sm-3 col-form-label text-sm-left">Phone</label>
+															<div class="col-12 col-sm-8 col-lg-9 text-sm-left">
+																<input class="form-control" ng-model="form[3]"
+																	name="Phone" type="text" placeholder="Phone" required>
+															</div>
+														</div>
+										
+
+														<div
+															class="card card-border-color card-border-color-primary">
+														</div>
+										</form>
+
+									</div>
+									<div class="d-grid gap-2 d-md-block text-sm-center">
+										<button ng-click=staff.purchase() class="btn btn-primary"
+											type="button" ng-disabled=" myForm.$invalid ">Create</button>
+										<button ng-click=delete(form) class="btn btn-primary"
+											type="button">Delete</button>
+										<button ng-click=update() class="btn btn-primary"
+											type="button">Update</button>
+										<button ng-click=reset() class="btn btn-primary" type="button">
+											New</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					  </div>
+
 					</div>
 			</div>
 		</div>
 	</div>
-
-	
-
-	<script src="/app/js/product_ctrl.js"></script>
+	<script src="/app/js/staff-ctrl.js"></script>
 </body>
 </html>

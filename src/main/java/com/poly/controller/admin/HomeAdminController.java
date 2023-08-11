@@ -40,7 +40,7 @@ public class HomeAdminController {
 	}
 	@RequestMapping("/admin/Profile")
 	public String Profile() {
-		return "admin/ProfileAdmin";
+		return "admin/profile";
 	}
 	
 	@RequestMapping("/admin/statistical")
