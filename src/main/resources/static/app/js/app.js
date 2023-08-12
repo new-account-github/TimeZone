@@ -87,6 +87,15 @@ app.controller('ctrl',function($scope,$http){
     $scope.cart.loadFromLocalStorage();
 
 
+    $scope.totalAmount = function() {
+        var total = 0;
+        angular.forEach($scope.listOrders, function(order) {
+          angular.forEach(order.orderDetails, function(detail) {
+            total += detail.price * detail.quantity;
+          });
+        });
+        return total;
+      };
 
     $scope.order = {
         createDate: new Date(),
