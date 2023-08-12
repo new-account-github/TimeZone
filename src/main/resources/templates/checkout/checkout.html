@@ -86,7 +86,8 @@
                     </a>
                   </li>
                 </ul>
-                <button class="btn_3" ng-click="order.purchase()" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">PURCHASE YOUR ORDER</button>
+                <a class="btn_3 button" ng-click="order.purchase()" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">CAST</a>
+                <a th:href="@{|/pay|}" class="btn_3 button my-2" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">VN PAY</a>
               </div>
             </div>
           </div>

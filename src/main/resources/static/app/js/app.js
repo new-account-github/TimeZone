@@ -91,8 +91,8 @@ app.controller('ctrl',function($scope,$http){
     $scope.order = {
         createDate: new Date(),
         address: "TP HCM",
+        orderStatus: {id:1},
         account:{username: $("#username").text()},
-
         get orderDetails(){
             return $scope.cart.items.map(item=>{
                 return {
@@ -102,21 +102,20 @@ app.controller('ctrl',function($scope,$http){
                 }
             });
         },
-
+        
         purchase(){
             var order = angular.copy(this);
-
-            $http.post(`/rest/orders`,order).then(resp=>{
+            
+            $http.post(`/rest/orders`, order).then(resp=>{
                 alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
                 $scope.cart.clear();
                 location.href = "/order/detail/" + resp.data.id;
             }).catch(error=>{
                 alert("Error")
-                console.log(error);
             })
         }
     }
-
+    
   // account ctrl
   $scope.account = {};
     
