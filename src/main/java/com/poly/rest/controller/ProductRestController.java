@@ -1,14 +1,9 @@
 package com.poly.rest.controller;
 
-
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.annotations.Sort;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,10 +27,10 @@ public class ProductRestController {
 
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@GetMapping()
 	public List<Product> getAll() {
-		
+
 		return productService.findAll();
 	}
 
