@@ -84,7 +84,7 @@
 									class="user-name">[[${#request.remoteUser}]]</span></a>
 							<div class="dropdown-menu" role="menu">
 								<div class="user-info">
-									<div class="user-name">Bùi Hải Hưng</div>
+									<div class="user-name">[[${#request.remoteUser}]]</div>
 									<div class="user-position online">Available</div>
 								</div>
 								<a class="dropdown-item" href="/home/account"><span
@@ -106,6 +106,9 @@
 								<li class="divider">Menu</li>
 								<li class="active"><a href="index"><i
 											class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
+								<li class="active"><a href="index"><i
+											class="icon mdi mdi-home"></i><span></span>Employee Manager
+											</a></li>
 								<th:block th:if="${#request.isUserInRole('DIR')}">
 									<li class="active"><a th:href="@{|/admin/authority|}"><i
 												class="icon mdi mdi-home"></i><span>Authority</span></a></li>
@@ -167,7 +170,7 @@
 								<div class="value">
 									<span class="indicator indicator-negative mdi mdi-chevron-down"></span><span
 										class="number" data-toggle="counter"
-										data-end="113">[[${#numbers.formatDecimal(totalRevenue,0,'COMMA',1,'POINT')}]]</span>
+										data-end="113">[[${#numbers.formatDecimal(totalRevenue,0,'COMMA',0,'POINT')}]]</span>
 								</div>
 							</div>
 						</div>
@@ -271,7 +274,7 @@
 											</td>
 											<td class="align-middle text-sm-left">
 												<div class="">
-													<h6 class="text-sm mb-0" th:text="${result[2]}"></h6>
+													<h6 class="text-sm mb-0" th:text="${#numbers.formatDecimal(result[2],2,'COMMA',0,'POINT')}" VND></h6>
 												</div>
 											</td>
 											</tr>
@@ -320,7 +323,7 @@
 											</td>
 											<td class="align-middle text-sm-left">
 												<div class="">
-													<h5 class="text-sm mb-0" th:text="${#numbers.formatDecimal(result[3],2,'COMMA',1,'POINT')}"></h5>
+													<h5 class="text-sm mb-0" th:text="${#numbers.formatDecimal(result[3],2,'COMMA',0,'POINT')}"></h5>
 												</div>
 											</td>
 											</tr>
@@ -359,7 +362,7 @@
 											</td>
 											<td class="align-middle text-sm-left">
 												<div>
-													<h5 class="text-sm mb-1" th:text="${result[1]}"></h5>
+													<h5 class="text-sm mb-1" th:text="${#numbers.formatDecimal(result[1],2,'COMMA',0,'POINT')}"></h5>
 												</div>
 											</td>
 

@@ -23,6 +23,4 @@ public class GlobalInterceptor implements HandlerInterceptor{
 		request.setAttribute("cates", categoryService.findAll());
 		
 	}
-	
-	
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.poly.dao.AccountsDAO;
 import com.poly.entity.Account;
+import com.poly.entity.Product;
 import com.poly.service.AccountService;
 
 @Service
@@ -20,12 +21,10 @@ public class AccountServiceImpl implements AccountService {
 		return accountsDAO.findById(username).get();
 	}
 
-
 	@Override
 	public Account update(Account account) {
 		return accountsDAO.save(account);
 	}
-
 
 	@Override
 	public void delete(String username) {
@@ -48,10 +47,10 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	 public boolean checkUsernameExists(String username) {
-        return accountsDAO.findByUsername(username).isPresent();
-    }
-	
+	public boolean checkUsernameExists(String username) {
+		return accountsDAO.findByUsername(username).isPresent();
+	}
+
 	@Override
 	public List<Account> getAdmin() {
 		return accountsDAO.getAdmin();
@@ -61,5 +60,16 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> findALL() {
 		return accountsDAO.findAll();
 	}
+
+	@Override
+	public Account createStaff(Account account) {
+		return accountsDAO.save(account);
+	}
+
+	  
+
+	  
+	  
+	 
 
 }

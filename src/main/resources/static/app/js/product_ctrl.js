@@ -2,10 +2,12 @@ const app = angular.module('product-app', []);
 app.controller('product_ctrl', function($scope, $http) {
 	$scope.items = [];
 	$scope.cates = [];
-	$scope.form = {};
-	$scope.form.name = '';
-	$scope.form.price = '';
-	$scope.form.createDate = '';
+	$scope.form = {
+		createDate: new Date(),
+		image: 'icloud-upload.png',
+		available: true,
+	};
+	$scope.form.createDate=new Date();
 
 
 	$scope.initialize = function() {

@@ -22,17 +22,18 @@ import com.poly.service.StatisticalService;
 public class HomeAdminController {
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	ReportDAO reportDAO;
-	
+
 	@Autowired
 	StatisticalService service;
-	
+
 	@RequestMapping("/admin/index")
 	public String show() {
 		return "admin/DashBoard";
 	}
+
 	@RequestMapping("/admin/order")
 	public String orderManager() {
 		return "admin/order";
@@ -42,47 +43,52 @@ public class HomeAdminController {
 	public String authority() {
 		return "admin/authority";
 	}
+
+	@RequestMapping("/admin/Profile")
+	public String Profile() {
+		return "admin/profile";
+	}
+
 	@RequestMapping("/admin/orders")
 	public String order() {
 		return "admin/orders";
 	}
-	
+
 	@RequestMapping("/admin/statistical")
 	public String statistical(Model model) {
-		
+
 		String totalAccount = service.totalAccount();
 		model.addAttribute("totalAccount", totalAccount);
-		
+
 		String totalOrder = service.totalOrder();
 		model.addAttribute("totalOrder", totalOrder);
-		
+
 		Integer productsSold = service.totalProductSold();
 		model.addAttribute("totalProductsSold", productsSold);
-		
+
 		Double totaRevenue = service.totalRevenue();
 		model.addAttribute("totalRevenue", totaRevenue);
-		
+
 		List<Object[]> countProductSold = service.countProductSold();
 		model.addAttribute("countProductSold", countProductSold);
-		
+
 		List<Object[]> getRevenuePerProduct = service.getRevenuePerProduct();
 		model.addAttribute("revenuePerProduct", getRevenuePerProduct);
-		
+
 		List<Object[]> totalAmountPaid = service.getTotalAmountPaid();
 		model.addAttribute("totalAmountPaid", totalAmountPaid);
-		
+
 		List<Object[]> revenue = service.getRevenue();
 		model.addAttribute("revenue", revenue);
 
 		return "admin/statistical";
 	}
 
-	
 	@GetMapping("/admin/index/{id}")
-	public Product getOne(@PathVariable("id") Integer id) {	
+	public Product getOne(@PathVariable("id") Integer id) {
 		return productService.findById(id);
 	}
-	
+
 	@RequestMapping("/admin/report")
 	public String getReport(Model model) {
 		return "admin/report";

@@ -1,5 +1,6 @@
 package com.poly.rest.controller;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,31 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.entity.Authority;
+import com.poly.entity.Product;
 import com.poly.service.AuthorityService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/authorities")
-public class AuthorityRestController {
+@RequestMapping("/rest/staff")
+public class StaffRestController {
 	@Autowired
 	AuthorityService authorityService;
-
+	
 	@GetMapping()
-	public List<Authority> getAuthorities(@RequestParam("admin") Optional<Boolean> admin) {
-		if (admin.orElse(false)) {
-			return authorityService.getAdmin();
-		} else {
-			return authorityService.findALL();
-		}
+	public List<Object[]> authority() {
+		return authorityService.getStaff();
 	}
 	
 	@PostMapping()
-	public Authority authority(@RequestBody Authority authority) {
+	public Authority create(@RequestBody Authority authority) {
 		return authorityService.create(authority);
 	}
-
-	@DeleteMapping("{id}")
-	public void delete(@PathVariable("id") Integer id) {
-		authorityService.delete(id);
-	}
-}
+}	
