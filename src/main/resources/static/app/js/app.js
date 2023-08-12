@@ -112,7 +112,6 @@ app.controller('ctrl',function($scope,$http){
                 location.href = "/order/detail/" + resp.data.id;
             }).catch(error=>{
                 alert("Error")
-                console.log(error);
             })
         }
     }
