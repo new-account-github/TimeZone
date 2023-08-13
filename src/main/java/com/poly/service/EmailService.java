@@ -34,24 +34,24 @@ public class EmailService {
 
 	}
     
-    public void sendPaymentSuccess(String to, String token,String fullName,String orderID) {
+    public void sendPaymentSuccess(String to, String token,String fullName, String transactionId) {
     	SimpleMailMessage msg = new SimpleMailMessage();
     	msg.setTo(to);
     	msg.setSubject("Thanh toán thành công");
     	msg.setText("Chào " + fullName + ",\n\n"
-    			+ "Chúng tôi đã xác nhận bạn đã thanh toán thành công cho đơn hàng " + orderID + "\n\n "
+    			+ "Chúng tôi đã xác nhận bạn đã thanh toán thành công cho đơn hàng " + transactionId + "\n\n "
     			+ "Mã xác thực của bạn là: " + token + " vui lòng giữ lại thông tin này để xác nhận với nhân viên của chúng tôi \n\n" 
     			+ "Trân trọng,\n"
     			+ "TimeZone");
     	javaMailSender.send(msg);
     }
     
-    public void sendPaymentStatus(String to, String token, String orderID) {
+    public void sendPaymentStatus(String to, String token, String transactionId) {
     	SimpleMailMessage msg = new SimpleMailMessage();
     	msg.setTo(to);
     	msg.setSubject("Thanh toán thành công");
     	msg.setText("Thông báo " + ",\n\n"
-    			+ "Đã có đơn hàng thanh toán thành công mã đơn hàng là:" + orderID + "\n\n" 
+    			+ "Đã có đơn hàng thanh toán thành công mã đơn hàng là:" + transactionId + "\n\n" 
     			+ "Mã xác thực là: " + token + "\n\n"
     			+ "Yêu cầu kiểm tra lại thông tin đơn hàng và mã xác thực đơn hàng.\n\n"
     			+ "Trân trọng,\n"

@@ -4,7 +4,7 @@ app.controller('order_ctrl', function($scope, $http) {
     $scope.listOrdersConfirmed = [];
     $scope.listOrdersCancelled = [];
     $scope.listOrdersSuccessful = [];
-    
+	
 	$scope.initialize = function() {
 		$http.get(`/rest/order`).then(resp => {
 			$scope.listOrders = resp.data;
@@ -27,17 +27,15 @@ app.controller('order_ctrl', function($scope, $http) {
 
 
 	$scope.updateOrder = function(orderID) {
-		var orderToUpdate = $scope.listOrders.find(function(order){
+		let orderToUpdate = $scope.listOrders.find(function(order){
 			return order.id === orderID;
 		})
 		if (orderToUpdate){
-			var updateOrder = angular.copy(orderToUpdate);
+			let updateOrder = angular.copy(orderToUpdate);
 			updateOrder.orderStatus.id = 2;
 			$http.put(`/rest/order/${orderToUpdate.id}`, updateOrder).then(resp => {
 				$scope.initialize();
-				alert('Update success');
 			}).catch(err => {
-				alert('Error updating');
 			})
 		}
 	}
@@ -45,72 +43,78 @@ app.controller('order_ctrl', function($scope, $http) {
 	$scope.updateOrder = {
 
 		confirmOrder(orderID){
-			var orderToUpdate = $scope.listOrders.find(function(order){
+			let orderToUpdate = $scope.listOrders.find(function(order){
 				return order.id === orderID;
 			})
 			if (orderToUpdate){
-				var updateOrder = angular.copy(orderToUpdate);
+				let updateOrder = angular.copy(orderToUpdate);
 				updateOrder.orderStatus.id = 2;
 				$http.put(`/rest/order/${orderToUpdate.id}`, updateOrder).then(resp => {
 					$scope.initialize();
-					alert('Update success');
 					$(".nav-pills a:eq(1)").tab('show');
 				}).catch(err => {
-					alert('Error updating');
 				})
 			}
 		},
 		cancelOrder(orderID){
-			var orderToUpdate = $scope.listOrdersConfirmed.find(function(order){
+			let orderToUpdateWhenOrder = $scope.listOrdersConfirmed.find(function(order){
 				return order.id === orderID;			
 			})
-			if(orderToUpdate){
-				var orderCancel =  angular.copy(orderToUpdate)
+
+			let orderUpdateWhenCofirm = $scope.listOrders.find(function(order){
+				return order.id === orderID;			
+			})
+
+			if(orderToUpdateWhenOrder){
+				let orderCancel =  angular.copy(orderToUpdateWhenOrder)
 				orderCancel.orderStatus.id = 3;
 				$http.put(`/rest/order/cancel/${orderCancel.id}`,orderCancel).then(resp=>{
 					$scope.initialize();
-					alert('Cancel order success');
 					$(".nav-pills a:eq(2)").tab('show');
 				}).catch(err => {
-					alert('Error cancelling order');
+				})
+				
+			} else if(orderUpdateWhenCofirm){
+				let orderCancel =  angular.copy(orderUpdateWhenCofirm)
+				orderCancel.orderStatus.id = 3;
+				$http.put(`/rest/order/cancel/${orderCancel.id}`,orderCancel).then(resp=>{
+					$scope.initialize();
+					$(".nav-pills a:eq(2)").tab('show');
+				}).catch(err => {
 				})
 			}
 		},
 		resetOrder(orderID){
-			var orderToUpdate = $scope.listOrdersCancelled.find(function(order){
+			let orderToUpdate = $scope.listOrdersCancelled.find(function(order){
 				return order.id === orderID;			
 			})
 			if(orderToUpdate){
-				var orderReset =  angular.copy(orderToUpdate)
+				let orderReset =  angular.copy(orderToUpdate)
 				orderReset.orderStatus.id = 2;
 				$http.put(`/rest/order/reset/${orderReset.id}`,orderReset).then(resp=>{
 					$scope.initialize();
-					alert('Reset order success');
 					$(".nav-pills a:eq(1)").tab('show');
 				}).catch(err => {
-					alert('Error reset order');
 				})
 			}
 		},
 		successOrder(orderID){
-			var orderToUpdate = $scope.listOrdersConfirmed.find(function(order){
+			let orderToUpdate = $scope.listOrdersConfirmed.find(function(order){
 				return order.id === orderID;			
 			})
 			if(orderToUpdate){
-				var orderSuccess =  angular.copy(orderToUpdate)
+				let orderSuccess =  angular.copy(orderToUpdate)
 				orderSuccess.orderStatus.id = 4;
 				$http.put(`/rest/order/success/${orderSuccess.id}`,orderSuccess).then(resp=>{
 					$scope.initialize();
-					alert('Order Success');
 					$(".nav-pills a:eq(3)").tab('show');
 				}).catch(err => {
-					alert('Error');
 				})
 			}
 		}
 	};
 
-	
+		
 
     
 });

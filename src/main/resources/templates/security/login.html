@@ -48,7 +48,10 @@
                                 <h3>Welcome Back ! <br>
                                     Please Sign in now</h3>
                                 <form class="row contact_form" th:action="@{|/security/login|}" method="post" novalidate="novalidate">
-                                    <h6 class="text-center text-danger" th:text="${message}"></h6>
+                                    <div class="col-md-12 form-group">
+                                        <h6 class="text-center text-danger " th:text="${message}"></h6>
+                                    </div>
+                                    
                                     <div class="col-md-12 form-group p_star">
                                         <input type="text" class="form-control" id="username" name="username" value=""
                                             placeholder="Username">
