@@ -1,14 +1,8 @@
 # TimeZone
 những thứ cần sửa hoặc bổ sung,
-đặt mật khẩu theo một quy tắc,
+
 profile: đổi mật khẩu , xác nhận mật khẩu ,
-shop :tìm kiếm sản phẩm ,
 shop detail : thêm thông tin,
 checkout : chia địa điểm (quận, huyện,tỉnh),
-quản lý đơn hàng : 4 trạng thái (đã đặt hàng, đã xác nhận, đã hủy, giao hàng thành công),
-id trong orderdetail thay bằng số thứ tự,
-orderdetail thêm một hàng  tổng tiền,
 authority : tạo thêm một trang thêm nhân viên, set quyền mặc định khi đăng ký thành công là customer,
-quản lý đơn hàng,
-thống kê thì khi đơn hàng ở trạng thái thành công thì thống kê,
 thống kê doanh thu theo mốc thời gian ,
