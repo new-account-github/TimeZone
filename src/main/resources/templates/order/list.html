@@ -38,21 +38,28 @@
                                 <thead>
                                   <tr>
                                     <th>No</th>
+                                    <th>Order ID</th>
                                     <th>Order Date</th>
                                     <th>Shipping Address</th>
                                     <th>Status</th>
                                     <th></th>
+                                    <th>Order Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr th:each="order,state:${orders}" >
                                     <td>[[${state.index +1}]]</td> 
+                                    <td>[[${state.index + 1}]]</td>
+                                    <td>[[${order.id}]]</td>
                                     <td>[[${order.createDate}]]</td>
                                     <td>[[${order.address}]]</td>
                                    	<td>abc</td>
+                                    <td>[[${order.orderStatus.name}]]</td> 
+                                    <th:block th:if="${order.orderStatus.id} == 4">
+                                    </th:block>
                                     <td class="d-flex justify-content-center">
-                                        <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-outline-primary">DETAIL</a>
-                                    </td>
+                                       <a th:href="@{|/order/detail/${order.id}|}" class="btn btn-outline-primary">DETAIL</a>
+                                   </td> 
                                   </tr>
                                 </tbody>
                               </table>

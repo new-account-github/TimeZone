@@ -33,10 +33,18 @@ public class HomeAdminController {
 	public String show() {
 		return "admin/DashBoard";
 	}
+	@RequestMapping("/admin/order")
+	public String orderManager() {
+		return "admin/order";
+	}
 
 	@RequestMapping("/admin/authority")
 	public String authority() {
 		return "admin/authority";
+	}
+	@RequestMapping("/admin/orders")
+	public String order() {
+		return "admin/orders";
 	}
 	@RequestMapping("/admin/Profile")
 	public String Profile() {
@@ -81,9 +89,6 @@ public class HomeAdminController {
 	
 	@RequestMapping("/admin/report")
 	public String getReport(Model model) {
-	
-		
-		
 		return "admin/report";
 	}
 }
