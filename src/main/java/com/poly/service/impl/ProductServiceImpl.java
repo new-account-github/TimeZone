@@ -25,8 +25,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findByName(String string) {
-		return productDAO.findByName(string);
+	public List<Product> findByName(String name) {
+		return productDAO.findByName(name);
 	}
 
 	@Override

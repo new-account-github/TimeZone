@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -29,7 +30,7 @@ public class Account implements Serializable {
     String username;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 12 characters long")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     @Pattern(regexp = "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}$", message = "Password must contain at least one lowercase letter, one uppercase letter, one digit and one special character")
     String password;
 
@@ -42,6 +43,7 @@ public class Account implements Serializable {
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be in the correct format")
     String email;
+    @Pattern(regexp = "^[0-9]*$", message = "Phone number must only contain digits")
     @Size(min = 9, max = 10, message = "Phone number must be between 9 and 10 digits")
     String phone;
     

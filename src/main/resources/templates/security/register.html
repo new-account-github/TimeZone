@@ -46,7 +46,7 @@
 						<div class="login_part_form">
 							<div class="login_part_form_iner">
 								<h3>Welcome to TimeZone! <br>
-									Register</h3>
+									Forgot</h3>
 								<form class="row contact_form" th:action="@{|/security/register|}" method="post"
 									novalidate="novalidate">
 									<h6 class="text-centert text-danger" th:text="${message}"></h6>
@@ -77,7 +77,6 @@
 									<div class="col-md-12 form-group p_star">
 										<input type="password" class="form-control" id="password1" name="password1"
 											value="" placeholder="Confirm PassWord" >
-										
 									</div>
 
 									<div class="col-md-12 form-group p_star">
@@ -89,7 +88,7 @@
 									<div class="col-md-12 form-group p_star">
 										<div class="input-group">
 											<input type="tel" class="form-control" id="phone" name="phone"
-												placeholder="Phone" th:field="*{account.phone}">
+												placeholder="Phone" th:field="*{account.phone}" minlength="9" maxlength="10">
 											<span th:if="${#fields.hasErrors('account.phone')}"
 												th:errors="*{account.phone}" class="text-centert text-danger"></span>
 										</div>

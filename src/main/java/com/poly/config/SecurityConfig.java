@@ -3,6 +3,8 @@ package com.poly.config;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.poly.entity.Account;
 import com.poly.service.AccountService;
@@ -30,7 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	BCryptPasswordEncoder pe;
-
+	@Bean
+    public Validator validator() {
+        return new LocalValidatorFactoryBean();
+    }
 	
 	@Bean
 	public BCryptPasswordEncoder getPasswordEncoder() {

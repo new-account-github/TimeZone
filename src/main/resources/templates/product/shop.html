@@ -60,19 +60,24 @@
                     </div>
                     <!-- Grid and List view -->
                     <div class="grid-list-view">
+						<form th:action="@{|/home/shop/findByName|}" method="get">
+							<div class="grid-list-view">
+								<input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search"
+									th:value="${keywords}">
+							</div>
+							
+						</form>
                     </div>
                     <!-- Select items -->
-                    <div class="select-this">
-                        <form>
-                            <div class="select-itms">
-                                <select name="select" id="select1" >
-                                    <option th:each="cate:${cates}">
-                                        <a th:href="@{|/category/list?cid=${cate.id}|}">[[${cate.name}]]</a>
-                                    </option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
+					<div class="dropdown">
+						<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Category
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+							<a class="dropdown-item"  th:each="cate:${cates}" th:href="@{|/category/list?cid=${cate.id}|}">[[${cate.name}]]</a>
+						</div>
+					</div>
                 </div>
                 <!-- Nav Card -->
                 <div class="tab-content" id="nav-tabContent">
