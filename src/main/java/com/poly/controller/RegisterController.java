@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.Account;
 import com.poly.service.AccountService;
@@ -32,7 +33,8 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value = "/security/register", method = RequestMethod.POST)
-	public String register(Model model, @Valid Account account, BindingResult bindingResult) {
+	public String register(Model model, @RequestParam("password") String Password,
+			@RequestParam("password1") String Password1, @Valid Account account, BindingResult bindingResult) {
 		if (accountService.checkUsernameExists(account.getUsername())) {
 			model.addAttribute("message", "Username already exists");
 			return "/security/register";
@@ -42,12 +44,19 @@ public class RegisterController {
 			model.addAttribute("account", account);
 			return "/security/register";
 		}
-		account.setPhone("(+84) " + account.getInputphone());
-		account.setPassword(pe.encode(account.getPassword()));
-		accountService.create(account);
-		emailService.sendWelcomeEmail(account.getEmail(), account.getFullname());
-		model.addAttribute("message", "Register Success");
-		return "/security/login";
+		if (Password.equals(Password1) && !bindingResult.hasErrors() ) {
+			account.setPassword(pe.encode(Password));
+			String fullname = account.getFirstname() + " " + account.getLastname();
+			account.setFullname(fullname);
+			accountService.create(account);
+			emailService.sendWelcomeEmail(account.getEmail(), account.getFirstname(), account.getLastname());
+			model.addAttribute("message", "Register Success");
+			return "/security/login";
+		} else {
+			model.addAttribute("message", "Wrong Password");
+			return "/security/register";
+		}
+		
 	}
 
 }

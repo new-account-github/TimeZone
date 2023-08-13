@@ -12,7 +12,7 @@ public interface AccountsDAO extends JpaRepository<Account, String> {
 	@Query("SELECT DISTINCT ar.account FROM Authority ar WHERE ar.id.role IN ('STA')")
 	List<Account> getAdmin();
 
-	Optional<Account> findByUsernameAndEmail(String username, String email);
+	Account findByUsernameAndEmail(String username, String email);
 
 	Optional<Account> findByUsername(String username);
 

@@ -39,4 +39,12 @@ public class AuthorityServiceImpl implements AuthorityService{
 	public Authority create(Authority authority) {
 		return authorityDAO.save(authority);
 	}
+
+	@Override
+	public List<Object[]> getStaff() {
+		return authorityDAO.getStaff();
+	}
+
+
+
 }

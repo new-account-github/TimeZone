@@ -35,10 +35,10 @@ public interface ReportDAO extends JpaRepository<OrderDetail, Long>{
 	List<Object[]> countProductSold();
 	
 	@Query(
-			value = "SELECT o.account.username, o.account.fullname, sum(od.quantity), sum(od.price * od.quantity) "
+			value = "SELECT o.account.username, o.account.lastname, sum(od.quantity), sum(od.price * od.quantity) "
 				    +"FROM OrderDetail od "
 					+"JOIN od.order o "
-				    +"GROUP BY o.account.username,o.account.fullname "
+				    +"GROUP BY o.account.username,o.account.lastname "
 		   )
 	List<Object[]> getTotalAmountPaid();
 	

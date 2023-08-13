@@ -46,49 +46,60 @@
 						<div class="login_part_form">
 							<div class="login_part_form_iner">
 								<h3>Welcome to TimeZone! <br>
-									Register</h3>
-									<form class="row contact_form" th:action="@{|/security/register|}" method="post"
-										novalidate="novalidate">
-										<div class="col-md-12 form-group">
-											<h6 class="text-center text-danger " th:text="${message}"></h6>
+									Forgot</h3>
+								<form class="row contact_form" th:action="@{|/security/register|}" method="post"
+									novalidate="novalidate">
+									<h6 class="text-centert text-danger" th:text="${message}"></h6>
+									<div class="col-md-12 form-group p_star">
+										<input type="text" class="form-control" id="firstname" name="firstname" value=""
+											placeholder="Firstname" th:field="*{account.firstname}">
+										<span th:if="${#fields.hasErrors('account.firstname')}"
+											th:errors="*{account.firstname}" class="text-centert text-danger"></span>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="text" class="form-control" id="lastname" name="lastname" value=""
+											placeholder="Lastname" th:field="*{account.lastname}">
+										<span th:if="${#fields.hasErrors('account.lastname')}"
+											th:errors="*{account.lastname}" class="text-centert text-danger"></span>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="text" class="form-control" id="username" name="username" value=""
+											placeholder="Username" th:field="*{account.username}">
+										<span th:if="${#fields.hasErrors('account.username')}"
+											th:errors="*{account.username}" class="text-centert text-danger"></span>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="password" class="form-control" id="password" name="password"
+											value="" placeholder="Password" th:field="*{account.password}">
+										<span th:if="${#fields.hasErrors('account.password')}"
+											th:errors="*{account.password}" class="text-centert text-danger"></span>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<input type="password" class="form-control" id="password1" name="password1"
+											value="" placeholder="Confirm PassWord" >
+									</div>
+
+									<div class="col-md-12 form-group p_star">
+										<input type="email" class="form-control" id="email" name="email" value=""
+											placeholder="Email" th:field="*{account.email}">
+										<span th:if="${#fields.hasErrors('account.email')}" th:errors="*{account.email}"
+											class="text-centert text-danger"></span>
+									</div>
+									<div class="col-md-12 form-group p_star">
+										<div class="input-group">
+											<input type="tel" class="form-control" id="phone" name="phone"
+												placeholder="Phone" th:field="*{account.phone}" minlength="9" maxlength="10">
+											<span th:if="${#fields.hasErrors('account.phone')}"
+												th:errors="*{account.phone}" class="text-centert text-danger"></span>
 										</div>
-										<div class="col-md-12 form-group p_star">
-											<input type="text" class="form-control" id="username" name="username" value=""
-												placeholder="Username" th:field="*{account.username}">
-												 <span th:if="${#fields.hasErrors('account.username')}" th:errors="*{account.username}" class="text-centert text-danger"></span>
-										</div>
-										<div class="col-md-12 form-group p_star">
-											<input type="password" class="form-control" id="password" name="password"
-												value="" placeholder="Password" th:field="*{account.password}">
-												 <span th:if="${#fields.hasErrors('account.password')}" th:errors="*{account.password}" class="text-centert text-danger"></span>
-										</div>
-										<div class="col-md-12 form-group p_star">
-											<input type="text" class="form-control" id="fullname" name="fullname" value=""
-												placeholder="Fullname" th:field="*{account.fullname}">
-												 <span th:if="${#fields.hasErrors('account.fullname')}" th:errors="*{account.fullname}" class="text-centert text-danger"></span>
-										</div>
-										<div class="col-md-12 form-group p_star">
-											<input type="email" class="form-control" id="email" name="email" value=""
-												placeholder="Email" th:field="*{account.email}">
-												 <span th:if="${#fields.hasErrors('account.email')}" th:errors="*{account.email}" class="text-centert text-danger"></span>
-										</div>
-										<div class="col-md-12 form-group p_star">
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text">(+84)</span>
-												</div>
-												<input type="tel" class="form-control" id="inputphone" name="inputphone"
-													placeholder="Phone" th:field="*{account.inputphone}">
-													 <span th:if="${#fields.hasErrors('account.inputphone')}" th:errors="*{account.inputphone}" class="text-centert text-danger"></span>
-											</div>
-	
-										</div>
-										<div class="col-md-12 form-group">
-											<button type="submit" value="submit" class="btn_3">
-												Register
-											</button>
-										</div>
-									</form>
+
+									</div>
+									<div class="col-md-12 form-group">
+										<button type="submit" value="submit" class="btn_3">
+											Register
+										</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
