@@ -121,6 +121,8 @@
 										<li class="active"><a th:href="@{|/admin/authority|}"><i
 										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
 									</th:block>
+									<li class="active"><a th:href="@{|/admin/orders|}"><i
+										class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 									<li class="active"><a th:href="@{|/admin/statistical|}"><i
 										class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>
@@ -158,9 +160,10 @@
 										<thead>
 											<tr>
 												<th class="text-center" style="width: 10%;">ID</th>
+												<th class="text-center" style="width: 10%;">CreateDate</th>
 												<th class="text-center" style="width: 10%">UserName</th>
 												<th class="text-center" style="width: 10%;">Fullname</th>
-												<th class="text-center" style="width: 30%;">Address</th>
+												<th class="text-center" style="width: 20%;">Address</th>
 												<th class="text-center" style="width: 10%;">Status</th>
 												<th class="text-center" style="width: 10%;">Detail</th>
 												<th class="actions text-center" style="width: 20%;"></th>
@@ -170,8 +173,13 @@
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
-														<h6 class="text-sm text-center mb-0">{{order.id}}</h6>
+														<h6 class="text-sm mb-0">{{order.id}}</h6>
 													</div>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div>
+													<h6 class="text-sm text-center mb-1">{{order.createDate}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
@@ -196,22 +204,20 @@
 											</td>
 											<td class="align-middle text-sm">
 												<div class="col text-center">
-													<button class="btn btn-outline-primary"
-													ng-click="updateOrder.successOrder(order.id)">
+													<a class="btn btn-outline-primary" href="/order/detail/{{order.id}}">
 													<i class="bi bi-search"></i>
-												</button>
+												</a>
 												</div>
 											</td>
 											<td>
-
 												<button class="btn btn-outline-primary"
-												ng-click="updateOrder.confirmOrder(order.id)">
-												<i class="bi bi-check"></i>
-											</button>
-											<button class="btn btn-outline-danger"
-											ng-click="updateOrder.cancelOrder(order.id)">
-											<i class="bi bi-x-circle"></i>
-											</button>
+													ng-click="updateOrder.confirmOrder(order.id)">
+													<i class="bi bi-check"></i>
+												</button>
+												<button class="btn btn-outline-danger"
+													ng-click="updateOrder.cancelOrder(order.id)">
+													<i class="bi bi-x-circle"></i>
+												</button>
 											</td>
 									</table>
 								</div>
@@ -239,9 +245,10 @@
 										<thead>
 											<tr>
 												<th class="text-center" style="width: 10%;">ID</th>
+												<th class="text-center" style="width: 10%;">Create Date</th>
 												<th class="text-center" style="width: 10%">UserName</th>
 												<th class="text-center" style="width: 10%;">Fullname</th>
-												<th class="text-center" style="width: 30%;">Address</th>
+												<th class="text-center" style="width: 20%;">Address</th>
 												<th class="text-center" style="width: 10%;">Status</th>
 												<th class="text-center" style="width: 10%;">Detail</th>
 												<th class="actions text-center" style="width: 20%;"></th>
@@ -253,6 +260,11 @@
 													<div class="ms-1">
 														<h6 class="text-sm text-center mb-0">{{order.id}}</h6>
 													</div>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div>
+													<h6 class="text-sm text-center mb-1">{{order.createDate}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
@@ -277,10 +289,9 @@
 											</td>
 											<td class="align-middle text-sm">
 												<div class="col text-center">
-													<button class="btn btn-outline-primary"
-													ng-click="updateOrder.successOrder(order.id)">
+													<a class="btn btn-outline-primary" href="/order/detail/{{order.id}}">
 													<i class="bi bi-search"></i>
-												</button>
+												</a>
 												</div>
 											</td>
 											<td>
@@ -320,9 +331,10 @@
 										<thead>
 											<tr>
 												<th class="text-center" style="width: 10%;">ID</th>
+												<th class="text-center" style="width: 10%;">Create Date</th>
 												<th class="text-center" style="width: 10%">UserName</th>
 												<th class="text-center" style="width: 10%;">Fullname</th>
-												<th class="text-center" style="width: 30%;">Address</th>
+												<th class="text-center" style="width: 20%;">Address</th>
 												<th class="text-center" style="width: 10%;">Status</th>
 												<th class="text-center" style="width: 10%;">Detail</th>
 												<th class="actions text-center" style="width: 20%;"></th>
@@ -334,6 +346,11 @@
 													<div class="ms-1">
 														<h6 class="text-sm text-center mb-0">{{order.id}}</h6>
 													</div>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div>
+													<h6 class="text-sm text-center mb-1">{{order.createDate}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
@@ -358,10 +375,9 @@
 											</td>
 											<td class="align-middle text-sm">
 												<div class="col text-center">
-													<button class="btn btn-outline-primary"
-													ng-click="updateOrder.successOrder(order.id)">
+													<a class="btn btn-outline-primary" href="/order/detail/{{order.id}}">
 													<i class="bi bi-search"></i>
-												</button>
+												</a>
 												</div>
 											</td>
 											<td>
@@ -397,20 +413,26 @@
 										<thead>
 											<tr>
 												<th class="text-center" style="width: 10%;">ID</th>
+												<th class="text-center" style="width: 10%;">Create Date</th>
 												<th class="text-center" style="width: 10%">UserName</th>
 												<th class="text-center" style="width: 10%;">Fullname</th>
-												<th class="text-center" style="width: 30%;">Address</th>
+												<th class="text-center" style="width: 20%;">Address</th>
 												<th class="text-center" style="width: 10%;">Status</th>
 												<th class="text-center" style="width: 10%;">Detail</th>
-												<th class="actions text-center" style="width: 20%;"></th>
+												<!-- <th class="actions text-center" style="width: 20%;"></th> -->
 											</tr>
 										</thead>
 										<tbody class="no-border-x" ng-repeat="order in listOrdersSuccessful">
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
-														<h6 class="text-sm text-center mb-0">{{order.id}}</h6>
+														<h6 class="text-sm  mb-0">{{order.id}}</h6>
 													</div>
+												</div>
+											</td>
+											<td class="align-middle text-sm">
+												<div>
+													<h6 class="text-sm text-center mb-1">{{order.createDate}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
@@ -424,7 +446,7 @@
 												</div>
 											</td>
 											<td class="align-middle text-sm">
-												<div class=" ">
+												<div class="">
 													<h6 class="text-sm text-center mb-0">{{order.address}}</h6>
 												</div>
 											</td>
@@ -435,10 +457,9 @@
 											</td>
 											<td class="align-middle text-sm">
 												<div class="col text-center">
-													<button class="btn btn-outline-primary"
-													ng-click="updateOrder.successOrder(order.id)">
+													<a class="btn btn-outline-primary" href="/order/detail/{{order.id}}">
 													<i class="bi bi-search"></i>
-												</button>
+												</a>
 												</div>
 											</td>
 										
