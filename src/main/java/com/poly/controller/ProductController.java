@@ -66,7 +66,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/home/shop/findByName")
-	public String product(Model model,@RequestParam("keyword") Optional<String> kw) {
+	public String product(Model model,@RequestParam("keyword") String kw) {
 		List<Product> list = productService.findByName("%" + kw + "%");
 		model.addAttribute("items", list);
 		return "/product/shop";

@@ -1,8 +1,13 @@
 package com.poly.controller;
 
-import java.time.LocalDateTime;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,19 +31,26 @@ public class ForgotPasswordController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+	BCryptPasswordEncoder pe;
+    
+    @Autowired
+    private Validator validator;
     @GetMapping("/security/forgot")
     public String showForgotPasswordForm() {
         return "/security/forgot";
     }
 
     @PostMapping("/security/forgot")
-    public String processForgotPasswordForm(@RequestParam("username") String username, @RequestParam("email") String email, Model model) {
-        Account account = accountService.findByUsernameAndEmail(username, email);
+    public String processForgotPasswordForm(@RequestParam("username") String username, @RequestParam("email") String email, Model model,HttpSession session) {
+        
+    	Account account = accountService.findByUsernameAndEmail(username, email);
         if (account == null) {
             model.addAttribute("message", "Invalid username or email");
             return "/security/forgot";
         }
         String token = verificationTokenService.createVerificationTokenForUser(account);
+        session.setAttribute("token", token);
         emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
         model.addAttribute("message", "An email with a reset link has been sent to your email address");
         return "/security/verifi";
@@ -50,31 +62,43 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/security/verifi")
-    public String processVerifiForm(@RequestParam("token") String token, Model model) {
-        VerificationToken verificationToken = verificationTokenService.findByToken(token);
-        if (verificationToken == null || verificationToken.getExpiry_date().isBefore(LocalDateTime.now())) {
-            model.addAttribute("message", "Invalid or expired token");
-            return "/security/verifi";
-        }
-        model.addAttribute("token", token);
-        return "/security/confirmPass";
+    public String processVerifiForm(@RequestParam("token") String tokenveri, Model model, HttpSession session) {
+    	String token = (String) session.getAttribute("token");
+    	if (tokenveri.equals(token)) {
+			return "redirect:/security/confirmPass";
+		} else {
+			model.addAttribute("message", "Invalid or expired token");
+			return "/security/verifi";
+		}
     }
 
+    @GetMapping("/security/confirmPass")
+    public String confirmPassForm() {
+        return "/security/confirmPass";
+    }
     @PostMapping("/security/confirmPass")
-    public String processResetPassword(@RequestParam("password") String password, @RequestParam("password1") String password1, @RequestParam("token") String token, Model model) {
+    public String processResetPassword(@RequestParam("password") String password, @RequestParam("password1") String password1, Model model, HttpSession session) {
+        String token = (String) session.getAttribute("token");
+        VerificationToken verificationToken = verificationTokenService.findByToken(token);
+        Account account = verificationToken.getAccount();
         if (!password.equals(password1)) {
             model.addAttribute("message", "Passwords do not match");
             return "/security/confirmPass";
         }
-        VerificationToken verificationToken = verificationTokenService.findByToken(token);
-        if (verificationToken == null || verificationToken.getExpiry_date().isBefore(LocalDateTime.now())) {
-            model.addAttribute("message", "Invalid or expired token");
+        account.setPassword(pe.encode(password));
+        // Validate account
+        Set<ConstraintViolation<Account>> violations = validator.validate(account);
+        if (!violations.isEmpty()) {
+            // Handle validation errors
+            for (ConstraintViolation<Account> violation : violations) {
+                model.addAttribute("message", violation.getMessage());
+            }
             return "/security/confirmPass";
         }
-        Account account = verificationToken.getAccount();
-        account.setPassword(password);
+        
         accountService.create(account);
         model.addAttribute("message", "Your password has been reset successfully");
         return "/security/login";
     }
+
 }

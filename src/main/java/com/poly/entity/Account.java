@@ -43,9 +43,8 @@ public class Account implements Serializable {
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be in the correct format")
     String email;
-//    @Null
-//    @Pattern(regexp = "^[0-9]*$", message = "Phone number must only contain digits")
-//    @Size(min = 9, max = 10, message = "Phone number must be between 9 and 10 digits")
+    @Pattern(regexp = "^[0-9]*$", message = "Phone number must only contain digits")
+    @Size(min = 9, max = 10, message = "Phone number must be between 9 and 10 digits")
     String phone;
     
     @JsonIgnore

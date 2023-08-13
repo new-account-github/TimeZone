@@ -60,7 +60,13 @@
                     </div>
                     <!-- Grid and List view -->
                     <div class="grid-list-view">
-						 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+						<form th:action="@{|/home/shop/findByName|}" method="get">
+							<div class="grid-list-view">
+								<input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search"
+									th:value="${keywords}">
+							</div>
+							
+						</form>
                     </div>
                     <!-- Select items -->
 					<div class="dropdown">
