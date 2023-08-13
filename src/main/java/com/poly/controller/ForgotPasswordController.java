@@ -1,114 +1,104 @@
 package com.poly.controller;
 
-import java.util.Optional;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.entity.Account;
+import com.poly.entity.VerificationToken;
 import com.poly.service.AccountService;
 import com.poly.service.EmailService;
 import com.poly.service.VerificationTokenService;
 
 @Controller
 public class ForgotPasswordController {
-	@Autowired
-	AccountService accountService;
+    @Autowired
+    private AccountService accountService;
 
-	@Autowired
-	VerificationTokenService verificationTokenService;
+    @Autowired
+    private VerificationTokenService verificationTokenService;
 
-	@Autowired
-	EmailService emailService;
+    @Autowired
+    private EmailService emailService;
 
-	@Autowired
+    @Autowired
 	BCryptPasswordEncoder pe;
-	
-	@RequestMapping(value = "/security/forgot", method = RequestMethod.GET)
-	public String forgotForm() {
-		return "/security/forgot";
-	}
+    
+    @Autowired
+    private Validator validator;
+    @GetMapping("/security/forgot")
+    public String showForgotPasswordForm() {
+        return "/security/forgot";
+    }
 
-	@RequestMapping(value = "/security/forgot", method = RequestMethod.POST)
-	public String forgot(@RequestParam("username") String username, @RequestParam("email") String email, Model model,
-			HttpSession session) {
-		Optional<Account> accountOptional = accountService.findByUsernameAndEmail(username, email);
-		if (!accountOptional.isPresent()) {
-			model.addAttribute("message", "Tên đăng nhập hoặc email không tồn tại");
-			return "/security/forgot";
-		}
+    @PostMapping("/security/forgot")
+    public String processForgotPasswordForm(@RequestParam("username") String username, @RequestParam("email") String email, Model model,HttpSession session) {
+        
+    	Account account = accountService.findByUsernameAndEmail(username, email);
+        if (account == null) {
+            model.addAttribute("message", "Invalid username or email");
+            return "/security/forgot";
+        }
+        String token = verificationTokenService.createVerificationTokenForUser(account);
+        session.setAttribute("token", token);
+        emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
+        model.addAttribute("message", "An email with a reset link has been sent to your email address");
+        return "/security/verifi";
+    }
 
-		Account account = accountOptional.get();
+    @GetMapping("/security/verifi")
+    public String showVerifiForm() {
+        return "/security/verifi";
+    }
 
-		// Lưu giá trị của username vào HttpSession
-		session.setAttribute("username", username);
-
-		model.addAttribute("message", "Vui lòng kiểm tra email để đặt lại mật khẩu");
-
-		// Tạo mã xác thực và lưu vào cơ sở dữ liệu
-		String token = verificationTokenService.createVerificationTokenForUser(account);
-		session.setAttribute("token", token);
-		// Gửi email
-		emailService.sendEmail(account.getEmail(), token, account.getFullname());
-
-		return "redirect:/security/verifi";
-	}
-
-	@RequestMapping(value = "/security/verifi", method = RequestMethod.GET)
-	public String verifiForm() {
-		return "/security/verifi";
-	}
-
-	@RequestMapping(value = "/security/verifi", method = RequestMethod.POST)
-	public String verifi(@RequestParam("token") String tokenveri, Model model, HttpSession session) {
-		// Lấy giá trị của username từ HttpSession
-		String username = (String) session.getAttribute("username");
-
-		Optional<Account> accountOptional = accountService.findByUsername(username);
-		Account account = accountOptional.get();
-		// Lấy giá trị của token từ HttpSession
-		String token = (String) session.getAttribute("token");
-		// System.out.println(token);
-		// System.out.println(tokenveri);
-		if (tokenveri.equals(token)) {
+    @PostMapping("/security/verifi")
+    public String processVerifiForm(@RequestParam("token") String tokenveri, Model model, HttpSession session) {
+    	String token = (String) session.getAttribute("token");
+    	if (tokenveri.equals(token)) {
 			return "redirect:/security/confirmPass";
 		} else {
-			model.addAttribute("message", "Sai mã xác thực");
+			model.addAttribute("message", "Invalid or expired token");
 			return "/security/verifi";
 		}
-	}
+    }
 
-	@RequestMapping(value = "/security/confirmPass", method = RequestMethod.GET)
-	public String confirmPassForm() {
-		return "/security/confirmPass";
-	}
+    @GetMapping("/security/confirmPass")
+    public String confirmPassForm() {
+        return "/security/confirmPass";
+    }
+    @PostMapping("/security/confirmPass")
+    public String processResetPassword(@RequestParam("password") String password, @RequestParam("password1") String password1, Model model, HttpSession session) {
+        String token = (String) session.getAttribute("token");
+        VerificationToken verificationToken = verificationTokenService.findByToken(token);
+        Account account = verificationToken.getAccount();
+        if (!password.equals(password1)) {
+            model.addAttribute("message", "Passwords do not match");
+            return "/security/confirmPass";
+        }
+        account.setPassword(pe.encode(password));
+        // Validate account
+        Set<ConstraintViolation<Account>> violations = validator.validate(account);
+        if (!violations.isEmpty()) {
+            // Handle validation errors
+            for (ConstraintViolation<Account> violation : violations) {
+                model.addAttribute("message", violation.getMessage());
+            }
+            return "/security/confirmPass";
+        }
+        
+        accountService.create(account);
+        model.addAttribute("message", "Your password has been reset successfully");
+        return "/security/login";
+    }
 
-	@RequestMapping(value = "/security/confirmPass", method = RequestMethod.POST)
-	public String confirmPass(Model model, @RequestParam("PassWord1") String PassWord1,
-			@RequestParam("PassWord2") String PassWord2, HttpSession session) {
-		String username = (String) session.getAttribute("username");
-		if (PassWord1.equals(PassWord2)) {
-			// Đổi mật khẩu
-			Account account = accountService.findById(username);
-			if (account != null) {
-				// Đổi mật khẩu
-				account.setPassword(pe.encode(PassWord1));
-				// Lưu lại thông tin tài khoản
-				accountService.create(account);
-
-			} else {
-				model.addAttribute("message", "Sai Password");
-				return "/security/confirmPass";
-			}
-
-		}
-		return "/security/Login";
-	}
 }

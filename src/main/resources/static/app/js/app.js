@@ -23,7 +23,14 @@ app.controller('ctrl',function($scope,$http){
         });
         return totalPrice;
     }
-
+     function totalOrders(){
+        let totalOrder = 0;
+        angular.forEach($scope.items, function(item) {
+            totalPrice += item.price * item.qty;
+        });
+        return totalPrice;
+    }
+    	
 
     $scope.cart= {
      
