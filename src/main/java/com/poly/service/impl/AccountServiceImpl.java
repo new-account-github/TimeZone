@@ -38,9 +38,9 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Optional<Account> findByUsernameAndEmail(String username, String email) {
-		return accountsDAO.findByUsernameAndEmail(username, email);
-	}
+    public Account findByUsernameAndEmail(String username, String email) {
+        return accountsDAO.findByUsernameAndEmail(username, email);
+    }
 
 	@Override
 	public Optional<Account> findByUsername(String username) {

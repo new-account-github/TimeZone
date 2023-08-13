@@ -27,12 +27,15 @@ public class ProductController {
 	CategoryService categoryService;
 	
 	@RequestMapping("/home/shop")
-	public String shop(Model model) {
-		List<Product> listProduct = productService.findAll();
-		model.addAttribute("items", listProduct);	
+	public String shop(Model model,@RequestParam("cid") Optional<String> cid) {
+		if(cid.isPresent()) {
+			List<Category> listCates = categoryService.findAll();
+			model.addAttribute("cates", listCates);
+		} else {
+			List<Product> listProduct = productService.findAll();
+			model.addAttribute("items", listProduct);	
 
-		List<Category> listCates = categoryService.findAll();
-		model.addAttribute("cates", listCates);
+		}
 
 		return "/product/shop";
 	}

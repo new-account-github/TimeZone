@@ -11,7 +11,8 @@ public interface AccountService {
 
 	void delete(String username);
 
-	Optional<Account> findByUsernameAndEmail(String username, String email);
+	
+	Account findByUsernameAndEmail(String username, String email);
 
 	Optional<Account> findByUsername(String username);
 

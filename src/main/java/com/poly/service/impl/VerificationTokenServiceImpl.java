@@ -36,5 +36,8 @@ public class VerificationTokenServiceImpl implements VerificationTokenService{
 	    
 	    return token;
 	}
-
+	@Override
+    public VerificationToken findByToken(String token) {
+        return verificationTokenDAO.findByToken(token);
+    }
 }
