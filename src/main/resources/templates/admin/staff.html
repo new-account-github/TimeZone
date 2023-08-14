@@ -43,6 +43,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
 	
 <link rel="stylesheet" href="/assets/css/admin.css" type="text/css">
+
 <link rel="stylesheet" href="/assets/css/adminform.css" type="text/css">
 
 
@@ -70,7 +71,7 @@
 }
 </style>
 </head>
-<body ng-app="staff-app" ng-controller="staff-ctrl">
+<body ng-app="authority-app" ng-controller="authority-ctrl">
 	<div class="be-wrapper be-fixed-sidebar">
 
 		<nav class="navbar navbar-expand fixed-top be-top-header">
@@ -117,10 +118,12 @@
 								<li class="divider">Menu</li>
 								<li class="active"><a href="index"><i
 										class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
-									<th:block th:if="${#request.isUserInRole('DIR')}">
-										<li class="active"><a th:href="@{|/admin/authority|}"><i
-										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
-									</th:block>
+										<th:block th:if="${#request.isUserInRole('DIR')}">
+											<li class="active"><a th:href="@{|/admin/staff|}"><i
+											class="icon mdi mdi-home"></i><span>Staff</span></a></li>
+										</th:block>
+										<li class="active"><a th:href="@{|/admin/orders|}"><i
+											class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 									<li class="active"><a th:href="@{|/admin/statistical|}"><i
 										class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>
@@ -132,20 +135,20 @@
 		<div class="be-content">
 			<div class="main-content container-fluid">
 				
-					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-					  <li class="nav-item">
-					    <a class="nav-link active" id="pills-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">List Products</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" id="pills-profile-tab" data-toggle="tab" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Edit Products</a>
-					  </li>
-					</ul>
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					<li class="nav-item">
+					  <button class="nav-link active" id="pills-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">List Staff</button>
+					</li>
+					<li class="nav-item">
+					  <button class="nav-link" id="pills-profile-tab" data-toggle="tab" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Edit Staff</button>
+					</li>
+				  </ul>
 					<div class="tab-content" id="pills-tabContent">
 					  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 					 	<div class="col-12 col-lg-12">
 							<div class="card card-table">
 								<div class="card-header">
-									<div class="title">ListStaff</div>
+									<div class="title">List Staff</div>
 								</div>
 								<div class="card-body table-responsive">
 									<table class="table table-striped table-borderless">
@@ -159,45 +162,42 @@
 												<th class="actions" style="width: 4%;"></th>
 											</tr>
 										</thead>
-										<tbody class="no-border-x" ng-repeat="staff in staffs">
+										<tbody class="no-border-x" ng-repeat="acc in admins">
 											<td class="w-20">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
-														<h6 class="text-sm mb-0">{{staff[0]}}</h6>
+														<h6 class="text-sm mb-0">{{acc.username}}</h6>
 													</div>
 												</div>
 											</td>
 											<td>
 												<div>
-													<h6 class="text-sm mb-1">{{staff[1]}}</h6>
+													<h6 class="text-sm mb-1">{{acc.fullname}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
 												<div class="">
-													<h6 class="text-sm mb-0">{{staff[2]}}</h6>
+													<h6 class="text-sm mb-0">{{acc.email}}</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
 												<div class=" ">
-													<h6 class="text-sm mb-0">{{staff[3]}}
+													<h6 class="text-sm mb-0">{{acc.phone}}
 													</h6>
 												</div>
 											</td>
-												<td class="align-middle text-sm">
-												<div class=" ">
-													<h6 class="text-sm mb-0">{{staff[4]}}
-													</h6>
+											<td class="align-middle text-sm" ng-repeat="role in roles" >
+												<div class="">
+												<button class="btn btn-outline-danger" ng-click="authority_changed(acc,role)">
+													<i class="bi bi-trash"></i>
+												</button>
 												</div>
 											</td>
 							
 											<td>
 												<button class="btn btn-outline-primary"
-													ng-click="edit(staff)">
+													ng-click="edit(acc)">
 													<i class="bi bi-pencil-square"></i>
-												</button>
-												<button class="btn btn-outline-danger"
-													ng-click="delete(staff)">
-													<i class="bi bi-trash"></i>
 												</button>
 											</td>
 											</tr>
@@ -226,7 +226,7 @@
 							<div class="card-body table-responsive  text-sm-left ">
 								<div class="row text-center">
 									<div class="col-12">
-										<form name="myForm" novalidate>
+										<form name="myStaff" novalidate="novalidate">
 											<div class="row">
 												<div class="col-md-12">
 													<div
@@ -237,7 +237,7 @@
 															<label
 																class="col-12 col-sm-3 col-form-label text-sm-left">Username</label>
 															<div class="col-12 col-sm-8 col-lg-9">
-																<input class="form-control" name="username" ng-model="form[0]"
+																<input class="form-control" name="username" ng-model="username"
 																	type="text" placeholder="Username">
 															</div>
 														</div>
@@ -246,26 +246,51 @@
 															<label
 																class="col-12 col-sm-3 col-form-label text-sm-left">FullName</label>
 															<div class="col-12 col-sm-8 col-lg-9 text-center">
-																<input class="form-control" name="fullname" ng-model="form[1]"
-																	type="text" placeholder="FullName" required >
+																<input type="text" class="form-control" id="fullname" name="fullname" value=""
+																ng-minlength="3" required ng-pattern="/^[\p{L}\d\s]*$/u" ng-model="fullname" placeholder="Fullname">
+																<div class="errortext" ng-show="myStaff.fullname.$dirty && myStaff.fullname.$invalid" style="float: left; margin-right: 40px; color:red">
+																	<span ng-show="myStaff.fullname.$error.required">Fullname is required</span> 
+																	<span ng-show="myStaff.fullname.$error.minlength">Fullname must be more than 3 characters</span> 
+																	<span ng-show="myStaff.fullname.$error.pattern && !myStaff.fullname.$error.minlength">Fullname cannot contain special characters</span> 
+																</div>
 															</div>
 														</div>
-														
+														<div class="form-group row">
+															<label
+																class="col-12 col-sm-3 col-form-label text-sm-left">Password</label>
+															<div class="col-12 col-sm-8 col-lg-9 text-center">
+																<input class="form-control" name="password" ng-model="password" ng-minlength="8"
+																	type="password" placeholder="Password" required ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}\[\]:;<>,.?~]).*$/">
+																<div class="errortext" ng-show="myStaff.password.$dirty && myStaff.password.$invalid" style="float: left; margin-right: 40px; color:red">
+																		<span ng-show="myStaff.password.$error.required">Password is required</span> 
+																		<span ng-show="myStaff.password.$error.minlength">Password must be more than 8 characters</span> 
+																		<span ng-show="myStaff.password.$error.pattern && !myStaff.password.$error.minlength">Password must contain at least one lowercase letter, one uppercase letter, one digit and one special character</span> 
+																</div>
+															</div>
+														</div>
 														<div class="form-group row">
 															<label
 																class="col-12 col-sm-3 col-form-label text-sm-left">Email</label>
 															<div class="col-12 col-sm-8 col-lg-9 text-sm-left">
-																<input class="form-control" ng-model="form[2]"
-																	name="Email" type="email" placeholder="Email" required>
+																<input class="form-control" ng-model="email"
+																	name="email" type="email" placeholder="Email" required>
+																<div class="errortext" ng-show="myStaff.email.$dirty && myStaff.email.$invalid" style="float: left; margin-right: 40px; color:red">
+																	<span ng-show="myStaff.email.$error.required">Email is required.</span>
+																	<span ng-show="myStaff.email.$error.email">Invalid email address.</span>
+																</div>
 															</div>
 														</div>
-														
 														<div class="form-group row">
 															<label
 																class="col-12 col-sm-3 col-form-label text-sm-left">Phone</label>
 															<div class="col-12 col-sm-8 col-lg-9 text-sm-left">
-																<input class="form-control" ng-model="form[3]"
-																	name="Phone" type="text" placeholder="Phone" required>
+																<input class="form-control" ng-model="phone"
+																	name="phone" type="text" placeholder="Phone" required ng-pattern="/^[0-9]*$/" ng-maxlength="10" ng-minlength="10">
+																	<div class="errortext" ng-show="myStaff.phone.$dirty && myStaff.phone.$invalid" style="float: left; margin-right: 40px; color:red">
+																		<span ng-show="myStaff.phone.$error.required">Phone is required</span> 
+																		<span ng-show="myStaff.phone.$error.minlength">Phone must at least 10 digit</span> 
+																		<span ng-show="myStaff.phone.$error.pattern && !myStaff.phone.$error.maxlength">Phone must be a valid phone</span>
+																	</div>
 															</div>
 														</div>
 										
@@ -277,13 +302,11 @@
 
 									</div>
 									<div class="d-grid gap-2 d-md-block text-sm-center">
-										<button ng-click=staff.purchase() class="btn btn-primary"
-											type="button" ng-disabled=" myForm.$invalid ">Create</button>
-										<button ng-click=delete(form) class="btn btn-primary"
-											type="button">Delete</button>
-										<button ng-click=update() class="btn btn-primary"
+										<button ng-click="saveAccount()" class="btn btn-primary"
+											type="button" ng-disabled="myStaff.$invalid ">Create</button>
+										<button ng-click= "update()" ng-disabled="myStaff.$invalid " class="btn btn-primary"
 											type="button">Update</button>
-										<button ng-click=reset() class="btn btn-primary" type="button">
+										<button ng-click="clearForm()" class="btn btn-primary" type="button">
 											New</button>
 									</div>
 								</div>
@@ -296,6 +319,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/app/js/staff-ctrl.js"></script>
+	<script src="/app/js/authority-ctrl.js"></script>
 </body>
 </html>

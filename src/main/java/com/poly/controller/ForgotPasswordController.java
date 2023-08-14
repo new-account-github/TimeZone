@@ -51,7 +51,7 @@ public class ForgotPasswordController {
         }
         String token = verificationTokenService.createVerificationTokenForUser(account);
         session.setAttribute("token", token);
-        emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
+//        emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
         model.addAttribute("message", "An email with a reset link has been sent to your email address");
         return "/security/verifi";
     }
