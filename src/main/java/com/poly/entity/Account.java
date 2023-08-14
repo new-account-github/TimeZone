@@ -35,10 +35,10 @@ public class Account implements Serializable {
     String password;
 
     String fullname;
-    @NotBlank(message = "Firstname is required")
-    String firstname;
-    @NotBlank(message = "Lastname is required")
-    String lastname;
+//    @NotBlank(message = "Firstname is required")
+//    String firstname;
+//    @NotBlank(message = "Lastname is required")
+//    String lastname;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email must be in the correct format")

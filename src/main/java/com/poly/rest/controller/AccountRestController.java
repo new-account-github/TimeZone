@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.entity.Account;
-import com.poly.entity.Product;
 import com.poly.service.AccountService;
 
 @CrossOrigin("*")
@@ -31,36 +32,31 @@ public class AccountRestController {
 	@Autowired
 	HttpServletRequest request;
 
-//	@GetMapping()
-//	public Account account(HttpServletRequest request) {
-//		return accountService.findById(request.getRemoteUser());
-//	}
-
-	/* Thêm nhân viên bên Admin */
 	@GetMapping()
 	public List<Account> getAll() {
 		return accountService.findALL();
 	}
-	
-	
-	  @PostMapping() 
-	  public Account create(@RequestBody Account account) { 
-		  return accountService.createStaff(account); 
-	  }
-	 
-	
-	
-	
-	
+
 	@GetMapping("/admin")
 	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin) {
 		if (admin.orElse(false)) {
-			return accountService.getAdmin();
+			return accountService.getStaff();
 		} else {
 			return accountService.findALL();
 		}
 	}
 
+	@PostMapping("/add")
+	public Account createStaff(@RequestBody JsonNode account, Model model) {
+		String username = account.get("username").asText();
+		return accountService.checkUsernameExists(username) ? null : accountService.create(account);
+	}
+
+	@PutMapping("/update/{username}")
+	public Account updateStaff(@RequestBody JsonNode staffToUpdate, @PathVariable("username") String username) {
+		return accountService.create(staffToUpdate);
+	}
+	
 	@PutMapping("/{username}")
 	public Account update(@RequestBody Account account, @PathVariable("username") String username) {
 		return accountService.update(account);

@@ -2,7 +2,10 @@ package com.poly.service;
 
 import java.util.Optional;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.entity.Account;
+import com.poly.entity.Order;
 
 public interface AccountService {
 	Account findById(String username);
@@ -10,7 +13,6 @@ public interface AccountService {
 	Account update(Account account);
 
 	void delete(String username);
-
 	
 	Account findByUsernameAndEmail(String username, String email);
 
@@ -20,10 +22,10 @@ public interface AccountService {
 
 	public boolean checkUsernameExists(String username);
 
-	List<Account> getAdmin();
+	List<Account> getStaff();
 
 	List<Account> findALL();
 
-	 Account createStaff(Account account); 
+	Account create(JsonNode account);
 
 }

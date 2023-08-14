@@ -18,4 +18,14 @@ public class RoleServiceImpl implements RoleService{
 	public List<Role> findALL() {
 		return roleDAO.findAll();
 	}
+
+	@Override
+	public Role findById(String string) {
+		return roleDAO.findById(string).get();
+	}
+
+	@Override
+	public List<Role> findAllById(List<String> targetRoleIds) {
+		return roleDAO.findAllById(targetRoleIds);
+	}
 }

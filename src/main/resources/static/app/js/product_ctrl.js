@@ -122,16 +122,16 @@ app.controller('product_ctrl', function($scope, $http) {
 	}
 
 
-	document.getElementById("select1").addEventListener("change", function() {
-		var selectedCategory = this.value;
-		var items = document.querySelectorAll(".single-popular-items");
-		items.forEach(function(item) {
-			if (selectedCategory == "all" || item.classList.contains(selectedCategory)) {
-				item.style.display = "block";
-			} else {
-				item.style.display = "none";
-			}
-		});
-	});
+	// document.getElementById("select1").addEventListener("change", function() {
+	// 	var selectedCategory = this.value;
+	// 	var items = document.querySelectorAll(".single-popular-items");
+	// 	items.forEach(function(item) {
+	// 		if (selectedCategory == "all" || item.classList.contains(selectedCategory)) {
+	// 			item.style.display = "block";
+	// 		} else {
+	// 			item.style.display = "none";
+	// 		}
+	// 	});
+	// });
 
 })

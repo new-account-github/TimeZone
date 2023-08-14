@@ -117,10 +117,10 @@
 								<li class="divider">Menu</li>
 								<li class="active"><a href="index"><i
 										class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
-									<th:block th:if="${#request.isUserInRole('DIR')}">
-										<li class="active"><a th:href="@{|/admin/authority|}"><i
-										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
-									</th:block>
+										<th:block th:if="${#request.isUserInRole('DIR')}">
+											<li class="active"><a th:href="@{|/admin/staff|}"><i
+											class="icon mdi mdi-home"></i><span>Staff</span></a></li>
+										</th:block>
 									<li class="active"><a th:href="@{|/admin/orders|}"><i
 										class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 									<li class="active"><a th:href="@{|/admin/statistical|}"><i
