@@ -8,9 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -35,8 +35,10 @@ public class Account implements Serializable {
     String password;
 
     String fullname;
-    @NotBlank(message = "Firstname is required")
+
+    @NotBlank(message = "Surname and middle name is required")
     String firstname;
+
     @NotBlank(message = "Lastname is required")
     String lastname;
 

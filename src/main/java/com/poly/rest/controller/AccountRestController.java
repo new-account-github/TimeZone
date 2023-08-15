@@ -1,11 +1,13 @@
 package com.poly.rest.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,9 +34,17 @@ public class AccountRestController {
 	@Autowired
 	HttpServletRequest request;
 
+	@Autowired
+	BCryptPasswordEncoder pe;
+
 	@GetMapping()
 	public List<Account> getAll() {
 		return accountService.findALL();
+	}
+
+	@PostMapping()
+	public Account create(@RequestBody Account account) {
+		return accountService.createStaff(account);
 	}
 
 	@GetMapping("/admin")
@@ -56,10 +66,32 @@ public class AccountRestController {
 	public Account updateStaff(@RequestBody JsonNode staffToUpdate, @PathVariable("username") String username) {
 		return accountService.create(staffToUpdate);
 	}
-	
+
 	@PutMapping("/{username}")
 	public Account update(@RequestBody Account account, @PathVariable("username") String username) {
+		// account.setPassword(pe.encode(account.getPassword()));
 		return accountService.update(account);
+	}
+
+	@PutMapping("/{username}/password")
+	public void updatePassword(@PathVariable("username") String username, @RequestBody Map<String, String> body) {
+		// Lấy password mới từ request body
+		String newPassword = body.get("password");
+		// Lấy account từ database
+		Account account = accountService.findById(username);
+		// Cập nhật password mới cho account
+		account.setPassword(pe.encode(newPassword));
+		accountService.update(account);
+	}
+
+	@PostMapping("/{username}/authenticate")
+	public boolean authenticate(@PathVariable("username") String username, @RequestBody Map<String, String> body) {
+		// Lấy password nhập vào từ request body
+		String password = body.get("password");
+		// Lấy account từ database
+		Account account = accountService.findById(username);
+		// So sánh password nhập vào với password đã mã hóa trong database
+		return pe.matches(password, account.getPassword());
 	}
 
 	@DeleteMapping("/{username}")
