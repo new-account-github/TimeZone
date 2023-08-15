@@ -113,8 +113,125 @@ app.controller('order_ctrl', function($scope, $http) {
 			}
 		}
 	};
-
-		
-
-    
+	
+	//phân trang listOrders
+	$scope.pager1 = {
+		page: 0,
+		size: 8,
+		get listOrders() {
+			var start = this.page * this.size;
+			return $scope.listOrders.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.listOrders.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		}
+	};
+	//phân trang listOrdersConfirmed
+	$scope.pager2 = {
+		page: 0,
+		size: 8,
+		get listOrdersConfirmed() {
+			var start = this.page * this.size;
+			return $scope.listOrdersConfirmed.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.listOrdersConfirmed.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		},
+	};
+	//phân trang listOrdersCancelled
+	$scope.pager3 = {
+		page: 0,
+		size: 8,
+		get listOrdersCancelled() {
+			var start = this.page * this.size;
+			return $scope.listOrdersCancelled.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.listOrdersCancelled.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		},
+};
+	//phân trang listOrdersSuccessful
+	$scope.pager4 = {
+		page: 0,
+		size: 5,
+		get listOrdersSuccessful() {
+			var start = this.page * this.size;
+			return $scope.listOrdersSuccessful.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.listOrdersSuccessful.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		}
+	}	
 });

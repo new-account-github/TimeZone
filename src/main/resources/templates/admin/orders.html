@@ -169,7 +169,7 @@
 												<th class="actions text-center" style="width: 20%;"></th>
 											</tr>
 										</thead>
-										<tbody class="no-border-x" ng-repeat="order in listOrders">
+										<tbody class="no-border-x" ng-repeat="order in pager1.listOrders">
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
@@ -223,12 +223,12 @@
 								</div>
 
 								<div class="card-footer text-center">
-									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
-									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
-									<button class="btn btn-outline-success">{{pager.page + 1}}
-										of {{pager.count}}</button>
-									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
-									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
+									<button class="btn btn-outline-danger" ng-click="pager1.first()">FIRST</button>
+									<button class="btn btn-outline-primary" ng-click="pager1.prev()">PREV</button>
+									<button class="btn btn-outline-success">{{pager1.page + 1}}
+										of {{pager1.count}}</button>
+									<button class="btn btn-outline-primary" ng-click="pager1.next()">NEXT</button>
+									<button class="btn btn-outline-danger" ng-click="pager1.last()">LAST</button>
 								</div>
 
 							</div>
@@ -254,7 +254,7 @@
 												<th class="actions text-center" style="width: 20%;"></th>
 											</tr>
 										</thead>
-										<tbody class="no-border-x" ng-repeat="order in listOrdersConfirmed">
+										<tbody class="no-border-x" ng-repeat="order in pager2.listOrdersConfirmed">
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
@@ -308,12 +308,12 @@
 								</div>
 
 								<div class="card-footer text-center">
-									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
-									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
-									<button class="btn btn-outline-success">{{pager.page + 1}}
-										of {{pager.count}}</button>
-									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
-									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
+									<button class="btn btn-outline-danger" ng-click="pager2.first()">FIRST</button>
+									<button class="btn btn-outline-primary" ng-click="pager2.prev()">PREV</button>
+									<button class="btn btn-outline-success">{{pager2.page + 1}}
+										of {{pager2.count}}</button>
+									<button class="btn btn-outline-primary" ng-click="pager2.next()">NEXT</button>
+									<button class="btn btn-outline-danger" ng-click="pager2.last()">LAST</button>
 								</div>
 
 							</div>
@@ -340,7 +340,7 @@
 												<th class="actions text-center" style="width: 20%;"></th>
 											</tr>
 										</thead>
-										<tbody class="no-border-x" ng-repeat="order in listOrdersCancelled">
+										<tbody class="no-border-x" ng-repeat="order in pager3.listOrdersCancelled">
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
@@ -390,12 +390,12 @@
 								</div>
 
 								<div class="card-footer text-center">
-									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
-									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
-									<button class="btn btn-outline-success">{{pager.page + 1}}
-										of {{pager.count}}</button>
-									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
-									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
+									<button class="btn btn-outline-danger" ng-click="pager3.first()">FIRST</button>
+									<button class="btn btn-outline-primary" ng-click="pager3.prev()">PREV</button>
+									<button class="btn btn-outline-success">{{pager3.page + 1}}
+										of {{pager3.count}}</button>
+									<button class="btn btn-outline-primary" ng-click="pager3.next()">NEXT</button>
+									<button class="btn btn-outline-danger" ng-click="pager3.last()">LAST</button>
 								</div>
 
 							</div>
@@ -422,7 +422,7 @@
 												<!-- <th class="actions text-center" style="width: 20%;"></th> -->
 											</tr>
 										</thead>
-										<tbody class="no-border-x" ng-repeat="order in listOrdersSuccessful">
+										<tbody class="no-border-x" ng-repeat="order in pager4.listOrdersSuccessful">
 											<td class="align-middle text-sm">
 												<div class="d-flex px-0 py-0 ">
 													<div class="ms-1">
@@ -467,12 +467,12 @@
 								</div>
 
 								<div class="card-footer text-center">
-									<button class="btn btn-outline-danger" ng-click="pager.first()">FIRST</button>
-									<button class="btn btn-outline-primary" ng-click="pager.prev()">PREV</button>
-									<button class="btn btn-outline-success">{{pager.page + 1}}
-										of {{pager.count}}</button>
-									<button class="btn btn-outline-primary" ng-click="pager.next()">NEXT</button>
-									<button class="btn btn-outline-danger" ng-click="pager.last()">LAST</button>
+									<button class="btn btn-outline-danger" ng-click="pager4.first()">FIRST</button>
+									<button class="btn btn-outline-primary" ng-click="pager4.prev()">PREV</button>
+									<button class="btn btn-outline-success">{{pager4.page + 1}}
+										of {{pager4.count}}</button>
+									<button class="btn btn-outline-primary" ng-click="pager4.next()">NEXT</button>
+									<button class="btn btn-outline-danger" ng-click="pager4.last()">LAST</button>
 								</div>
 
 							</div>
