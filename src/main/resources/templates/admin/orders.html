@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org"
 	th:fragment="dynamic(main)">
 <head>
@@ -95,7 +95,7 @@
 								class="user-name">[[${#request.remoteUser}]]</span></a>
 							<div class="dropdown-menu" role="menu">
 								<div class="user-info">
-									<div class="user-name"></div>
+									<div class="user-name">[[${#request.remoteUser}]]</div>
 									<div class="user-position online">Available</div>
 								</div>
 								<a class="dropdown-item" href="/home/account"><span
