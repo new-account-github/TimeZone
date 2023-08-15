@@ -42,11 +42,6 @@ public class AccountRestController {
 		return accountService.findALL();
 	}
 
-	@PostMapping()
-	public Account create(@RequestBody Account account) {
-		return accountService.createStaff(account);
-	}
-
 	@GetMapping("/admin")
 	public List<Account> getAccounts(@RequestParam("admin") Optional<Boolean> admin) {
 		if (admin.orElse(false)) {
