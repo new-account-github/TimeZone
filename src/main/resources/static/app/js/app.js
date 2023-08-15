@@ -145,12 +145,48 @@ app.controller('ctrl', function($scope, $http) {
 	$scope.delete = function(accountD) {
 		if (confirm("Are you sure you want to delete this account?")) {
 			$http.delete(`/rest/account/${accountD.username}`).then(resp => {
-				alert("Xóa thành công");
+				alert("Delete Success");
 				location.href = "/security/logoff";
 			}).catch(err => {
 				alert('Delete fail');
 				console.log(err);
 			})
+		}
+	}
+
+	$scope.authenticationPass = function() {
+		// Lấy giá trị của input xác nhận password
+		var confirmPassword = document.getElementById("confirmPassword").value;
+		// Gửi password nhập vào lên server để xác thực
+		$http.post(`/rest/account/${$scope.account.username}/authenticate`, { password: confirmPassword }).then(resp => {
+			if (resp.data) {
+				$('#exampleModalCenter').modal('hide');
+				// Nếu đúng, chuyển đến trang updatePassword
+				 $('#newPasswordModal').modal('show');
+			} else {
+				// Nếu sai, hiển thị thông báo lỗi
+				alert("Incorrect password");
+			}
+		});
+	}
+
+	$scope.updatePassword = function() {
+		// Lấy giá trị của 2 ô input nhập password mới
+		var newPassword = document.getElementById("newPassword").value;
+		var confirmPassword = document.getElementById("confirmNewPassword").value;
+		// So sánh 2 giá trị nhập vào
+		if (newPassword === confirmPassword) {
+			// Nếu đúng, cập nhật password mới cho account
+			$http.put(`/rest/account/${$scope.account.username}/password`, { password: newPassword }).then(resp => {
+				alert("Update password success");
+				location.href = "/home/account";
+			}).catch(err => {
+				alert("Update password fail");
+				console.log(err);
+			})
+		} else {
+			// Nếu sai, hiển thị thông báo lỗi
+			alert("Passwords do not match");
 		}
 	}
 
