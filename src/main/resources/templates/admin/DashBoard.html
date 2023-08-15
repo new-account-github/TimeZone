@@ -45,7 +45,6 @@
 <link rel="stylesheet" href="/assets/css/admin.css" type="text/css">
 <link rel="stylesheet" href="/assets/css/adminform.css" type="text/css">
 
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 
 <style type="text/css">
 .button_scroll2top {
@@ -118,9 +117,11 @@
 								<li class="active"><a href="index"><i
 										class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
 									<th:block th:if="${#request.isUserInRole('DIR')}">
-										<li class="active"><a th:href="@{|/admin/authority|}"><i
-										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
+										<li class="active"><a th:href="@{|/admin/staff|}"><i
+										class="icon mdi mdi-home"></i><span>Staff</span></a></li>
 									</th:block>
+									<li class="active"><a th:href="@{|/admin/orders|}"><i
+										class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 									<li class="active"><a th:href="@{|/admin/statistical|}"><i
 										class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>
@@ -276,8 +277,8 @@
 																	 ng-min="0"   required>
 																<div class="errortext text-sm-left"
 																	ng-show="myForm.price.$dirty && myForm.price.$invalid" style="float: left; margin-right: 40px; color:red">
-																	  <span  ng-show="myForm.price.$error.required" >Price is required</span>
-																	 <span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
+																	<span  ng-show="myForm.price.$error.required" >Price is required</span>
+																	<span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
 																
 																</div>
 															</div>

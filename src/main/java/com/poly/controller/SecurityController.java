@@ -30,10 +30,11 @@ public class SecurityController {
 	public String processLogin(Model model, @RequestParam("username") String username,
 			@RequestParam("password") String passFromRequest) {
 		Account account = accountService.findById(username);
-		if (account != null && username != null) {
+		
+		if (account != null ) {
 			String password = account.getPassword();
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			if (!encoder.matches(passFromRequest, password)) {
+			if (!encoder.matches(passFromRequest, password) || username != account.getUsername()) {
 				model.addAttribute("message", "Username or password incorrect");
 				return "redirect:/security/login/error";
 			} else {
