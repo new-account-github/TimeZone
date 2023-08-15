@@ -259,7 +259,7 @@
 																<input class="form-control" ng-model="form.name"
 																	type="text" placeholder="Name" required name="name"
 																	ng-minlength="3" ng-maxlength="20"
-																	ng-pattern="/^[a-zA-Z0-9_]*$/">
+																	ng-pattern="/^[a-zA-Z0-9_]*$/" >
 																<div class="errortext" ng-show="myForm.name.$dirty && myForm.name.$invalid" style="float: left; margin-right: 40px; color:red">
 																	<span ng-show="myForm.name.$error.required">Name is required</span> 
 																	<span ng-show="myForm.name.$error.minlength">Name must be greater than 3</span> 
@@ -348,7 +348,7 @@
 									</div>
 									<div class="d-grid gap-2 d-md-block text-sm-center">
 										<button ng-click=create() class="btn btn-primary"
-											type="button" ng-disabled=" myForm.$invalid ">Create</button>
+											type="button" ng-disabled="myForm.$invalid ">Create</button>
 										<button ng-click=delete(form) class="btn btn-primary"
 											type="button">Delete</button>
 										<button ng-click=update() class="btn btn-primary"
