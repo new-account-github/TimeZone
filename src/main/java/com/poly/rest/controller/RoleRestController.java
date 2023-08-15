@@ -1,5 +1,6 @@
 package com.poly.rest.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class RoleRestController {
 
 	@GetMapping()
 	public List<Role> getAll() {
-		return roleService.findALL();
+		 List<String> targetRoleIds = Arrays.asList("STA");
+		  return roleService.findAllById(targetRoleIds);
 	}
 }

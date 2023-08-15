@@ -80,19 +80,4 @@ app.controller('staff-ctrl', function($scope, $http) {
 		}
 	}
 
-const xhr = new XMLHttpRequest();
-
-// Kiểm tra xem đối tượng `post` có được định nghĩa hay không
-if (post) {
-  // Kiểm tra xem đối tượng `post` có thuộc tính `data` hay không
-  if (post.data) {
-    // Gửi đối tượng `post` đến máy chủ
-    xhr.send(post.data);
-  } else {
-    console.log("Đối tượng post không có thuộc tính data");
-  }
-} else {
-  console.log("Đối tượng post không được định nghĩa");
-}
-
 })

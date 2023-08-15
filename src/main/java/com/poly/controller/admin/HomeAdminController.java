@@ -29,7 +29,7 @@ public class HomeAdminController {
 	public String show() {
 		return "admin/DashBoard";
 	}
-
+	
 	@RequestMapping("/admin/order")
 	public String orderManager() {
 		return "admin/order";
@@ -40,9 +40,9 @@ public class HomeAdminController {
 		return "admin/authority";
 	}
 
-	@RequestMapping("/admin/Profile")
+	@RequestMapping("/admin/staff")
 	public String Profile() {
-		return "admin/profile";
+		return "admin/staff";
 	}
 
 	@RequestMapping("/admin/orders")

@@ -14,6 +14,4 @@ public interface AuthorityService {
 
 	void delete(Integer id);
 
-	List<Object[]> getStaff();
-
 }

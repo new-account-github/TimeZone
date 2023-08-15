@@ -62,8 +62,8 @@ public class VNPayController {
         if(paymentStatus == 1) {
         	Account account = accountService.findById(request.getRemoteUser());
         	String token = verificationTokenService.createVerificationTokenForUser(account);
-        	emailService.sendPaymentSuccess(account.getEmail(), token, account.getFullname(), orderInfo);
-        	emailService.sendPaymentStatus("cuongkvps25207@fpt.edu.vn", token, orderInfo);
+        	emailService.sendPaymentSuccess(account.getEmail(), token, account.getFullname(), transactionId);
+        	emailService.sendPaymentStatus("cuongkvps25207@fpt.edu.vn", token, transactionId);
         	return "pay/ordersuccess";
         } else {
         	return "pay/orderfail";
