@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +32,9 @@ public class VerificationToken {
     private Account account;
     
     @Column(name = "expiry_date")
-    private LocalDateTime expiry_date;
+    private LocalDateTime expiryDate;
+
+	
     
 }
 
