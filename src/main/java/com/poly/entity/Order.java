@@ -42,7 +42,8 @@ public class Order implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;
-	
-	@OneToMany
-	List<OrderStatus> orderStatus;
+
+	@ManyToOne
+	@JoinColumn(name = "status_id")
+	OrderStatus orderStatus;
 }

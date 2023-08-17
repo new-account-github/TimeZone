@@ -1,6 +1,5 @@
 package com.poly.rest.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +27,10 @@ public class ProductRestController {
 
 	@Autowired
 	HttpServletRequest request;
-	
+
 	@GetMapping()
 	public List<Product> getAll() {
+
 		return productService.findAll();
 	}
 

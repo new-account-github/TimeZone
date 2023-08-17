@@ -11,7 +11,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
 
 
-<body>
+<body ng-app="account" ng-controller="account-ctrl">
 	<main>
 		<!-- Hero Area Start-->
 		<div class="slider-area ">
@@ -20,7 +20,7 @@
 					<div class="row">
 						<div class="col-xl-12">
 							<div class="hero-cap text-center">
-								<h2>Register</h2>
+								<h2>Profile</h2>
 							</div>
 						</div>
 					</div>
@@ -38,65 +38,23 @@
 								<h2>New to our Shop?</h2>
 								<p>There are advances being made in science and technology
 									everyday, and a good example of this is the</p>
-								<a th:href="@{|/security/login/form|}" class="btn_3">Login</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-7 col-md-7">
 						<div class="login_part_form">
 							<div class="login_part_form_iner">
-								<h3>Welcome to TimeZone! <br>
-									Register</h3>
-								<form class="row contact_form" th:action="@{|/security/register|}" method="post"
-									novalidate="novalidate">
+								<h3>Welcome to your profile [[${#request.remoteUser}]] ! <br></h3>
+								<form class="row contact_form" method="" name="myAccount">
 									<h6 class="text-centert text-danger" th:text="${message}"></h6>
-									<div class="col-md-7 form-group p_star">
-										<input type="text" class="form-control" id="firstname" name="firstname" value=""
-											placeholder="Surname and middle name" th:field="*{account.firstname}">
-										<span th:if="${#fields.hasErrors('account.firstname')}"
-											th:errors="*{account.firstname}" class="text-centert text-danger"></span>
-									</div>
-									<div class="col-md-5 form-group p_star">
-										<input type="text" class="form-control" id="lastname" name="lastname" value=""
-											placeholder="Lastname" th:field="*{account.lastname}">
-										<span th:if="${#fields.hasErrors('account.lastname')}"
-											th:errors="*{account.lastname}" class="text-centert text-danger"></span>
-									</div>
-									<div class="col-md-12 form-group p_star">
-										<input type="text" class="form-control" id="username" name="username" value=""
-											placeholder="Username" th:field="*{account.username}">
-										<span th:if="${#fields.hasErrors('account.username')}"
-											th:errors="*{account.username}" class="text-centert text-danger"></span>
-									</div>
-									<div class="col-md-12 form-group p_star">
-										<input type="password" class="form-control" id="password" name="password"
-											value="" placeholder="Password" th:field="*{account.password}">
-										<span th:if="${#fields.hasErrors('account.password')}"
-											th:errors="*{account.password}" class="text-centert text-danger"></span>
-									</div>
-									<div class="col-md-12 form-group p_star">
-										<input type="password" class="form-control" id="password1" name="password1"
-											value="" placeholder="Confirm PassWord" >
-									</div>
 
 									<div class="col-md-12 form-group p_star">
-										<input type="email" class="form-control" id="email" name="email" value=""
-											placeholder="Email" th:field="*{account.email}">
-										<span th:if="${#fields.hasErrors('account.email')}" th:errors="*{account.email}"
-											class="text-centert text-danger"></span>
-									</div>
-									<div class="col-md-12 form-group p_star">
-										<div class="input-group">
-											<input type="tel" class="form-control" id="phone" name="phone"
-												placeholder="Phone" th:field="*{account.phone}" minlength="9" maxlength="10">
-											<span th:if="${#fields.hasErrors('account.phone')}"
-												th:errors="*{account.phone}" class="text-centert text-danger"></span>
-										</div>
-
+										<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value=""
+											placeholder="password" >
 									</div>
 									<div class="col-md-12 form-group">
-										<button type="submit" value="submit" class="btn_3">
-											Register
+										<button class="btn_3 btn-outline-danger" ng-click="authenticationPass()">
+											Send
 										</button>
 									</div>
 								</form>
@@ -183,6 +141,7 @@
 		</div>
 	</div>
 	<!-- Search model end -->
+
 
 </body>
 

@@ -69,7 +69,7 @@
 								class="user-name">[[${#request.remoteUser}]]</span></a>
 							<div class="dropdown-menu" role="menu">
 								<div class="user-info">
-									<div class="user-name">Bùi Hải Hưng</div>
+									<div class="user-name">[[${#request.remoteUser}]]</div>
 									<div class="user-position online">Available</div>
 								</div>
 								<a class="dropdown-item" href="/home/account"><span
@@ -95,6 +95,8 @@
 											<li class="active"><a th:href="@{|/admin/authority|}"><i
 											class="icon mdi mdi-home"></i><span>Authority</span></a></li>
 										</th:block>
+										<li class="active"><a th:href="@{|/admin/orders|}"><i
+											class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 										<li class="active"><a th:href="@{|/admin/statistical|}"><i
 											class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>

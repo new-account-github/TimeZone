@@ -33,7 +33,7 @@
     <section class="cart_area section_padding">
       <div class="container">
         <div class="cart_inner">
-          <div class="table-responsive" th:fragment="shopping_cart">
+          <div class="table-responsive">
             <table class="table" name="table">
               <thead>
                 <tr>
@@ -66,7 +66,7 @@
                     </div>
                   </td>
                   <td>
-                    <h5 class="text-center">{{item.price * item.qty | number:2}} VND</h5>
+                    <h5 class="text-center">{{item.price * item.qty | number:0}} VND</h5>
                   </td>
                   <td>
                     <button ng-click="cart.remove(item.id)" class="btn btn-outline-danger">Delete</button>
@@ -90,7 +90,7 @@
                     <h3>Subtotal</h3>
                   </td>
                   <td>
-                    <h3 class="text-center"> {{cart.amount | number : 1}} VND</h3>
+                    <h3 class="text-center"> {{cart.amount | number : 0}} VND</h3>
                   </td>
                 </tr>
                 

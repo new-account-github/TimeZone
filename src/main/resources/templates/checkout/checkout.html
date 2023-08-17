@@ -42,22 +42,41 @@
                   <div class="form-control">[[${#request.remoteUser}]]</div>
                   <span class="placeholder" data-placeholder=""></span>
                 </div>
+
                 <div class="col-md-6 form-group p_star">
                   <div type="text" class="form-control" id="date" name="date">
                     <span class="placeholder" data-placeholder=""></span>
-                    {{order.createDate | date:'dd-MMM-yyyy'}}
+                    {{order.createDate | date:'yyyy-MM-dd'}}
                   </div>
                 </div>
-            
                 <div class="col-md-12 form-group">
                   <div class="creat_account">
                     <h3>Shipping Details</h3>
                   </div>
-                  <span style="color:red" class="text-center" ng-show="formCheckOut.message.$dirty && formCheckOut.message.$invalid">
-                    <span class="text-center" ng-show="formCheckOut.message.$error.required">Address is required</span>
+
+                  <div class="errortext" ng-show="formCheckOut.house.$dirty && formCheckOut.house.$invalid" style="float: left; margin-right: 40px; color:red">
+                    <span ng-show="formCheckOut.house.$error.required">House is required</span> 
+                  </div>
+                  <input type="text" class="form-control" name="house" ng-model="house" ng-change="updateAddress()" placeholder="House Number, Street" required>
+                  
+                  
+                  <div class="errortext" ng-show="formCheckOut.district.$dirty && formCheckOut.district.$invalid" style="float: left; margin-right: 40px; color:red">
+                    <span ng-show="formCheckOut.district.$error.required">District is required</span> 
+                  </div>
+                  <input type="text" class="form-control my-4" name="district" ng-model="district" ng-change="updateAddress()" placeholder="District" required>
+                  
+                  <div class="errortext" ng-show="formCheckOut.city.$dirty && formCheckOut.city.$invalid" style="float: left; margin-right: 40px; color:red">
+                    <span ng-show="formCheckOut.city.$error.required">City is required</span> 
+                  </div>
+                  <input type="text" class="form-control" name="city"  ng-model="city" ng-change="updateAddress()" placeholder="City" required>
+                  
+                   <span style="color:red" class="text-center" ng-show="formCheckOut.message.$dirty && formCheckOut.message.$invalid">
+                   <span class="text-center" ng-show="formCheckOut.message.$error.required">Address is required</span>
                   </span>
                   <textarea ng-model="order.address"class="form-control" name="message" id="message" rows="1"
-                    placeholder="Order Notes" required></textarea>
+                    placeholder="Order Notes" readonly>
+                    {{ house || '' }} {{ district || '' }} {{ city || '' }}
+                  </textarea>
                 </div>
               </form>
             </div>
@@ -74,7 +93,7 @@
               
                   <li ng-repeat="item in cart.items">
                     <a href="#">{{item.name}}
-                      <span class="last">{{item.qty * item.price | number: 1}} VND</span>
+                      <span class="last">{{item.qty * item.price | number: 0}} VND</span>
                     </a>
                   </li>
                 </ul>
@@ -82,11 +101,16 @@
                 
                   <li>
                     <a href="#">Total
-                      <span>{{cart.amount | number : 1}} VND</span>
+                      <span>{{cart.amount | number : 0}} VND</span>
                     </a>
                   </li>
                 </ul>
-                <button class="btn_3" ng-click="order.purchase()" ng-disabled="formCheckOut.message.$invalid && formCheckOut.message.$dirty">PURCHASE YOUR ORDER</button>
+                <div class="row">
+                    <button class="btn_3 col-md-12" ng-click="order.purchase()" ng-disabled="formCheckOut.$invalid || isDisabled ">CAST</button>
+                  </div> 
+                  <div class="row">
+                    <button ng-click="goToPay()" class="btn_3 my-2 col-md-12" ng-disabled="formCheckOut.$invalid || isDisabled ">VN PAY</button>
+                </div>
               </div>
             </div>
           </div>

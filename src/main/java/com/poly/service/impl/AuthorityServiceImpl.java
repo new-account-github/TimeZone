@@ -21,7 +21,7 @@ public class AuthorityServiceImpl implements AuthorityService{
 	
 	@Override
 	public List<Authority> getAdmin() {
-		List<Account> accounts = accountDAO.getAdmin();
+		List<Account> accounts = accountDAO.getStaff();
 		return authorityDAO.autoritiesOf(accounts);
 	}
 
@@ -39,4 +39,5 @@ public class AuthorityServiceImpl implements AuthorityService{
 	public Authority create(Authority authority) {
 		return authorityDAO.save(authority);
 	}
+
 }

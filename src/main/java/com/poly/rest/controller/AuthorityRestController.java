@@ -32,7 +32,7 @@ public class AuthorityRestController {
 			return authorityService.findALL();
 		}
 	}
-
+	
 	@PostMapping()
 	public Authority authority(@RequestBody Authority authority) {
 		return authorityService.create(authority);

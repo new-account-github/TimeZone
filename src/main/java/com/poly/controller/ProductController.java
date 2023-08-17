@@ -27,12 +27,15 @@ public class ProductController {
 	CategoryService categoryService;
 	
 	@RequestMapping("/home/shop")
-	public String shop(Model model) {
-		List<Product> listProduct = productService.findAll();
-		model.addAttribute("items", listProduct);	
+	public String shop(Model model,@RequestParam("cid") Optional<String> cid) {
+		if(cid.isPresent()) {
+			List<Category> listCates = categoryService.findAll();
+			model.addAttribute("cates", listCates);
+		} else {
+			List<Product> listProduct = productService.findAll();
+			model.addAttribute("items", listProduct);	
 
-		List<Category> listCates = categoryService.findAll();
-		model.addAttribute("cates", listCates);
+		}
 
 		return "/product/shop";
 	}
@@ -63,7 +66,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/home/shop/findByName")
-	public String product(Model model,@RequestParam("keyword") Optional<String> kw) {
+	public String product(Model model,@RequestParam("keyword") String kw) {
 		List<Product> list = productService.findByName("%" + kw + "%");
 		model.addAttribute("items", list);
 		return "/product/shop";

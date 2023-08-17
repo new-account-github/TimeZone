@@ -45,7 +45,6 @@
 <link rel="stylesheet" href="/assets/css/admin.css" type="text/css">
 <link rel="stylesheet" href="/assets/css/adminform.css" type="text/css">
 
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 
 <style type="text/css">
 .button_scroll2top {
@@ -95,7 +94,7 @@
 								class="user-name">[[${#request.remoteUser}]]</span></a>
 							<div class="dropdown-menu" role="menu">
 								<div class="user-info">
-									<div class="user-name">Bùi Hải Hưng</div>
+									<div class="user-name">[[${#request.remoteUser}]]</div>
 									<div class="user-position online">Available</div>
 								</div>
 								<a class="dropdown-item" href="/home/account"><span
@@ -118,9 +117,11 @@
 								<li class="active"><a href="index"><i
 										class="icon mdi mdi-home"></i><span>Dashboard</span></a></li>
 									<th:block th:if="${#request.isUserInRole('DIR')}">
-										<li class="active"><a th:href="@{|/admin/authority|}"><i
-										class="icon mdi mdi-home"></i><span>Authority</span></a></li>
+										<li class="active"><a th:href="@{|/admin/staff|}"><i
+										class="icon mdi mdi-home"></i><span>Staff</span></a></li>
 									</th:block>
+									<li class="active"><a th:href="@{|/admin/orders|}"><i
+										class="icon mdi mdi-home"></i><span>Orders</span></a></li>
 									<li class="active"><a th:href="@{|/admin/statistical|}"><i
 										class="icon mdi mdi-home"></i><span>Statistical</span></a></li>
 							</ul>
@@ -134,10 +135,10 @@
 				
 					<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 					  <li class="nav-item">
-					    <a class="nav-link active" id="pills-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+					    <a class="nav-link active" id="pills-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">List Products</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" id="pills-profile-tab" data-toggle="tab" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+					    <a class="nav-link" id="pills-profile-tab" data-toggle="tab" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Edit Products</a>
 					  </li>
 					</ul>
 					<div class="tab-content" id="pills-tabContent">
@@ -175,7 +176,7 @@
 											</td>
 											<td class="align-middle text-sm">
 												<div class="">
-													<h6 class="text-sm mb-0">{{item.price}}</h6>
+													<h6 class="text-sm mb-0">{{item.price | number:0 }} VND</h6>
 												</div>
 											</td>
 											<td class="align-middle text-sm">
@@ -258,7 +259,7 @@
 																<input class="form-control" ng-model="form.name"
 																	type="text" placeholder="Name" required name="name"
 																	ng-minlength="3" ng-maxlength="20"
-																	ng-pattern="/^[a-zA-Z0-9_]*$/">
+																	ng-pattern="/^[a-zA-Z0-9_]*$/" >
 																<div class="errortext" ng-show="myForm.name.$dirty && myForm.name.$invalid" style="float: left; margin-right: 40px; color:red">
 																	<span ng-show="myForm.name.$error.required">Name is required</span> 
 																	<span ng-show="myForm.name.$error.minlength">Name must be greater than 3</span> 
@@ -273,12 +274,12 @@
 															<div class="col-12 col-sm-8 col-lg-9 text-sm-left">
 																<input class="form-control" ng-model="form.price"
 																	name="price" type="number" placeholder="Price" min="0"
-																	 ng-min="0" ng-max="10000000"  required>
+																	 ng-min="0"   required>
 																<div class="errortext text-sm-left"
 																	ng-show="myForm.price.$dirty && myForm.price.$invalid" style="float: left; margin-right: 40px; color:red">
 																	<span  ng-show="myForm.price.$error.required" >Price is required</span>
 																	<span ng-show="myForm.price.$error.min" >Price must greater than 0</span>
-																	<span ng-show="myForm.price.$error.max	" >Price must be less than 10,000,000</span>
+																
 																</div>
 															</div>
 														</div>
@@ -329,7 +330,10 @@
 																<div class="form-group" name="available">
 																	<label> <input  ng-model="form.available"
 																		type="radio" ng-value="true" ng-required> Yes
-																	</label> <br><label> <input ng-model="form.available"
+																	</label>
+																</div>
+																<div class="form-group" name="available">
+																	<label> <input ng-model="form.available"
 																		type="radio" ng-value="false" ng-required>No
 																	</label>
 																</div>
@@ -344,7 +348,7 @@
 									</div>
 									<div class="d-grid gap-2 d-md-block text-sm-center">
 										<button ng-click=create() class="btn btn-primary"
-											type="button" ng-disabled=" myForm.$invalid ">Create</button>
+											type="button" ng-disabled="myForm.$invalid ">Create</button>
 										<button ng-click=delete(form) class="btn btn-primary"
 											type="button">Delete</button>
 										<button ng-click=update() class="btn btn-primary"

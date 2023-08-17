@@ -9,8 +9,6 @@ import com.poly.entity.Account;
 import com.poly.entity.Authority;
 
 public interface AuthorityDAO extends JpaRepository<Authority, Integer> {
-
-		@Query("SELECT DISTINCT a FROM Authority a WHERE a.account IN ?1")
+	@Query("SELECT DISTINCT a FROM Authority a WHERE a.account IN ?1")
 	List<Authority> autoritiesOf(List<Account> accounts);
-
 }

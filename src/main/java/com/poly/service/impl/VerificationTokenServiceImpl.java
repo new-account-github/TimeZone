@@ -29,12 +29,15 @@ public class VerificationTokenServiceImpl implements VerificationTokenService{
 	    verificationToken.setAccount(account);
 	    
 	    // Thiết lập thời gian hết hạn cho mã xác thực
-	    LocalDateTime expiry_date = LocalDateTime.now().plusMinutes(5);
+	    LocalDateTime expiry_date = LocalDateTime.now().plusMinutes(60);
 	    verificationToken.setExpiry_date(expiry_date);
 	    
 	    verificationTokenDAO.save(verificationToken);
 	    
 	    return token;
 	}
-
+	@Override
+    public VerificationToken findByToken(String token) {
+        return verificationTokenDAO.findByToken(token);
+    }
 }
