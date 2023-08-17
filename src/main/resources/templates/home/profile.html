@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="manifest" href="site.webmanifest">
 	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
 
 <body ng-app="app" ng-controller="ctrl">
@@ -87,46 +87,6 @@
 											</div>
 										</div>
 									</div>
-									<!-- Modal nhập password mới -->
-									<div class="modal fade" id="newPasswordModal" tabindex="-1" role="dialog"
-										aria-labelledby="newPasswordModalTitle" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="newPasswordModalTitle">New Password
-													</h5>
-												</div>
-												<div class="modal-body">
-													<input type="password" class="form-control" id="newPassword"
-														name="newPassword" value="" placeholder="New Password"
-														ng-minlength="8" required
-														ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}\[\]:;<>,.?~]).*$/">
-													<div class="errortext"
-														ng-show="myAccount.newPassword.$dirty && myAccount.newPassword.$invalid"
-														style="float: left; margin-right: 40px; color:red">
-														<span ng-show="myAccount.newPassword.$error.required">Password
-															is required</span>
-														<span ng-show="myAccount.newPassword.$error.minlength">Password
-															must be more than 8 characters</span>
-														<span
-															ng-show="myAccount.newPassword.$error.pattern && !myAccount.newPassword.$error.minlength">Password
-															must contain at least one lowercase letter, one uppercase
-															letter, one digit and one special character</span>
-													</div>
-
-													<input type="password" class="form-control" id="confirmNewPassword"
-														name="confirmNewPassword" value=""
-														placeholder="Confirm new Password">
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary"
-														ng-click="updatePassword()">Update</button>
-												</div>
-											</div>
-										</div>
-									</div>
 
 									<div class="col-md-7 form-group p_star">
 										<input type="text" class="form-control" id="firstname" name="firstname" value=""
@@ -135,14 +95,14 @@
 										<div class="errortext"
 											ng-show="myAccount.firstname.$dirty && myAccount.firstname.$invalid"
 											style="float: left; margin-right: 40px; color:red">
-											<span ng-show="myAccount.firstname.$error.required">Firstname is
+											<span ng-show="myAccount.firstname.$error.required">Surname and middle name is
 												required</span>
-											<span ng-show="myAccount.firstname.$error.minlength">Firstname must be more
+											<span ng-show="myAccount.firstname.$error.minlength">Surname and middle name must be more
 												than 3 characters</span>
-											<span ng-show="myAccount.firstname.$error.maxlength">Firstname must be less
+											<span ng-show="myAccount.firstname.$error.maxlength">Surname and middle name must be less
 												than 50 characters</span>
 											<span
-												ng-show="myAccount.firstname.$error.pattern && !myAccount.firstname.$error.minlength && !myAccount.firstname.$error.maxlength">Firstname
+												ng-show="myAccount.firstname.$error.pattern && !myAccount.firstname.$error.minlength && !myAccount.firstname.$error.maxlength">Surname and middle name
 												cannot contain special characters</span>
 										</div>
 									</div>
@@ -175,18 +135,19 @@
 												email</span>
 										</div>
 									</div>
-									<div class="col-md-12 form-group p_star">
-										<div class="input-group">
-											<input type="tel" class="form-control" id="phone" name="phone" value=""
-												ng-model="account.phone" placeholder="Phone" ng-pattern="/^[^a-zA-Z]*$"
-												required>
-											<div class="errortext"
-												ng-show="myAccount.phone.$dirty && myAccount.phone.$invalid"
-												style="float: left; margin-right: 40px; color:red">
-												<span ng-show="myAccount.phone.$error.required">Phone is required</span>
-												<span ng-show="myAccount.phone.$error.pattern">Phone must be a valid
-													phone</span>
-											</div>
+									<div class="col-md-12 form-group">
+										<input class="form-control" ng-model="account.phone" name="phone" type="text"
+											placeholder="Phone" required ng-pattern="/^[0-9]*$/" ng-maxlength="10"
+											ng-minlength="9" maxlength="10">
+										<div class="errortext"
+											ng-show="myAccount.phone.$dirty && myAccount.phone.$invalid"
+											style="float: left; margin-right: 40px; color:red">
+											<span ng-show="myAccount.phone.$error.required">Phone is required</span>
+											<span ng-show="myAccount.phone.$error.minlength">Phone must at least 10
+												digit</span>
+											<span
+												ng-show="myAccount.phone.$error.pattern && !myAccount.phone.$error.maxlength">Phone
+												must be a valid phone</span>
 										</div>
 									</div>
 									<div class="col-md-12 form-group">
@@ -198,7 +159,7 @@
 											class="btn_3 btn-outline-danger">
 											Delete
 										</button>
-										
+
 									</div>
 								</form>
 							</div>
@@ -207,6 +168,45 @@
 				</div>
 			</div>
 		</section>
+		<!-- Modal nhập password mới -->
+		<div class="modal fade" id="newPasswordModal" tabindex="-1" role="dialog"
+			aria-labelledby="newPasswordModalTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="newPasswordModalTitle">New Password
+						</h5>
+					</div>
+					<div class="modal-body">
+						<form name="myPass">
+							<input type="password" class="form-control" id="newPassword" ng-model="newPassword"
+								name="newPassword" value="" placeholder="New password" ng-minlength="8" required
+								ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}\[\]:;<>,.?~]).*$/">
+							<div class="errortext" ng-show="myPass.newPassword.$dirty && myPass.newPassword.$invalid"
+								style="float: left; margin-right: 40px; color:red">
+								<span ng-show="myPass.newPassword.$error.required">Password
+									is required</span>
+								<span ng-show="myPass.newPassword.$error.minlength">Password
+									must be more than 8 characters</span>
+								<span
+									ng-show="myPass.newPassword.$error.pattern && !myPass.newPassword.$error.minlength">Password
+									must contain at least one lowercase letter, one uppercase
+									letter, one digit and one special character</span>
+							</div>
+						</form>
+
+						<input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword"
+							value="" placeholder="Confirm new Password">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" ng-click="updatePassword()"
+							ng-disabled="myPass.$invalid ">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!--================login_part end =================-->
 	</main>
 	<footer>
