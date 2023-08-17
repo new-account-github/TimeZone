@@ -50,8 +50,6 @@ app.controller("authority-ctrl", function ($scope, $http, $location) {
         alert("Cap quyen thanh cong");
       })
       .catch((error) => {
-        alert("Cap quyen that bai");
-        console.log(error);
       });
   };
 
@@ -64,18 +62,18 @@ app.controller("authority-ctrl", function ($scope, $http, $location) {
         alert("Thu hoi quyen thanh cong");
       })
       .catch((error) => {
-        alert("Thu hoi quyen that bai");
-        console.log("ERROR" + error);
       });
   };
 
   $scope.saveAccount = function () {
     let account = {
       username: $scope.username,
-      fullname: $scope.fullname,
+      fullname: $scope.firstname + ' ' +$scope.lastname,
       password: $scope.password,
       email: $scope.email,
       phone: $scope.phone,
+      firstname: $scope.firstname,
+      lastname: $scope.lastname
     };
     let existUsername = $scope.admins.find(function (admin) {
       return admin.username === account.username;
@@ -93,22 +91,30 @@ app.controller("authority-ctrl", function ($scope, $http, $location) {
     }
   };
 
+  $scope.updateFullname = function() {
+    $scope.fullname = $scope.firstname + ' ' + $scope.lastname;
+  };
+
   $scope.edit = function (acc) {
     $scope.username = acc.username;
     $scope.fullname = acc.fullname;
     $scope.password = acc.password;
     $scope.email = acc.email;
     $scope.phone = acc.phone;
-   	$(".nav-pills a:eq(0)").tab('show');
+    $scope.firstname = acc.firstname;
+    $scope.lastname = acc.lastname;
+   	$(".nav-pills a:eq(1)").tab('show');
   };
 
   $scope.update = function () {
     let account = {
       username: $scope.username,
-      fullname: $scope.fullname,
+      fullname: $scope.firstname + ' ' + $scope.lastname,
       password: $scope.password,
       email: $scope.email,
       phone: $scope.phone,
+      firstname: $scope.firstname,
+      lastname: $scope.lastname
     };
     $http
       .put(`/rest/account/update/${account.username}`, account)
@@ -133,6 +139,8 @@ app.controller("authority-ctrl", function ($scope, $http, $location) {
     $scope.password = "";
     $scope.email = "";
     $scope.phone = "";
+    $scope.firstname = "";
+    $scope.lastname = "";
   };
   
   $scope.pager = {
