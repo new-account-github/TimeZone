@@ -70,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers("/home/checkout/**").authenticated()
 		.antMatchers("/home/account/**").authenticated()
+		.antMatchers("/home/cart/**").authenticated()
 		.antMatchers("/rest/account/**").authenticated()
 		.antMatchers("/admin/index").hasAnyRole("STA","DIR")
 		.antMatchers("/admin/statistical").hasAnyRole("STA","DIR")

@@ -45,15 +45,14 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="login_part_form">
 							<div class="login_part_form_iner">
-								<h3>Welcome Back ! <br>
-									Forgot Password</h3>
+								<h3>Forgot Password</h3>
 								<form class="row contact_form" th:action="@{|/security/verifi|}" method="post"
 									novalidate="novalidate">
 									<div class="col-md-12 form-group">
                                         <h6 class="text-center text-danger " th:text="${message}"></h6>
                                     </div>
 									<div class="col-md-12 form-group p_star">
-										<input type="text" class="form-control" id="token" name="token" value=""
+										<input type="password" class="form-control" id="token" name="token" value=""
 											placeholder="Token">
 									</div>
 									<div class="col-md-12 form-group">

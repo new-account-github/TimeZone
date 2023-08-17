@@ -23,12 +23,16 @@ public class OrderController {
 	
 	@Autowired
 	OrderDetailService orderDetailService;
+	
+	@Autowired
+	HttpServletRequest request;
+	
 	@RequestMapping("/home/checkout")
 	public String checkout() {
 		return "/checkout/checkout";
 	}
 	@RequestMapping("/home/order")
-	public String list(Model model, HttpServletRequest request) {
+	public String list(Model model) {
 		String username = request.getRemoteUser();
 		model.addAttribute("orders", orderService.findByUserName(username));
 		return "/order/list";

@@ -95,9 +95,9 @@ app.controller('ctrl', function($scope, $http) {
 
 	$scope.order = {
 		createDate: new Date(),
-		address: "TP HCM",
+		address: "",
 		account: { username: $("#username").text() },
-
+		orderStatus: {id:1},
 		get orderDetails() {
 			return $scope.cart.items.map(item => {
 				return {
@@ -109,19 +109,23 @@ app.controller('ctrl', function($scope, $http) {
 		},
 
 		purchase() {
-			var order = angular.copy(this);
+			let order = angular.copy(this);
 
 			$http.post(`/rest/orders`, order).then(resp => {
 				alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
 				$scope.cart.clear();
 				location.href = "/order/detail/" + resp.data.id;
 			}).catch(error => {
-				alert("Error")
-				console.log(error);
 			})
 		}
 	}
 
+	$scope.goToPay = function() {
+		if (!$scope.formCheckOut.$invalid && !$scope.isDisabled) {
+			window.location.href = "/pay";
+		}
+	};
+	
 	// account ctrl
 	$scope.account = {};
 
@@ -135,13 +139,11 @@ app.controller('ctrl', function($scope, $http) {
 	$scope.initialize();
 
   $scope.updateAccount= function(){
-      var account = angular.copy($scope.account);
+      let account = angular.copy($scope.account);
       $http.put(`/rest/account/${account.username}`, account).then(resp=>{
           $scope.account = angular.copy(account);
           alert("Update success");
       }).catch(err=>{
-          alert("Update fail");
-          console.log(err);
       })
   }
 
@@ -152,46 +154,30 @@ app.controller('ctrl', function($scope, $http) {
 				alert("Delete Success");
 				location.href = "/security/logoff";
 			}).catch(err => {
-				alert('Delete fail');
-				console.log(err);
 			})
 		}
 	}
 
 	$scope.authenticationPass = function() {
-		// Lấy giá trị của input xác nhận password
-		var confirmPassword = document.getElementById("confirmPassword").value;
-		// Gửi password nhập vào lên server để xác thực
+		let confirmPassword = document.getElementById("confirmPassword").value;
 		$http.post(`/rest/account/${$scope.account.username}/authenticate`, { password: confirmPassword }).then(resp => {
 			if (resp.data) {
 				$('#exampleModalCenter').modal('hide');
-				// Nếu đúng, chuyển đến trang updatePassword
-				 $('#newPasswordModal').modal('show');
-			} else {
-				// Nếu sai, hiển thị thông báo lỗi
-				alert("Incorrect password");
-			}
+				$('#newPasswordModal').modal('show');
+			} 
 		});
 	}
 
 	$scope.updatePassword = function() {
-		// Lấy giá trị của 2 ô input nhập password mới
-		var newPassword = document.getElementById("newPassword").value;
-		var confirmPassword = document.getElementById("confirmNewPassword").value;
-		// So sánh 2 giá trị nhập vào
+		let newPassword = document.getElementById("newPassword").value;
+		let confirmPassword = document.getElementById("confirmNewPassword").value;
 		if (newPassword === confirmPassword) {
-			// Nếu đúng, cập nhật password mới cho account
 			$http.put(`/rest/account/${$scope.account.username}/password`, { password: newPassword }).then(resp => {
 				alert("Update password success");
 				location.href = "/home/account";
 			}).catch(err => {
-				alert("Update password fail");
-				console.log(err);
 			})
-		} else {
-			// Nếu sai, hiển thị thông báo lỗi
-			alert("Passwords do not match");
-		}
+		} 
 	}
 
 

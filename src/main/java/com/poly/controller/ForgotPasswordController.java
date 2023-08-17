@@ -51,7 +51,7 @@ public class ForgotPasswordController {
         }
         String token = verificationTokenService.createVerificationTokenForUser(account);
         session.setAttribute("token", token);
-//        emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
+        emailService.sendEmail(email, token,account.getFirstname(),account.getLastname());
         model.addAttribute("message", "An email with a reset link has been sent to your email address");
         return "/security/verifi";
     }
@@ -76,26 +76,30 @@ public class ForgotPasswordController {
     public String confirmPassForm() {
         return "/security/confirmPass";
     }
+    
     @PostMapping("/security/confirmPass")
     public String processResetPassword(@RequestParam("password") String password, @RequestParam("password1") String password1, Model model, HttpSession session) {
         String token = (String) session.getAttribute("token");
         VerificationToken verificationToken = verificationTokenService.findByToken(token);
         Account account = verificationToken.getAccount();
-        if (!password.equals(password1)) {
-            model.addAttribute("message", "Passwords do not match");
-            return "/security/confirmPass";
+        
+        if(password.isEmpty() || password1.isEmpty()) {
+        	model.addAttribute("message", "Password is empty");
+        	return "/security/confirmPass";
         }
-        account.setPassword(pe.encode(password));
-        // Validate account
+        
         Set<ConstraintViolation<Account>> violations = validator.validate(account);
         if (!violations.isEmpty()) {
-            // Handle validation errors
             for (ConstraintViolation<Account> violation : violations) {
                 model.addAttribute("message", violation.getMessage());
             }
             return "/security/confirmPass";
-        }
+        } else if (!password.equals(password1)) {
+        	model.addAttribute("message", "Passwords do not match");
+        	return "/security/confirmPass";
+        } 
         
+        account.setPassword(pe.encode(password));
         accountService.create(account);
         model.addAttribute("message", "Your password has been reset successfully");
         return "/security/login";

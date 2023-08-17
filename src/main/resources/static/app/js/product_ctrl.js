@@ -17,8 +17,6 @@ app.controller('product_ctrl', function($scope, $http) {
 				item.createDate = new Date(item.createDate)
 			})
 		});
-		//Load Category
-
 		$http.get(`/rest/categories`).then(resp => {
 			$scope.cates = resp.data;
 		});
@@ -41,45 +39,40 @@ app.controller('product_ctrl', function($scope, $http) {
 
 	}
 	$scope.create = function() {
-		var item = angular.copy($scope.form);
+		let item = angular.copy($scope.form);
 		$http.post(`/rest/products`, item).then(resp => {
 			resp.data.createDate = new Date(resp.data.createDate);
 			$scope.items.push(resp.data);
 			$scope.reset();
 			alert("Create Success");
 		}).catch(err => {
-			alert('message');
 
 		})
 	}
 
 	$scope.update = function() {
-		var item = angular.copy($scope.form);
+		let item = angular.copy($scope.form);
 		$http.put(`/rest/products/${item.id}`, item).then(resp => {
-			var index = $scope.items.findIndex(p => p.id == item.id);
+			let index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items[index] = item;
 			$scope.reset();
 			alert("Update Success");
 		}).catch(err => {
-			alert('Update Fail');
-			console.log(err);
 		})
 	}
 
 	$scope.delete = function(item) {
 		$http.delete(`/rest/products/${item.id}`).then(resp => {
-			var index = $scope.items.findIndex(p => p.id == item.id);
+			let index = $scope.items.findIndex(p => p.id == item.id);
 			$scope.items.splice(index, 1);
 			$scope.reset();
 			alert("Delete Success")
 		}).catch(err => {
-			alert("Delete Fail");
-			console.log(err);
 		})
 	}
 
 	$scope.imageChanged = function(files) {
-		var data = new FormData();
+		let data = new FormData();
 		data.append('file', files[0]);
 		$http.post(`/rest/upload/img/gallery`, data, {
 			transformRequest: angular.identity,
@@ -87,15 +80,13 @@ app.controller('product_ctrl', function($scope, $http) {
 		}).then(resp => {
 			$scope.form.image = resp.data.name;
 		}).catch(err => {
-			alert('Error');
-			console.log(err);
 		})
 	}
 	$scope.pager = {
 		page: 0,
 		size: 10,
 		get items() {
-			var start = this.page * this.size;
+			let start = this.page * this.size;
 			return $scope.items.slice(start, start + this.size);
 		},
 		get count() {
@@ -120,18 +111,5 @@ app.controller('product_ctrl', function($scope, $http) {
 			this.page = this.count - 1;
 		}
 	}
-
-
-	// document.getElementById("select1").addEventListener("change", function() {
-	// 	var selectedCategory = this.value;
-	// 	var items = document.querySelectorAll(".single-popular-items");
-	// 	items.forEach(function(item) {
-	// 		if (selectedCategory == "all" || item.classList.contains(selectedCategory)) {
-	// 			item.style.display = "block";
-	// 		} else {
-	// 			item.style.display = "none";
-	// 		}
-	// 	});
-	// });
 
 })

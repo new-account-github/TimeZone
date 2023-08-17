@@ -38,8 +38,8 @@ public class AccountRestController {
 	BCryptPasswordEncoder pe;
 
 	@GetMapping()
-	public List<Account> getAll() {
-		return accountService.findALL();
+	public Account getAll() {
+		return request.getRemoteUser() != null ? accountService.findById(request.getRemoteUser()) : null;
 	}
 
 	@GetMapping("/admin")
@@ -50,6 +50,7 @@ public class AccountRestController {
 			return accountService.findALL();
 		}
 	}
+	
 
 	@PostMapping("/add")
 	public Account createStaff(@RequestBody JsonNode account, Model model) {
@@ -64,28 +65,21 @@ public class AccountRestController {
 
 	@PutMapping("/{username}")
 	public Account update(@RequestBody Account account, @PathVariable("username") String username) {
-		// account.setPassword(pe.encode(account.getPassword()));
 		return accountService.update(account);
 	}
 
 	@PutMapping("/{username}/password")
 	public void updatePassword(@PathVariable("username") String username, @RequestBody Map<String, String> body) {
-		// Lấy password mới từ request body
 		String newPassword = body.get("password");
-		// Lấy account từ database
 		Account account = accountService.findById(username);
-		// Cập nhật password mới cho account
 		account.setPassword(pe.encode(newPassword));
 		accountService.update(account);
 	}
 
 	@PostMapping("/{username}/authenticate")
 	public boolean authenticate(@PathVariable("username") String username, @RequestBody Map<String, String> body) {
-		// Lấy password nhập vào từ request body
 		String password = body.get("password");
-		// Lấy account từ database
 		Account account = accountService.findById(username);
-		// So sánh password nhập vào với password đã mã hóa trong database
 		return pe.matches(password, account.getPassword());
 	}
 
