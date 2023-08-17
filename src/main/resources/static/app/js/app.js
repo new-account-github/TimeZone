@@ -169,7 +169,7 @@ app.controller('ctrl', function($scope, $http) {
 	}
 
 	$scope.updatePassword = function() {
-		let newPassword = document.getElementById("newPassword").value;
+		let newPassword = document.getElementById("password").value;
 		let confirmPassword = document.getElementById("confirmNewPassword").value;
 		if (newPassword === confirmPassword) {
 			$http.put(`/rest/account/${$scope.account.username}/password`, { password: newPassword }).then(resp => {
