@@ -107,7 +107,6 @@ app.controller('ctrl', function($scope, $http) {
 
 		purchase() {
 			let order = angular.copy(this);
-			order.address = $scope.house + ' ' + $scope.district + ' ' + $scope.city;
 			$http.post(`/rest/orders`, order).then(resp => {
 				alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
 				$scope.cart.clear();
@@ -120,6 +119,7 @@ app.controller('ctrl', function($scope, $http) {
 	$scope.updateAddress = function() {
 		$scope.order.address = $scope.house + ' ' + $scope.district + ' ' + $scope.city;
 	};
+	
 	$scope.goToPay = function() {
 		if (!$scope.formCheckOut.$invalid && !$scope.isDisabled) {
 			window.location.href = "/pay";

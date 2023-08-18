@@ -34,17 +34,9 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 		verificationToken.setExpiryDate(expiry_date);
 
 		verificationTokenDAO.save(verificationToken);
-		delete();
 		return token;
 	}
 	
-	@Transactional
-	public void delete() {
-		LocalDateTime now = LocalDateTime.now().plusMinutes(1);
-		verificationTokenDAO.deleteByExpiryDateBefore(now);
-	}
-	
-
 	@Override
 	public VerificationToken findByToken(String token) {
 		return verificationTokenDAO.findByToken(token);

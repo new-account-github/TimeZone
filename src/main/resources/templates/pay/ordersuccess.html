@@ -36,9 +36,10 @@
                             <tr>
                                 <td>Mã giao dịch:</td>
                                 <td><span th:text="${transactionId}">[transaction ID]</span></td>
+                            </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-primary" ng-click="order.purchase()">Về trang chủ</button>
+                    <a th:href="@{/home/index}" class="btn btn-primary" >Về trang chủ</button>
                 </div>
             </div>
         </div>

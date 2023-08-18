@@ -1,5 +1,6 @@
 package com.poly.controller;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -9,11 +10,13 @@ import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.dao.VerificationTokenDAO;
 import com.poly.entity.Account;
 import com.poly.entity.VerificationToken;
 import com.poly.service.AccountService;
@@ -28,6 +31,9 @@ public class ForgotPasswordController {
     @Autowired
     private VerificationTokenService verificationTokenService;
 
+    @Autowired 
+    VerificationTokenDAO dao;
+    
     @Autowired
     private EmailService emailService;
 
@@ -101,8 +107,17 @@ public class ForgotPasswordController {
         
         account.setPassword(pe.encode(password));
         accountService.create(account);
+        
+        delete();
+        
         model.addAttribute("message", "Your password has been reset successfully");
         return "/security/login";
     }
 
+    @Transactional
+	public void delete() {
+		LocalDateTime now = LocalDateTime.now().plusMinutes(1);
+		dao.deleteByExpiryDateBefore(now);
+	}
+    
 }

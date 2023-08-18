@@ -109,7 +109,7 @@
                     <button class="btn_3 col-md-12" ng-click="order.purchase()" ng-disabled="formCheckOut.$invalid || isDisabled ">CAST</button>
                   </div> 
                   <div class="row">
-                    <button ng-click="goToPay()" class="btn_3 my-2 col-md-12" ng-disabled="formCheckOut.$invalid || isDisabled ">VN PAY</button>
+                    <a th:href="@{/pay}" ng-click="order.purchase()" class="btn_3 my-2 col-md-12" ng-disabled="formCheckOut.$invalid || isDisabled ">VN PAY</a>
                 </div>
               </div>
             </div>

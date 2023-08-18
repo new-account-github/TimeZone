@@ -7,4 +7,6 @@ public interface VerificationTokenService {
 	public String createVerificationTokenForUser(Account account);
 	
 	public VerificationToken findByToken(String token);
+	
+	
 }
