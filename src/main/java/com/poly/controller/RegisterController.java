@@ -46,10 +46,10 @@ public class RegisterController {
 		}
 		if (Password.equals(Password1) && !bindingResult.hasErrors() ) {
 			account.setPassword(pe.encode(Password));
-//			String fullname = account.getFirstname() + " " + account.getLastname();
-//			account.setFullname(fullname);
+			String fullname = account.getFirstname() + " " + account.getLastname();
+			account.setFullname(fullname);
 			accountService.create(account);
-//			emailService.sendWelcomeEmail(account.getEmail(), account.getFirstname(), account.getLastname());
+			emailService.sendWelcomeEmail(account.getEmail(), account.getFirstname(), account.getLastname());
 			model.addAttribute("message", "Register Success");
 			return "/security/login";
 		} else {

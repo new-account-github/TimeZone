@@ -86,6 +86,7 @@ app.controller("authority-ctrl", function ($scope, $http, $location) {
         .post(`/rest/account/add`, account)
         .then(function (response) {
           $scope.clearForm();
+          alert("Create Successful");
         })
         .catch(function (error) {});
     }

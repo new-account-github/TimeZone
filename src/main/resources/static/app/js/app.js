@@ -89,13 +89,10 @@ app.controller('ctrl', function($scope, $http) {
 
 
 
-    $scope.updateAddress = function() {
-        $scope.order.address = $scope.house + ' ' + $scope.district + ' ' + $scope.city;
-    };
-
+	
 	$scope.order = {
 		createDate: new Date(),
-		address: "",
+		address: $scope.house + ' ' + $scope.district + ' ' + $scope.city,
 		account: { username: $("#username").text() },
 		orderStatus: {id:1},
 		get orderDetails() {
@@ -110,7 +107,7 @@ app.controller('ctrl', function($scope, $http) {
 
 		purchase() {
 			let order = angular.copy(this);
-
+			order.address = $scope.house + ' ' + $scope.district + ' ' + $scope.city;
 			$http.post(`/rest/orders`, order).then(resp => {
 				alert(`Thank you for your purchasing ${$scope.cart.count} items!`);
 				$scope.cart.clear();
@@ -120,6 +117,9 @@ app.controller('ctrl', function($scope, $http) {
 		}
 	}
 
+	$scope.updateAddress = function() {
+		$scope.order.address = $scope.house + ' ' + $scope.district + ' ' + $scope.city;
+	};
 	$scope.goToPay = function() {
 		if (!$scope.formCheckOut.$invalid && !$scope.isDisabled) {
 			window.location.href = "/pay";

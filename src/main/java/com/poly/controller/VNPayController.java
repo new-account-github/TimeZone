@@ -64,9 +64,9 @@ public class VNPayController {
         	String token = verificationTokenService.createVerificationTokenForUser(account);
         	emailService.sendPaymentSuccess(account.getEmail(), token, account.getFullname(), transactionId);
         	emailService.sendPaymentStatus("cuongkvps25207@fpt.edu.vn", token, transactionId);
-        	return "pay/ordersuccess";
+        	return "/pay/ordersuccess";
         } else {
-        	return "pay/orderfail";
+        	return "/pay/orderfail";
         }
         
         

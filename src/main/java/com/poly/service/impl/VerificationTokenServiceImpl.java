@@ -22,17 +22,14 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
 	VerificationTokenDAO verificationTokenDAO;
 
 	public String createVerificationTokenForUser(Account account) {
-		// Tạo mã xác thực gồm 6 chữ số
 		Random random = new Random();
 		int tokenInt = random.nextInt(1000000);
 		String token = String.format("%06d", tokenInt);
 
-		// Lưu mã xác thực vào cơ sở dữ liệu
 		VerificationToken verificationToken = new VerificationToken();
 		verificationToken.setToken(token);
 		verificationToken.setAccount(account);
 
-		// Thiết lập thời gian hết hạn cho mã xác thực
 		LocalDateTime expiry_date = LocalDateTime.now().plusMinutes(1);
 		verificationToken.setExpiryDate(expiry_date);
 
